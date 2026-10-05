@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Gold gradient for the metallic border and V logo -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF3E0" />
+      <stop offset="30%" stop-color="#FFE082" />
+      <stop offset="70%" stop-color="#FFB300" />
+      <stop offset="100%" stop-color="#E65100" />
+    </linearGradient>
+    
+    <!-- Clip path to keep flag colors inside the circular badge -->
+    <clipPath id="circleClip">
+      <circle cx="256" cy="256" r="236" />
+    </clipPath>
+    
+    <!-- Shadow filter for 3D effect -->
+    <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+  </defs>
+
+  <!-- Outer gold rim of the badge -->
+  <circle cx="256" cy="256" r="244" fill="url(#goldGrad)" />
+  
+  <!-- Outer black spacer ring for luxury contrast -->
+  <circle cx="256" cy="256" r="238" fill="#120f13" />
+
+  <!-- Flag colors clipped to circle -->
+  <g clip-path="url(#circleClip)">
+    <!-- Green stripe (Left) -->
+    <rect x="0" y="0" width="190" height="512" fill="#008751" />
+    <!-- Yellow stripe (Top Right) -->
+    <rect x="190" y="0" width="322" height="256" fill="#FCD116" />
+    <!-- Red stripe (Bottom Right) -->
+    <rect x="190" y="256" width="322" height="256" fill="#E8112D" />
+  </g>
+
+  <!-- Inner gold ring separator -->
+  <circle cx="256" cy="256" r="236" stroke="url(#goldGrad)" stroke-width="6" fill="none" opacity="0.8" />
+
+  <!-- Central luxury golden V for Vobokun -->
+  <path d="M160,150 L225,150 L256,290 L287,150 L352,150 L286,370 L226,370 Z" fill="url(#goldGrad)" filter="url(#dropShadow)" />
+</svg>
