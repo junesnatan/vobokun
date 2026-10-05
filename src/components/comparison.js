@@ -83,7 +83,7 @@ export function updateComparisonBar() {
     return;
   }
 
-  const itemsHTML = comparedVehicles.map(v => `
+  const desktopItemsHTML = comparedVehicles.map(v => `
     <div class="d-flex align-items-center gap-2 bg-light border px-2 py-1 rounded-3 small">
       <img src="${v.photos?.[0] || 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=150&q=80'}" class="rounded-2 object-fit-cover" style="width: 32px; height: 32px;">
       <span class="fw-bold text-dark text-truncate" style="max-width: 110px;">${v.marque} ${v.modele}</span>
@@ -93,18 +93,39 @@ export function updateComparisonBar() {
     </div>
   `).join('');
 
+  const mobileThumbnailsHTML = comparedVehicles.map((v, i) => `
+    <img src="${v.photos?.[0] || 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=150&q=80'}" class="rounded-circle border border-2 border-white object-fit-cover" style="width: 32px; height: 32px; margin-left: ${i > 0 ? '-10px' : '0'};" title="${v.marque} ${v.modele}">
+  `).join('');
+
   barRoot.innerHTML = `
-    <div class="toyota-panel border p-3 shadow-lg position-fixed bottom-0 start-50 translate-middle-x mb-3 rounded-4 d-flex flex-column flex-md-row align-items-center justify-content-between gap-3" style="z-index: 1040; max-width: 900px; width: 92%;">
-      <div class="d-flex align-items-center gap-2 flex-wrap">
+    <div class="toyota-panel border p-2 p-md-3 shadow-lg position-fixed bottom-0 start-50 translate-middle-x mb-2 mb-md-3 rounded-4 d-flex align-items-center justify-content-between gap-2 gap-md-3" style="z-index: 1040; max-width: 900px; width: calc(100% - 24px);">
+      <!-- Desktop Left View -->
+      <div class="d-none d-md-flex align-items-center gap-2 flex-wrap">
         <span class="badge bg-danger text-white text-uppercase tracking-wider px-2 py-1" style="font-size: 0.7rem;">Comparateur (${comparedVehicles.length}/3)</span>
         <div class="d-flex align-items-center gap-2 flex-wrap">
-          ${itemsHTML}
+          ${desktopItemsHTML}
         </div>
       </div>
-      <div class="d-flex align-items-center gap-2 flex-shrink-0">
-        <button id="clear-compare-btn" class="btn btn-link text-muted text-decoration-none btn-sm fw-bold text-uppercase" style="font-size: 0.75rem;">Vider</button>
-        <button id="open-compare-modal-btn" class="btn btn-toyota-red btn-sm fw-black text-uppercase px-3 py-2 shadow-sm" style="font-size: 0.75rem;">
-          Lancer la comparaison
+
+      <!-- Mobile Left View -->
+      <div class="d-flex d-md-none align-items-center gap-2 min-w-0">
+        <div class="d-flex align-items-center flex-shrink-0">
+          ${mobileThumbnailsHTML}
+        </div>
+        <span class="badge bg-danger text-white text-uppercase tracking-wider px-2 py-1 flex-shrink-0" style="font-size: 0.65rem;">
+          ${comparedVehicles.length}/3
+        </span>
+      </div>
+
+      <!-- Actions -->
+      <div class="d-flex align-items-center gap-1 gap-md-2 flex-shrink-0">
+        <button id="clear-compare-btn" class="btn btn-link text-muted text-decoration-none btn-sm fw-bold text-uppercase p-1 p-md-2" style="font-size: 0.75rem;">
+          <span class="d-none d-sm-inline">Vider</span>
+          <i class="bi bi-trash3 d-sm-none fs-6 text-muted"></i>
+        </button>
+        <button id="open-compare-modal-btn" class="btn btn-toyota-red btn-sm fw-black text-uppercase px-3 py-2 shadow-sm text-nowrap" style="font-size: 0.75rem;">
+          <i class="bi bi-arrow-left-right me-1"></i>
+          <span>Comparer</span>
         </button>
       </div>
     </div>

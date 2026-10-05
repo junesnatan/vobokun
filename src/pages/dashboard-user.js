@@ -61,27 +61,27 @@ export function render() {
         
         <!-- Sidebar Navigation Tabs -->
         <nav class="col-lg-3">
-          <div class="toyota-panel rounded-4 p-3 shadow-sm border d-flex flex-row flex-lg-column overflow-auto gap-2">
+          <div class="toyota-panel rounded-4 p-2 p-lg-3 shadow-sm border d-flex flex-row flex-lg-column overflow-x-auto no-scrollbar brand-scroll-track gap-2 mb-3 mb-lg-0">
             
-            <button data-tab="favorites" class="tab-btn btn ${activeTab === 'favorites' ? 'btn-toyota-red' : 'btn-light text-secondary'} text-start px-3 py-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-grow-1 flex-lg-grow-0" style="font-size: 0.75rem;">
+            <button data-tab="favorites" class="tab-btn btn ${activeTab === 'favorites' ? 'btn-toyota-red' : 'btn-light text-secondary'} text-start px-3 py-2 py-lg-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-shrink-0 flex-lg-shrink-1 text-nowrap" style="font-size: 0.75rem;">
               <i class="bi bi-heart fs-6"></i>
               <span>Mes Favoris</span>
             </button>
             
-            <button data-tab="offers" class="tab-btn btn ${activeTab === 'offers' ? 'btn-toyota-red' : 'btn-light text-secondary'} text-start px-3 py-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-grow-1 flex-lg-grow-0" style="font-size: 0.75rem;">
+            <button data-tab="offers" class="tab-btn btn ${activeTab === 'offers' ? 'btn-toyota-red' : 'btn-light text-secondary'} text-start px-3 py-2 py-lg-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-shrink-0 flex-lg-shrink-1 text-nowrap" style="font-size: 0.75rem;">
               <i class="bi bi-tag fs-6"></i>
               <span>Mes Négociations</span>
             </button>
             
-            <button data-tab="chat" class="tab-btn btn ${activeTab === 'chat' ? 'btn-toyota-red' : 'btn-light text-secondary'} text-start px-3 py-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center justify-content-between gap-2 flex-grow-1 flex-lg-grow-0 position-relative" style="font-size: 0.75rem;">
+            <button data-tab="chat" class="tab-btn btn ${activeTab === 'chat' ? 'btn-toyota-red' : 'btn-light text-secondary'} text-start px-3 py-2 py-lg-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center justify-content-between gap-2 flex-shrink-0 flex-lg-shrink-1 text-nowrap position-relative" style="font-size: 0.75rem;">
               <div class="d-flex align-items-center gap-2">
                 <i class="bi bi-chat-dots fs-6"></i>
                 <span>Messagerie Directe</span>
               </div>
-              <span id="inbox-badge" class="badge rounded-pill bg-danger text-white d-none" style="font-size: 0.65rem;">0</span>
+              <span id="inbox-badge" class="badge rounded-pill bg-danger text-white d-none ms-1" style="font-size: 0.65rem;">0</span>
             </button>
             
-            <button data-tab="profile" class="tab-btn btn ${activeTab === 'profile' ? 'btn-toyota-red' : 'btn-light text-secondary'} text-start px-3 py-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-grow-1 flex-lg-grow-0" style="font-size: 0.75rem;">
+            <button data-tab="profile" class="tab-btn btn ${activeTab === 'profile' ? 'btn-toyota-red' : 'btn-light text-secondary'} text-start px-3 py-2 py-lg-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-shrink-0 flex-lg-shrink-1 text-nowrap" style="font-size: 0.75rem;">
               <i class="bi bi-person fs-6"></i>
               <span>Mon Profil</span>
             </button>
@@ -108,9 +108,9 @@ export async function init() {
     tabButtons.forEach(btn => {
       const isMatch = btn.getAttribute('data-tab') === tab;
       if (isMatch) {
-        btn.className = "tab-btn btn btn-toyota-red text-start px-3 py-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-grow-1 flex-lg-grow-0 shadow-sm";
+        btn.className = "tab-btn btn btn-toyota-red text-start px-3 py-2 py-lg-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-shrink-0 flex-lg-shrink-1 text-nowrap shadow-sm";
       } else {
-        btn.className = "tab-btn btn btn-light text-secondary text-start px-3 py-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-grow-1 flex-lg-grow-0";
+        btn.className = "tab-btn btn btn-light text-secondary text-start px-3 py-2 py-lg-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-shrink-0 flex-lg-shrink-1 text-nowrap";
       }
     });
 
@@ -128,9 +128,9 @@ export async function init() {
   tabButtons.forEach(btn => {
     const btnTab = btn.getAttribute('data-tab');
     if (btnTab === activeTab) {
-      btn.className = "tab-btn btn btn-toyota-red text-start px-3 py-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-grow-1 flex-lg-grow-0 shadow-sm";
+      btn.className = "tab-btn btn btn-toyota-red text-start px-3 py-2 py-lg-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-shrink-0 flex-lg-shrink-1 text-nowrap shadow-sm";
     } else {
-      btn.className = "tab-btn btn btn-light text-secondary text-start px-3 py-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-grow-1 flex-lg-grow-0";
+      btn.className = "tab-btn btn btn-light text-secondary text-start px-3 py-2 py-lg-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-shrink-0 flex-lg-shrink-1 text-nowrap";
     }
   });
 

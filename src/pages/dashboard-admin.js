@@ -49,18 +49,18 @@ export function render() {
       </section>
 
       <!-- SUB-TABS NAVIGATION -->
-      <div class="d-flex border-bottom mb-4 overflow-auto pb-1 gap-2">
-        <button data-subtab="catalogue" class="subtab-btn btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 ${activeSubTab === 'catalogue' ? 'border-danger text-danger' : 'border-transparent text-secondary'}" style="font-size: 0.8rem; border-radius: 0;">
+      <div class="d-flex border-bottom mb-4 overflow-x-auto no-scrollbar brand-scroll-track pb-1 gap-2 flex-nowrap">
+        <button data-subtab="catalogue" class="subtab-btn text-nowrap flex-shrink-0 btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 ${activeSubTab === 'catalogue' ? 'border-danger text-danger' : 'border-transparent text-secondary'}" style="font-size: 0.8rem; border-radius: 0;">
           Gestion Catalogue
         </button>
-        <button data-subtab="requests" class="subtab-btn btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 ${activeSubTab === 'requests' ? 'border-danger text-danger' : 'border-transparent text-secondary'}" style="font-size: 0.8rem; border-radius: 0;">
+        <button data-subtab="requests" class="subtab-btn text-nowrap flex-shrink-0 btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 ${activeSubTab === 'requests' ? 'border-danger text-danger' : 'border-transparent text-secondary'}" style="font-size: 0.8rem; border-radius: 0;">
           Demandes / Offres
         </button>
-        <button data-subtab="inbox" class="subtab-btn btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 d-flex align-items-center gap-2 ${activeSubTab === 'inbox' ? 'border-danger text-danger' : 'border-transparent text-secondary'}" style="font-size: 0.8rem; border-radius: 0;">
+        <button data-subtab="inbox" class="subtab-btn text-nowrap flex-shrink-0 btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 d-flex align-items-center gap-2 ${activeSubTab === 'inbox' ? 'border-danger text-danger' : 'border-transparent text-secondary'}" style="font-size: 0.8rem; border-radius: 0;">
           <span>Messagerie Client</span>
           <span id="admin-inbox-badge" class="badge rounded-pill bg-danger text-white d-none" style="font-size: 0.65rem;">0</span>
         </button>
-        <button data-subtab="settings" class="subtab-btn btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 ${activeSubTab === 'settings' ? 'border-danger text-danger' : 'border-transparent text-secondary'}" style="font-size: 0.8rem; border-radius: 0;">
+        <button data-subtab="settings" class="subtab-btn text-nowrap flex-shrink-0 btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 ${activeSubTab === 'settings' ? 'border-danger text-danger' : 'border-transparent text-secondary'}" style="font-size: 0.8rem; border-radius: 0;">
           Paramètres Showroom
         </button>
       </div>
@@ -237,9 +237,9 @@ export async function init() {
     tabButtons.forEach(btn => {
       const isMatch = btn.getAttribute('data-subtab') === tab;
       if (isMatch) {
-        btn.className = "subtab-btn btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 border-danger text-danger";
+        btn.className = "subtab-btn text-nowrap flex-shrink-0 btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 border-danger text-danger";
       } else {
-        btn.className = "subtab-btn btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 border-transparent text-secondary";
+        btn.className = "subtab-btn text-nowrap flex-shrink-0 btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 border-transparent text-secondary";
       }
     });
     

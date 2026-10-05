@@ -27,8 +27,8 @@ export function render() {
           </p>
         </div>
 
-        <!-- Quick Filter Chips -->
-        <div class="d-flex flex-wrap gap-2 pt-3 border-top mt-3" id="quick-filter-chips">
+        <!-- Quick Filter Chips (Horizontal swipe on mobile) -->
+        <div class="brand-scroll-track pt-3 border-top mt-3 no-scrollbar" id="quick-filter-chips">
           <button class="chip-filter btn btn-sm btn-danger fw-bold text-uppercase px-3 py-2 rounded-3" data-type="all">
             Tous les SUV
           </button>
@@ -54,37 +54,58 @@ export function render() {
       </div>
 
       <!-- Control Toolbar -->
-      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 pb-3 mb-3 border-bottom">
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 pb-3 mb-3 border-bottom">
         <div class="d-flex align-items-center gap-2">
           <span class="spinner-grow spinner-grow-sm text-danger" role="status"></span>
-          <span class="small fw-bold text-dark text-uppercase">
-            <strong id="vehicles-total-count" class="text-danger fs-6 fw-black">8</strong> SUV DISPONIBLES EN SHOWROOM
+          <span class="small fw-bold text-dark text-uppercase" style="font-size: 0.75rem;">
+            <strong id="vehicles-total-count" class="text-danger fs-6 fw-black">8</strong> SUV DISPONIBLES
           </span>
         </div>
 
         <div class="d-flex align-items-center gap-2">
-          <label class="toyota-spec-label mb-0 d-none d-sm-inline">Trier par :</label>
-          <select id="catalogue-sort-select" class="form-select toyota-input py-1.5 px-3 small" style="width: auto;">
-            <option value="dateDesc" ${activeSort === 'dateDesc' ? 'selected' : ''}>Plus récents d'abord</option>
+          <label class="toyota-spec-label mb-0 d-none d-sm-inline">Trier :</label>
+          <select id="catalogue-sort-select" class="form-select toyota-input py-1.5 px-2.5 small" style="width: auto; font-size: 0.78rem;">
+            <option value="dateDesc" ${activeSort === 'dateDesc' ? 'selected' : ''}>Plus récents</option>
             <option value="prixAsc" ${activeSort === 'prixAsc' ? 'selected' : ''}>Prix : Croissant</option>
             <option value="prixDesc" ${activeSort === 'prixDesc' ? 'selected' : ''}>Prix : Décroissant</option>
-            <option value="kilometrageAsc" ${activeSort === 'kilometrageAsc' ? 'selected' : ''}>Kilométrage : Faible</option>
+            <option value="kilometrageAsc" ${activeSort === 'kilometrageAsc' ? 'selected' : ''}>Kilométrage faible</option>
           </select>
         </div>
+      </div>
+
+      <!-- Mobile Filter Toggle Button (Visible only on mobile < lg) -->
+      <div class="d-lg-none mb-3">
+        <button class="mobile-filter-trigger w-100" type="button" id="mobile-filter-toggle-btn">
+          <span class="d-flex align-items-center gap-2">
+            <i class="bi bi-sliders text-danger fs-5"></i>
+            <span>Affiner la recherche</span>
+          </span>
+          <span class="badge bg-danger rounded-pill px-2.5 py-1.5" id="mobile-filter-badge-text">Filtres</span>
+        </button>
       </div>
 
       <!-- Main Layout Grid -->
       <div class="row g-4 align-items-start">
         
-        <!-- Filters Sidebar -->
-        <aside class="col-12 col-lg-3" id="filters-container">
-          <!-- Rendered in init() -->
+        <!-- Filters Sidebar (Collapsible on Mobile, Persistent on Desktop) -->
+        <aside class="col-12 col-lg-3">
+          <div class="d-none d-lg-block" id="filters-desktop-wrapper">
+            <div id="filters-container">
+              <!-- Rendered in init() -->
+            </div>
+          </div>
+          <!-- Mobile Drawer Container -->
+          <div class="d-lg-none d-none mb-4" id="filters-mobile-drawer">
+            <div id="filters-container-mobile">
+              <!-- Cloned/Rendered dynamically -->
+            </div>
+          </div>
         </aside>
 
         <!-- Product Grid Listing -->
         <div class="col-12 col-lg-9">
           
-          <div id="catalogue-grid" class="row g-4">
+          <div id="catalogue-grid" class="row g-3 g-sm-4">
             <div class="col-12 text-center py-5 text-muted">
               Chargement instantané du showroom...
             </div>
@@ -284,6 +305,44 @@ export async function init() {
       updateCatalogue();
     });
   });
+
+  // Mobile Filter Drawer Toggle
+  const mobileToggleBtn = document.getElementById('mobile-filter-toggle-btn');
+  const mobileDrawer = document.getElementById('filters-mobile-drawer');
+  const mobileContainer = document.getElementById('filters-container-mobile');
+  const mobileBadgeText = document.getElementById('mobile-filter-badge-text');
+
+  if (mobileToggleBtn && mobileDrawer && mobileContainer) {
+    mobileContainer.innerHTML = renderFilters(store.getState().filters, allUniqueBrands);
+    initFilters(
+      (updatedFilters) => {
+        store.setFilters(updatedFilters);
+        currentPage = 1;
+        updateCatalogue();
+      },
+      () => {
+        store.resetFilters();
+        currentPage = 1;
+        mobileContainer.innerHTML = renderFilters(store.getState().filters, allUniqueBrands);
+        initFilters(
+          (u) => { store.setFilters(u); currentPage = 1; updateCatalogue(); },
+          () => { store.resetFilters(); currentPage = 1; updateCatalogue(); }
+        );
+        updateCatalogue();
+      }
+    );
+
+    mobileToggleBtn.addEventListener('click', () => {
+      const isHidden = mobileDrawer.classList.contains('d-none');
+      if (isHidden) {
+        mobileDrawer.classList.remove('d-none');
+        if (mobileBadgeText) mobileBadgeText.textContent = 'Masquer';
+      } else {
+        mobileDrawer.classList.add('d-none');
+        if (mobileBadgeText) mobileBadgeText.textContent = 'Filtres';
+      }
+    });
+  }
 
   if (sortSelect) {
     sortSelect.addEventListener('change', (e) => {

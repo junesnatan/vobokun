@@ -2,8 +2,6 @@ import { store } from './store.js';
 import { initRouter, navigate } from './router.js';
 import { renderNavbar, initNavbar } from './components/navbar.js';
 import { initComparisonSystem, updateComparisonBar } from './components/comparison.js';
-import { isMock, db } from './firebase.js';
-import { collection, getDocs } from 'firebase/firestore';
 
 // Global Toyota Corporate Footer HTML
 const footerHTML = `
@@ -162,19 +160,7 @@ async function bootstrap() {
       .replace('+229 01 00 00 00 00', siteTel);
   }
 
-  // Fetch settings from Firestore asynchronously in background (non-blocking)
-  if (!isMock && db) {
-    getDocs(collection(db, 'settings')).then(snap => {
-      snap.forEach(docSnap => {
-        const data = docSnap.data();
-        if (data.key && data.value) {
-          localStorage.setItem(data.key, data.value);
-        }
-      });
-    }).catch(() => {
-      // ignore
-    });
-  }
+
 
   // Boot social proof system
   try {

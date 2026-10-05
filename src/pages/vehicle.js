@@ -10,7 +10,7 @@ let activeVehicle = null;
 
 export function render(params) {
   return `
-    <div class="container py-4 text-start" id="vehicle-details-root">
+    <div class="container py-4 pb-sticky-mobile text-start" id="vehicle-details-root">
       <div class="text-center py-5 text-muted">
         <div class="spinner-border text-danger mb-3" role="status"></div>
         <p class="fw-semibold">Chargement instantané du véhicule...</p>
@@ -145,7 +145,7 @@ function renderDetailsDOM(root, vehicle, isFav, similar) {
   let thumbnailsHTML = '';
   if (photos && photos.length > 0) {
     thumbnailsHTML = photos.map((photo, idx) => `
-      <div class="col">
+      <div class="flex-shrink-0" style="width: 78px; scroll-snap-align: start;">
         <button class="thumbnail-btn w-100 rounded-3 overflow-hidden border p-0 ${idx === 0 ? 'border-danger ring-2' : 'border-secondary-subtle'}" style="aspect-ratio: 16/10; background: #eee;">
           <img src="${photo}" alt="Miniature ${idx + 1}" class="w-100 h-100 object-fit-cover">
         </button>
@@ -195,8 +195,8 @@ function renderDetailsDOM(root, vehicle, isFav, similar) {
           </div>
         </div>
 
-        <!-- Thumbnails Row -->
-        <div class="row row-cols-5 g-2 mt-2">
+        <!-- Thumbnails Row (Horizontal touch-scroll track) -->
+        <div class="d-flex gap-2 mt-2 overflow-x-auto no-scrollbar py-1 brand-scroll-track" style="scroll-snap-type: x mandatory;">
           ${thumbnailsHTML}
         </div>
 
@@ -349,6 +349,24 @@ function renderDetailsDOM(root, vehicle, isFav, similar) {
         <div class="col-12 text-center py-4 text-muted small">Recherche des modèles comparables...</div>
       </div>
     </section>
+
+    <!-- MOBILE STICKY BOTTOM BAR -->
+    ${statut === 'disponible' ? `
+      <div class="mobile-sticky-cta d-lg-none d-flex align-items-center justify-content-between gap-3 px-3 py-2 border-top shadow-lg">
+        <div class="min-w-0">
+          <span class="d-block text-muted text-uppercase fw-bold" style="font-size: 0.65rem;">Prix Showroom</span>
+          <span class="fw-black text-danger font-display fs-6 text-truncate d-block">${formattedPrice}</span>
+        </div>
+        <div class="d-flex align-items-center gap-2 flex-shrink-0">
+          <a id="mobile-sticky-whatsapp-btn" target="_blank" rel="noopener noreferrer" class="btn btn-outline-success btn-sm px-3 py-2 d-flex align-items-center justify-content-center" title="WhatsApp">
+            <i class="bi bi-whatsapp fs-6"></i>
+          </a>
+          <button id="mobile-sticky-offer-btn" class="btn btn-toyota-red btn-sm fw-black text-uppercase px-3 py-2 shadow-sm" style="font-size: 0.75rem;">
+            Faire une offre
+          </button>
+        </div>
+      </div>
+    ` : ''}
   `;
 
   updateChatVehicleContext(vehicle);
@@ -360,11 +378,13 @@ function initDetailsListeners(vehicle) {
   const favBtn = document.getElementById('details-fav-btn');
   const modal = document.getElementById('offer-modal');
   const openModalBtn = document.getElementById('open-offer-modal-btn');
+  const mobileOfferBtn = document.getElementById('mobile-sticky-offer-btn');
   const closeModalBtn = document.getElementById('close-offer-modal-btn');
   const cancelBtn = document.getElementById('cancel-offer-btn');
   const offerForm = document.getElementById('offer-form');
   const chatBtn = document.getElementById('direct-chat-trigger-btn');
   const whatsappBtn = document.getElementById('whatsapp-contact-btn');
+  const mobileWhatsappBtn = document.getElementById('mobile-sticky-whatsapp-btn');
   
   if (whatsappBtn) {
     const siteTel = localStorage.getItem('suv_site_tel') || '+229 01 00 00 00 00';
@@ -375,7 +395,15 @@ function initDetailsListeners(vehicle) {
     const currency = localStorage.getItem('suv_site_currency') || 'FCFA';
     const formattedPrice = new Intl.NumberFormat('fr-FR').format(vehicle.prix) + ' ' + currency;
     const encodedMsg = encodeURIComponent(`Bonjour Atelier Vobokun, je suis intéressé par le SUV ${vehicle.marque} ${vehicle.modele} (${vehicle.annee}) affiché à ${formattedPrice}. Est-il disponible pour un essai ?`);
-    whatsappBtn.setAttribute('href', `https://wa.me/${cleanTel}?text=${encodedMsg}`);
+    const waUrl = `https://wa.me/${cleanTel}?text=${encodedMsg}`;
+    whatsappBtn.setAttribute('href', waUrl);
+    if (mobileWhatsappBtn) mobileWhatsappBtn.setAttribute('href', waUrl);
+  }
+
+  if (mobileOfferBtn && openModalBtn) {
+    mobileOfferBtn.addEventListener('click', () => {
+      openModalBtn.click();
+    });
   }
 
   const lightbox = document.getElementById('lightbox-container');

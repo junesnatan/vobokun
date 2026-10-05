@@ -481,3 +481,125 @@ input[type="range"].toyota-range::-webkit-slider-thumb:hover {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* ==========================================================================
+   10. MOBILE-SPECIFIC ENHANCEMENTS & TOUCH OPTIMIZATIONS
+   ========================================================================== */
+
+/* Utility to hide scrollbar while preserving smooth horizontal swipe */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mobile responsive typography scaling */
+.hero-headline {
+  font-size: clamp(1.85rem, 5.5vw, 3.4rem);
+  line-height: 1.15;
+}
+
+.brand-scroll-track {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.brand-scroll-track .btn {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Mobile bottom sticky action bar for vehicle detail */
+.mobile-sticky-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--toyota-border);
+  padding: 0.75rem 1rem;
+  z-index: 1030;
+  box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Mobile filter drawer trigger */
+.mobile-filter-trigger {
+  border: 1.5px solid var(--toyota-border);
+  border-radius: 12px;
+  background: #FFFFFF;
+  padding: 0.75rem 1rem;
+  font-weight: 800;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--toyota-black);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 991.98px) {
+  /* Mobile padding optimization */
+  .toyota-panel {
+    padding: 1.25rem;
+    border-radius: 16px;
+  }
+  
+  .toyota-card {
+    border-radius: 16px;
+  }
+  
+  /* Compact chat panel on mobile */
+  #chat-box-panel {
+    width: calc(100vw - 28px) !important;
+    right: 14px !important;
+    bottom: 74px !important;
+    height: 480px !important;
+    max-height: 78vh !important;
+  }
+  
+  #chat-toggle-bubble {
+    width: 52px;
+    height: 52px;
+  }
+
+  body:has(.mobile-sticky-cta) #floating-chat-container {
+    bottom: 60px !important;
+  }
+}
+
+.pb-sticky-mobile {
+  padding-bottom: 5.5rem !important;
+}
+@media (min-width: 992px) {
+  .pb-sticky-mobile {
+    padding-bottom: 2rem !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .toyota-navbar {
+    padding: 0.65rem 0;
+  }
+  
+  .brand-emblem {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+
+  .btn-toyota-red,
+  .btn-toyota-dark,
+  .btn-toyota-outline {
+    padding: 0.65rem 1.1rem;
+    font-size: 0.75rem;
+  }
+}
+

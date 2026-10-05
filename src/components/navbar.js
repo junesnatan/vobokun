@@ -55,26 +55,26 @@ export function renderNavbar(state) {
 
   return `
     <nav class="navbar navbar-expand-lg toyota-navbar sticky-top">
-      <div class="container">
+      <div class="container px-3 px-sm-4">
         
         <!-- Brand Logo & Toyota-inspired Identity -->
         <a href="/" class="navbar-brand d-flex align-items-center gap-2 text-decoration-none" data-link>
-          <div class="brand-emblem">V</div>
+          <div class="brand-emblem flex-shrink-0">V</div>
           <div class="d-flex flex-column">
             <div class="d-flex align-items-center gap-1 lh-1">
               <span class="fs-4 fw-black font-display text-dark tracking-tight">VOBO<span class="text-danger">KUN</span></span>
-              <span class="badge bg-dark text-white rounded-1 px-1.5 py-0.5 small" style="font-size: 0.62rem; letter-spacing: 0.08em;">CORPORATE</span>
+              <span class="badge bg-dark text-white rounded-1 px-1.5 py-0.5 small d-none d-sm-inline" style="font-size: 0.6rem; letter-spacing: 0.08em;">SHOWROOM</span>
             </div>
-            <span class="text-muted fw-semibold" style="font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;">Showroom d'Exception</span>
+            <span class="text-muted fw-bold d-none d-sm-block" style="font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;">Automobiles de Prestige</span>
           </div>
         </a>
 
         <!-- Mobile Toggler -->
-        <button class="navbar-toggler border-0 p-2 shadow-none" type="button" id="mobile-menu-toggle-btn" aria-label="Toggle navigation">
+        <button class="navbar-toggler border-0 p-1.5 shadow-none" type="button" id="mobile-menu-toggle-btn" aria-label="Toggle navigation">
           <i class="bi bi-list fs-2 text-dark" id="burger-icon"></i>
         </button>
 
-        <!-- Navbar Content (Desktop & Collapse) -->
+        <!-- Navbar Content (Desktop) -->
         <div class="collapse navbar-collapse d-none d-lg-flex justify-content-end align-items-center" id="desktop-navbar-content">
           <div class="d-flex align-items-center gap-2">
             <a href="/" class="toyota-nav-link" data-link>Accueil</a>
@@ -89,31 +89,31 @@ export function renderNavbar(state) {
       </div>
 
       <!-- Mobile Dropdown Menu -->
-      <div class="d-lg-none w-100 bg-white border-top mt-2 p-3 d-none shadow-sm" id="mobile-menu">
-        <div class="d-flex flex-col gap-2 flex-column">
-          <a href="/" class="toyota-nav-link justify-content-between py-2.5" data-link>
-            <span>Accueil</span>
+      <div class="d-lg-none w-100 bg-white border-top border-bottom mt-2 px-3 py-3 d-none shadow-lg animate-fade-in" id="mobile-menu">
+        <div class="d-flex flex-column gap-1">
+          <a href="/" class="toyota-nav-link justify-content-between py-2.5 px-3 rounded-3" data-link>
+            <span class="d-flex align-items-center gap-2"><i class="bi bi-house-door text-danger"></i> Accueil</span>
             <i class="bi bi-chevron-right text-muted small"></i>
           </a>
-          <a href="/catalogue" class="toyota-nav-link justify-content-between py-2.5" data-link>
-            <span>Catalogue SUV</span>
+          <a href="/catalogue" class="toyota-nav-link justify-content-between py-2.5 px-3 rounded-3" data-link>
+            <span class="d-flex align-items-center gap-2"><i class="bi bi-grid-3x3-gap text-danger"></i> Catalogue SUV</span>
             <span class="badge bg-danger rounded-pill">8 véhicules</span>
           </a>
           ${user ? `
             ${user.role === 'admin' ? `
-              <a href="/admin" class="toyota-nav-link justify-content-between py-2.5 text-danger fw-bold" data-link>
-                <span>Console Concessionnaire</span>
+              <a href="/admin" class="toyota-nav-link justify-content-between py-2.5 px-3 rounded-3 text-danger fw-bold bg-danger-subtle" data-link>
+                <span class="d-flex align-items-center gap-2"><i class="bi bi-speedometer2"></i> Console Concessionnaire</span>
                 <span class="badge bg-danger">${unreadMessagesCount} msg</span>
               </a>
             ` : `
-              <a href="/dashboard" class="toyota-nav-link justify-content-between py-2.5" data-link>
-                <span>Mon Espace VIP</span>
+              <a href="/dashboard" class="toyota-nav-link justify-content-between py-2.5 px-3 rounded-3 fw-bold" data-link>
+                <span class="d-flex align-items-center gap-2"><i class="bi bi-person-badge text-danger"></i> Mon Espace VIP</span>
                 <span class="badge bg-danger">${unreadMessagesCount}</span>
               </a>
             `}
-            <div class="pt-3 border-top d-flex justify-content-between align-items-center">
+            <div class="pt-3 mt-2 border-top d-flex justify-content-between align-items-center">
               <a href="/dashboard?tab=profile" class="d-flex align-items-center gap-2 text-decoration-none text-dark" data-link>
-                <img class="rounded-circle border border-danger" style="width: 32px; height: 32px; object-fit: cover;" src="${user.avatar_url || 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'}">
+                <img class="rounded-circle border border-danger" style="width: 34px; height: 34px; object-fit: cover;" src="${user.avatar_url || 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'}">
                 <span class="fw-bold small">${user.prenom} ${user.nom}</span>
               </a>
               <button id="mobile-logout-btn" class="btn btn-sm btn-outline-danger fw-bold small">
@@ -121,9 +121,9 @@ export function renderNavbar(state) {
               </button>
             </div>
           ` : `
-            <div class="pt-3 border-top">
-              <a href="/login" class="btn-toyota-red w-100 justify-content-center" data-link>
-                Accéder à l'Espace Client
+            <div class="pt-3 mt-2 border-top">
+              <a href="/login" class="btn-toyota-red w-100 justify-content-center py-2.5" data-link>
+                <i class="bi bi-person-lock me-1"></i> Accéder à l'Espace Client
               </a>
             </div>
           `}

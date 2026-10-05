@@ -9,7 +9,7 @@ export function render() {
     <div class="container py-2 animate-fade-in">
       
       <!-- 1. EDITORIAL HERO SHOWROOM -->
-      <section class="card toyota-card-dark position-relative overflow-hidden p-4 p-md-5 mb-5 border-0 shadow-lg">
+      <section class="card toyota-card-dark position-relative overflow-hidden p-3 p-sm-4 p-md-5 mb-4 mb-md-5 border-0 shadow-lg">
         
         <!-- Background Image with Toyota High-Contrast Dark Gradient Overlay -->
         <div class="position-absolute top-0 start-0 w-100 h-100 z-0">
@@ -24,46 +24,46 @@ export function render() {
         </div>
 
         <!-- Hero Content -->
-        <div class="position-relative z-2 py-4 py-lg-5" style="max-width: 680px;">
+        <div class="position-relative z-2 py-3 py-sm-4 py-lg-5" style="max-width: 680px;">
           
-          <div class="d-inline-flex align-items-center gap-2 badge bg-danger text-white text-uppercase px-3 py-2 fw-black font-display mb-3 rounded-2 shadow-sm">
-            <span class="spinner-grow spinner-grow-sm text-light" style="width: 8px; height: 8px;" role="status"></span>
+          <div class="d-inline-flex align-items-center gap-2 badge bg-danger text-white text-uppercase px-2.5 py-1.5 fw-black font-display mb-3 rounded-2 shadow-sm" style="font-size: 0.68rem;">
+            <span class="spinner-grow spinner-grow-sm text-light" style="width: 7px; height: 7px;" role="status"></span>
             SHOWROOM OFFICIEL &middot; COTONOU
           </div>
           
-          <h1 class="display-4 fw-black font-display text-white text-uppercase mb-3 tracking-tight lh-1">
+          <h1 class="hero-headline fw-black font-display text-white text-uppercase mb-3 tracking-tight">
             L'Excellence SUV <br>
             <span class="text-danger">Certifiée & Garantie.</span>
           </h1>
           
-          <p class="lead text-white text-opacity-75 mb-4 fw-normal" style="font-size: 1.05rem; line-height: 1.6;">
+          <p class="lead text-white text-opacity-75 mb-4 fw-normal" style="font-size: 0.95rem; line-height: 1.6;">
             Accédez à une sélection exclusive de SUV prestigieux rigoureusement inspectés sur 150 points. Négociation directe avec la concession, traçabilité certifiée et livraison clé en main.
           </p>
           
-          <div class="d-flex flex-wrap align-items-center gap-3 mb-5">
-            <a href="/catalogue" class="btn-toyota-red px-4 py-3" data-link>
+          <div class="d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center gap-2 gap-sm-3 mb-4 mb-md-5">
+            <a href="/catalogue" class="btn-toyota-red px-4 py-3 justify-content-center" data-link>
               <span>Explorer la Collection</span>
               <i class="bi bi-arrow-right fs-6"></i>
             </a>
-            <a href="#express-finance" class="btn-toyota-outline-white px-4 py-3">
+            <a href="#express-finance" class="btn-toyota-outline-white px-4 py-3 justify-content-center">
               <i class="bi bi-calculator text-danger fs-6"></i>
               <span>Simuler Financement</span>
             </a>
           </div>
 
           <!-- Quick Proof Points -->
-          <div class="pt-4 border-top border-secondary border-opacity-25 row g-4">
+          <div class="pt-3 pt-sm-4 border-top border-secondary border-opacity-25 row g-2 g-sm-4">
             <div class="col-4">
-              <div class="fs-4 fw-black font-display text-white">150<span class="text-danger">+</span></div>
-              <div class="text-white text-opacity-50 small fw-bold text-uppercase" style="font-size: 0.7rem;">Points Contrôlés</div>
+              <div class="h4 fw-black font-display text-white mb-0">150<span class="text-danger">+</span></div>
+              <div class="text-white text-opacity-50 fw-bold text-uppercase" style="font-size: 0.65rem;">Points Contrôlés</div>
             </div>
             <div class="col-4 border-start border-secondary border-opacity-25">
-              <div class="fs-4 fw-black font-display text-white">12 <span class="text-danger">Mois</span></div>
-              <div class="text-white text-opacity-50 small fw-bold text-uppercase" style="font-size: 0.7rem;">Garantie Réseau</div>
+              <div class="h4 fw-black font-display text-white mb-0">12 <span class="text-danger">Mois</span></div>
+              <div class="text-white text-opacity-50 fw-bold text-uppercase" style="font-size: 0.65rem;">Garantie Réseau</div>
             </div>
             <div class="col-4 border-start border-secondary border-opacity-25">
-              <div class="fs-4 fw-black font-display text-white">0 <span class="text-danger">Délai</span></div>
-              <div class="text-white text-opacity-50 small fw-bold text-uppercase" style="font-size: 0.7rem;">Essai Immédiat</div>
+              <div class="h4 fw-black font-display text-white mb-0">0 <span class="text-danger">Délai</span></div>
+              <div class="text-white text-opacity-50 fw-bold text-uppercase" style="font-size: 0.65rem;">Essai Immédiat</div>
             </div>
           </div>
 
@@ -71,13 +71,13 @@ export function render() {
       </section>
 
       <!-- 2. QUICK SEARCH DECK -->
-      <section class="container px-0 mb-5" style="margin-top: -3.5rem; position: relative; z-index: 10;">
-        <div class="card toyota-card p-4 p-md-4 shadow-lg border-2">
-          <form id="quick-search-form" class="row g-3 align-items-end">
+      <section class="container px-0 mb-4 mb-md-5" style="position: relative; z-index: 10;">
+        <div class="card toyota-card p-3 p-md-4 shadow-lg border-2">
+          <form id="quick-search-form" class="row g-2 g-sm-3 align-items-end">
             
             <!-- Brand -->
-            <div class="col-12 col-md-3">
-              <label class="toyota-spec-label mb-1.5"><i class="bi bi-car-front text-danger me-1"></i>Marque</label>
+            <div class="col-12 col-sm-6 col-lg-3">
+              <label class="toyota-spec-label mb-1"><i class="bi bi-car-front text-danger me-1"></i>Marque</label>
               <select id="qs-brand" class="form-select toyota-input">
                 <option value="">Toutes les marques</option>
                 <option value="Toyota">Toyota</option>
@@ -92,8 +92,8 @@ export function render() {
             </div>
             
             <!-- Budget Max -->
-            <div class="col-12 col-md-3">
-              <label class="toyota-spec-label mb-1.5"><i class="bi bi-cash-stack text-danger me-1"></i>Budget Max</label>
+            <div class="col-12 col-sm-6 col-lg-3">
+              <label class="toyota-spec-label mb-1"><i class="bi bi-cash-stack text-danger me-1"></i>Budget Max</label>
               <select id="qs-budget" class="form-select toyota-input">
                 <option value="">Tous les budgets</option>
                 <option value="30000000">Jusqu'à 30 000 000 FCFA</option>
@@ -104,8 +104,8 @@ export function render() {
             </div>
 
             <!-- Energy / Fuel -->
-            <div class="col-12 col-md-3">
-              <label class="toyota-spec-label mb-1.5"><i class="bi bi-fuel-pump text-danger me-1"></i>Motorisation</label>
+            <div class="col-12 col-sm-6 col-lg-3">
+              <label class="toyota-spec-label mb-1"><i class="bi bi-fuel-pump text-danger me-1"></i>Motorisation</label>
               <select id="qs-carburant" class="form-select toyota-input">
                 <option value="">Toutes énergies</option>
                 <option value="Diesel">Diesel</option>
@@ -116,7 +116,7 @@ export function render() {
             </div>
             
             <!-- Submit Button -->
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-sm-6 col-lg-3">
               <button type="submit" class="btn-toyota-red w-100 justify-content-center py-2.5">
                 <i class="bi bi-search"></i>
                 <span>Rechercher</span>
@@ -127,19 +127,19 @@ export function render() {
         </div>
       </section>
 
-      <!-- 3. BRAND PILLS CLOUD -->
-      <section class="text-center my-5 py-3">
+      <!-- 3. BRAND PILLS CLOUD (Horizontal smooth swipe on mobile) -->
+      <section class="text-center my-4 my-md-5 py-2">
         <span class="text-danger fw-bold small text-uppercase font-display tracking-widest d-block mb-1">Constructeurs Officiels</span>
-        <h2 class="h3 fw-black text-dark font-display text-uppercase mb-4">Sélections Privilèges</h2>
+        <h2 class="h4 h-md-3 fw-black text-dark font-display text-uppercase mb-3">Sélections Privilèges</h2>
         
-        <div class="d-flex flex-wrap justify-content-center gap-2">
-          <button class="brand-shortcut-btn btn btn-outline-dark fw-bold text-uppercase px-4 py-2 rounded-3" data-brand="Toyota">Toyota</button>
-          <button class="brand-shortcut-btn btn btn-outline-dark fw-bold text-uppercase px-4 py-2 rounded-3" data-brand="Land Rover">Land Rover</button>
-          <button class="brand-shortcut-btn btn btn-outline-dark fw-bold text-uppercase px-4 py-2 rounded-3" data-brand="BMW">BMW</button>
-          <button class="brand-shortcut-btn btn btn-outline-dark fw-bold text-uppercase px-4 py-2 rounded-3" data-brand="Porsche">Porsche</button>
-          <button class="brand-shortcut-btn btn btn-outline-dark fw-bold text-uppercase px-4 py-2 rounded-3" data-brand="Mercedes-Benz">Mercedes-Benz</button>
-          <button class="brand-shortcut-btn btn btn-outline-dark fw-bold text-uppercase px-4 py-2 rounded-3" data-brand="Audi">Audi</button>
-          <button class="brand-shortcut-btn btn btn-outline-dark fw-bold text-uppercase px-4 py-2 rounded-3" data-brand="Jeep">Jeep</button>
+        <div class="brand-scroll-track justify-content-start justify-content-md-center no-scrollbar">
+          <button class="brand-shortcut-btn btn btn-outline-dark fw-bold text-uppercase px-3 px-sm-4 py-2 rounded-3" data-brand="Toyota">Toyota</button>
+          <button class="brand-shortcut-btn btn btn-outline-dark fw-bold text-uppercase px-3 px-sm-4 py-2 rounded-3" data-brand="Land Rover">Land Rover</button>
+          <button class="brand-shortcut-btn btn btn-outline-dark fw-bold text-uppercase px-3 px-sm-4 py-2 rounded-3" data-brand="BMW">BMW</button>
+          <button class="brand-shortcut-btn btn btn-outline-dark fw-bold text-uppercase px-3 px-sm-4 py-2 rounded-3" data-brand="Porsche">Porsche</button>
+          <button class="brand-shortcut-btn btn btn-outline-dark fw-bold text-uppercase px-3 px-sm-4 py-2 rounded-3" data-brand="Mercedes-Benz">Mercedes-Benz</button>
+          <button class="brand-shortcut-btn btn btn-outline-dark fw-bold text-uppercase px-3 px-sm-4 py-2 rounded-3" data-brand="Audi">Audi</button>
+          <button class="brand-shortcut-btn btn btn-outline-dark fw-bold text-uppercase px-3 px-sm-4 py-2 rounded-3" data-brand="Jeep">Jeep</button>
         </div>
       </section>
 
