@@ -9,7 +9,7 @@ export function render() {
     <div class="space-y-24 animate-fade-in pb-16">
       
       <!-- 1. EDITORIAL HERO SHOWROOM -->
-      <section class="relative rounded-[32px] overflow-hidden min-h-[620px] flex items-center px-6 md:px-14 py-20 shadow-2xl border border-white/10 bg-[#0E1218]">
+      <section class="hero-showroom-banner relative rounded-[32px] overflow-hidden min-h-[620px] flex items-center px-6 md:px-14 py-20 shadow-2xl border border-white/10 bg-[#0E1218]">
         
         <!-- Optimized Background Image with Luxury Dark Gradient Overlay -->
         <div class="absolute inset-0 z-0 overflow-hidden">

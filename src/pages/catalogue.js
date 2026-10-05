@@ -14,7 +14,7 @@ export function render() {
     <div class="animate-fade-in space-y-10 text-left">
       
       <!-- Catalogue Header Showcase -->
-      <div class="relative rounded-3xl p-8 sm:p-12 border border-white/10 bg-[#0E1218] overflow-hidden shadow-2xl">
+      <div class="catalogue-header-showcase relative rounded-3xl p-8 sm:p-12 border border-white/10 bg-[#0E1218] overflow-hidden shadow-2xl">
         <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-suv-gold/10 blur-[80px] pointer-events-none"></div>
 
         <div class="relative z-10 max-w-2xl space-y-3">

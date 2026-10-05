@@ -7,7 +7,7 @@ import { collection, getDocs } from 'firebase/firestore';
 
 // Global Footer Component HTML
 const footerHTML = `
-  <div class="border-t border-white/10 bg-[#080A0E] pt-16 pb-12 px-6">
+  <div class="global-footer-container border-t border-white/10 bg-[#080A0E] pt-16 pb-12 px-6">
     <div class="max-w-7xl mx-auto space-y-12">
       
       <!-- Trust badges ribbon -->
