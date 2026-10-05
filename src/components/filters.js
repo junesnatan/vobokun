@@ -1,82 +1,82 @@
-import { getVehicles } from '../services/vehicles.js';
-
 export function renderFilters(currentFilters, uniqueBrands = []) {
   const currency = localStorage.getItem('suv_site_currency') || 'FCFA';
   const fuelTypes = ['Essence', 'Diesel', 'Hybride', 'Électrique'];
   const transmissions = ['Automatique', 'Manuelle'];
 
-  // Brands checkboxes HTML
   const brandsHTML = uniqueBrands.map(brand => {
     const isChecked = currentFilters.marque.includes(brand) ? 'checked' : '';
     return `
-      <label class="flex items-center gap-2.5 text-sm text-white/80 hover:text-white cursor-pointer py-1">
-        <input type="checkbox" name="marque" value="${brand}" ${isChecked} class="rounded border-white/10 bg-white/5 text-suv-red focus:ring-suv-red w-4 h-4 transition-colors">
-        <span>${brand}</span>
+      <label class="flex items-center gap-3 text-xs text-white/80 hover:text-white cursor-pointer py-1.5 px-2 rounded-xl hover:bg-white/5 transition-all">
+        <input type="checkbox" name="marque" value="${brand}" ${isChecked} class="rounded border-white/20 bg-white/5 text-suv-gold focus:ring-suv-gold w-4 h-4 transition-colors">
+        <span class="font-semibold tracking-wide">${brand}</span>
       </label>
     `;
   }).join('');
 
   return `
-    <div class="glass-panel rounded-2xl p-6 space-y-6 sticky top-24 border border-white/5">
+    <div class="glass-panel rounded-3xl p-6 sm:p-7 space-y-6 sticky top-24 border border-white/10 shadow-xl text-left">
       
-      <!-- Header -->
-      <div class="flex items-center justify-between">
-        <h3 class="text-md font-bold uppercase tracking-wider text-white font-display">Filtres</h3>
-        <button id="reset-filters-btn" class="text-xs text-suv-gold hover:text-suv-yellow font-medium transition-colors">
+      <!-- Filter Header -->
+      <div class="flex items-center justify-between pb-4 border-b border-white/10">
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-suv-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+          <h3 class="text-xs font-black uppercase tracking-widest text-white font-display">Filtres Détaillés</h3>
+        </div>
+        <button id="reset-filters-btn" class="text-[11px] text-suv-gold hover:text-suv-gold-light font-bold uppercase tracking-wider transition-colors hover:underline">
           Réinitialiser
         </button>
       </div>
 
-      <!-- Text Search -->
+      <!-- Quick Search Input -->
       <div class="space-y-2 relative">
-        <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Recherche rapide</label>
+        <label class="text-[10px] font-black uppercase tracking-widest text-suv-gold">Recherche directe</label>
         <div class="relative">
-          <input type="text" id="filter-search-input" value="${currentFilters.search || ''}" placeholder="Ex: Land Cruiser..." class="w-full suv-input pl-10" autocomplete="off">
-          <svg class="w-5 h-5 absolute left-3 top-3.5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <input type="text" id="filter-search-input" value="${currentFilters.search || ''}" placeholder="Modèle, mot-clé..." class="w-full suv-input pl-10 text-xs font-semibold" autocomplete="off">
+          <svg class="w-4 h-4 absolute left-3.5 top-3.5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
           </svg>
         </div>
         <div id="autocomplete-suggestions" class="autocomplete-dropdown hidden"></div>
       </div>
 
-      <!-- Brands Selection -->
-      <div class="space-y-2.5">
-        <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Marques</label>
-        <div class="flex flex-col max-h-40 overflow-y-auto pr-1 gap-1">
+      <!-- Brand Checkbox Deck -->
+      <div class="space-y-2">
+        <label class="text-[10px] font-black uppercase tracking-widest text-suv-gold">Marques</label>
+        <div class="flex flex-col max-h-48 overflow-y-auto pr-1 gap-0.5">
           ${brandsHTML.length > 0 ? brandsHTML : '<span class="text-xs text-white/30 py-2">Aucune marque disponible</span>'}
         </div>
       </div>
 
       <!-- Price Range Slider -->
-      <div class="space-y-3">
-        <div class="flex justify-between items-center text-xs font-bold uppercase tracking-wider text-suv-gray">
-          <span>Budget Max</span>
-          <span class="text-suv-gold font-sans text-sm font-bold" id="price-val-label">
+      <div class="space-y-3 pt-2 border-t border-white/5">
+        <div class="flex justify-between items-center text-xs font-bold uppercase tracking-wider">
+          <span class="text-white/60 text-[10px] uppercase font-bold">Budget Max</span>
+          <span class="text-suv-gold font-sans text-xs font-black" id="price-val-label">
             ${new Intl.NumberFormat('fr-FR').format(currentFilters.prixMax)} ${currency}
           </span>
         </div>
         <input type="range" id="filter-price-slider" min="10000000" max="100000000" step="1000000" value="${currentFilters.prixMax}" class="w-full">
-        <div class="flex justify-between text-[10px] text-white/30">
-          <span>10 M ${currency}</span>
+        <div class="flex justify-between text-[10px] text-white/30 font-semibold">
+          <span>10 M</span>
           <span>100 M ${currency}</span>
         </div>
       </div>
 
-      <!-- Fuel Type -->
+      <!-- Energy Type Dropdown -->
       <div class="space-y-2">
-        <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Carburant</label>
-        <select id="filter-fuel-select" class="w-full suv-input bg-suv-slate border-white/10 text-sm focus:border-suv-gold">
-          <option value="">Tous les carburants</option>
+        <label class="text-[10px] font-black uppercase tracking-widest text-suv-gold">Motorisation</label>
+        <select id="filter-fuel-select" class="w-full suv-input text-xs font-semibold">
+          <option value="">Toutes les motorisations</option>
           ${fuelTypes.map(fuel => `
             <option value="${fuel}" ${currentFilters.carburant === fuel ? 'selected' : ''}>${fuel}</option>
           `).join('')}
         </select>
       </div>
 
-      <!-- Transmission -->
+      <!-- Transmission Dropdown -->
       <div class="space-y-2">
-        <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Transmission</label>
-        <select id="filter-trans-select" class="w-full suv-input bg-suv-slate border-white/10 text-sm focus:border-suv-gold">
+        <label class="text-[10px] font-black uppercase tracking-widest text-suv-gold">Transmission</label>
+        <select id="filter-trans-select" class="w-full suv-input text-xs font-semibold">
           <option value="">Toutes les transmissions</option>
           ${transmissions.map(trans => `
             <option value="${trans}" ${currentFilters.transmission === trans ? 'selected' : ''}>${trans}</option>
@@ -85,17 +85,17 @@ export function renderFilters(currentFilters, uniqueBrands = []) {
       </div>
 
       <!-- Mileage Slider -->
-      <div class="space-y-3">
-        <div class="flex justify-between items-center text-xs font-bold uppercase tracking-wider text-suv-gray">
-          <span>Kilométrage Max</span>
-          <span class="text-suv-gold font-sans text-sm font-bold" id="mileage-val-label">
+      <div class="space-y-3 pt-2 border-t border-white/5">
+        <div class="flex justify-between items-center text-xs font-bold uppercase tracking-wider">
+          <span class="text-white/60 text-[10px] uppercase font-bold">Kilométrage Max</span>
+          <span class="text-suv-gold font-sans text-xs font-black" id="mileage-val-label">
             ${new Intl.NumberFormat('fr-FR').format(currentFilters.kilometrageMax)} km
           </span>
         </div>
         <input type="range" id="filter-mileage-slider" min="5000" max="200000" step="5000" value="${currentFilters.kilometrageMax}" class="w-full">
-        <div class="flex justify-between text-[10px] text-white/30">
-          <span>5k km</span>
-          <span>200k km</span>
+        <div class="flex justify-between text-[10px] text-white/30 font-semibold">
+          <span>5 000 km</span>
+          <span>200 000 km</span>
         </div>
       </div>
 
@@ -103,7 +103,7 @@ export function renderFilters(currentFilters, uniqueBrands = []) {
   `;
 }
 
-export function initFilters(onChangeCallback, onResetCallback) {
+export function initFilters(onFilterChange, onReset) {
   const searchInput = document.getElementById('filter-search-input');
   const priceSlider = document.getElementById('filter-price-slider');
   const priceLabel = document.getElementById('price-val-label');
@@ -112,144 +112,56 @@ export function initFilters(onChangeCallback, onResetCallback) {
   const mileageSlider = document.getElementById('filter-mileage-slider');
   const mileageLabel = document.getElementById('mileage-val-label');
   const resetBtn = document.getElementById('reset-filters-btn');
+  const currency = localStorage.getItem('suv_site_currency') || 'FCFA';
 
-  // Helper to gather all filters state
-  const getSelectedFilters = () => {
-    const checkedBrands = [];
-    document.querySelectorAll('input[name="marque"]:checked').forEach(box => {
-      checkedBrands.push(box.value);
-    });
+  let debounceTimer = null;
+  const triggerUpdate = () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      const selectedBrands = Array.from(document.querySelectorAll('input[name="marque"]:checked')).map(cb => cb.value);
+      
+      const newFilters = {
+        search: searchInput ? searchInput.value.trim() : '',
+        marque: selectedBrands,
+        prixMax: priceSlider ? parseFloat(priceSlider.value) : 100000000,
+        carburant: fuelSelect ? fuelSelect.value : '',
+        transmission: transSelect ? transSelect.value : '',
+        kilometrageMax: mileageSlider ? parseInt(mileageSlider.value) : 200000
+      };
 
-    return {
-      search: searchInput ? searchInput.value.trim() : '',
-      marque: checkedBrands,
-      prixMax: priceSlider ? parseInt(priceSlider.value) : 100000000,
-      carburant: fuelSelect ? fuelSelect.value : '',
-      transmission: transSelect ? transSelect.value : '',
-      kilometrageMax: mileageSlider ? parseInt(mileageSlider.value) : 200000
-    };
+      if (typeof onFilterChange === 'function') {
+        onFilterChange(newFilters);
+      }
+    }, 120);
   };
 
-  // Debounced/Triggered Change Handler
-  let debounceTimeout = null;
-  const triggerChange = (immediate = false) => {
-    if (immediate) {
-      onChangeCallback(getSelectedFilters());
-      return;
-    }
-    
-    if (debounceTimeout) clearTimeout(debounceTimeout);
-    debounceTimeout = setTimeout(() => {
-      onChangeCallback(getSelectedFilters());
-    }, 300); // 300ms debounce
-  };
+  if (searchInput) searchInput.addEventListener('input', triggerUpdate);
 
-  // Autocomplete Predictive Search
-  const suggestionsBox = document.getElementById('autocomplete-suggestions');
-  let allVehicles = [];
-
-  // Fetch initial list of vehicles for suggestions
-  getVehicles({}, 'dateDesc', 1, 100).then(({ data }) => {
-    allVehicles = data || [];
-  });
-
-  if (searchInput && suggestionsBox) {
-    searchInput.addEventListener('input', () => {
-      const val = searchInput.value.toLowerCase().trim();
-      if (!val) {
-        suggestionsBox.innerHTML = '';
-        suggestionsBox.classList.add('hidden');
-        triggerChange();
-        return;
-      }
-
-      // Filter matches
-      const matches = allVehicles.filter(v => 
-        v.marque.toLowerCase().includes(val) || 
-        v.modele.toLowerCase().includes(val)
-      );
-
-      // Limit to 6 suggestions
-      const subset = matches.slice(0, 6);
-
-      if (subset.length === 0) {
-        suggestionsBox.innerHTML = '<div class="p-3 text-xxs text-white/30 italic text-center">Aucune suggestion</div>';
-      } else {
-        suggestionsBox.innerHTML = subset.map(v => `
-          <div class="autocomplete-item" data-search="${v.marque} ${v.modele}">
-            <span class="font-bold text-white">${v.marque} <span class="text-white/60 font-normal">${v.modele}</span></span>
-            <span class="text-[10px] text-suv-gold">${v.annee}</span>
-          </div>
-        `).join('');
-
-        // Bind suggestion clicks
-        suggestionsBox.querySelectorAll('.autocomplete-item').forEach(item => {
-          item.addEventListener('click', () => {
-            const queryVal = item.getAttribute('data-search');
-            searchInput.value = queryVal;
-            suggestionsBox.classList.add('hidden');
-            triggerChange(true); // Trigger search immediately
-          });
-        });
-      }
-
-      suggestionsBox.classList.remove('hidden');
-      triggerChange();
-    });
-
-    // Close dropdown on focus loss / outside click
-    document.addEventListener('click', (e) => {
-      if (!suggestionsBox.contains(e.target) && e.target !== searchInput) {
-        suggestionsBox.classList.add('hidden');
-      }
-    });
-
-    // Show dropdown again on focus if input has value
-    searchInput.addEventListener('focus', () => {
-      if (searchInput.value.trim().length > 0 && suggestionsBox.innerHTML) {
-        suggestionsBox.classList.remove('hidden');
-      }
-    });
-  }
-
-  // Brand checkboxes click
-  document.querySelectorAll('input[name="marque"]').forEach(box => {
-    box.addEventListener('change', () => triggerChange(true));
-  });
-
-  // Price slider slide
   if (priceSlider && priceLabel) {
-    const currency = localStorage.getItem('suv_site_currency') || 'FCFA';
-    priceSlider.addEventListener('input', (e) => {
-      const val = parseInt(e.target.value);
-      priceLabel.textContent = new Intl.NumberFormat('fr-FR').format(val) + ' ' + currency;
-      triggerChange();
+    priceSlider.addEventListener('input', () => {
+      priceLabel.textContent = `${new Intl.NumberFormat('fr-FR').format(priceSlider.value)} ${currency}`;
+      triggerUpdate();
     });
   }
 
-  // Fuel select
-  if (fuelSelect) {
-    fuelSelect.addEventListener('change', () => triggerChange(true));
-  }
-
-  // Transmission select
-  if (transSelect) {
-    transSelect.addEventListener('change', () => triggerChange(true));
-  }
-
-  // Mileage slider slide
   if (mileageSlider && mileageLabel) {
-    mileageSlider.addEventListener('input', (e) => {
-      const val = parseInt(e.target.value);
-      mileageLabel.textContent = new Intl.NumberFormat('fr-FR').format(val) + ' km';
-      triggerChange();
+    mileageSlider.addEventListener('input', () => {
+      mileageLabel.textContent = `${new Intl.NumberFormat('fr-FR').format(mileageSlider.value)} km`;
+      triggerUpdate();
     });
   }
 
-  // Reset button action
+  document.querySelectorAll('input[name="marque"]').forEach(cb => {
+    cb.addEventListener('change', triggerUpdate);
+  });
+
+  if (fuelSelect) fuelSelect.addEventListener('change', triggerUpdate);
+  if (transSelect) transSelect.addEventListener('change', triggerUpdate);
+
   if (resetBtn) {
-    resetBtn.addEventListener('click', () => {
-      onResetCallback();
+    resetBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (typeof onReset === 'function') onReset();
     });
   }
 }

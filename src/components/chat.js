@@ -160,31 +160,31 @@ export function renderFloatingChat(vehicleContext = null) {
     <div id="floating-chat-container" class="fixed bottom-6 right-6 z-40 flex flex-col items-end">
       
       <!-- Collapsed Bubble -->
-      <button id="chat-toggle-bubble" class="w-14 h-14 bg-gradient-premium-red text-white rounded-full flex items-center justify-center shadow-xl shadow-suv-red/30 hover:scale-105 transition-all duration-300 animate-pulse-glow relative">
+      <button id="chat-toggle-bubble" class="w-14 h-14 bg-gradient-premium-gold text-black rounded-full flex items-center justify-center shadow-2xl shadow-suv-gold/30 hover:scale-105 transition-all duration-300 relative" title="Contacter un conseiller">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
         </svg>
-        <span id="chat-badge" class="absolute -top-1 -right-1 bg-suv-gold text-suv-red text-xxs font-extrabold w-5 h-5 rounded-full flex items-center justify-center border-2 border-suv-darker hidden">0</span>
+        <span id="chat-badge" class="absolute -top-1 -right-1 bg-rose-500 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-black hidden">0</span>
       </button>
  
       <!-- Chat Box Panel (Hidden by default) -->
-      <div id="chat-box-panel" class="hidden w-[360px] h-[460px] glass-panel bg-suv-dark border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden mb-4 animate-slide-up">
+      <div id="chat-box-panel" class="hidden w-[360px] h-[480px] glass-panel bg-[#0E1218] border border-white/15 rounded-3xl shadow-2xl flex flex-col overflow-hidden mb-4 animate-slide-up text-left">
         
         <!-- Chat Header -->
-        <div class="bg-gradient-premium-red px-4 py-3.5 flex items-center justify-between shadow-md">
-          <div class="flex items-center gap-2.5">
+        <div class="bg-gradient-premium-gold px-5 py-4 flex items-center justify-between shadow-md text-black">
+          <div class="flex items-center gap-3">
             <div class="relative">
-              <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Admin" class="w-9 h-9 rounded-full object-cover border border-white/20">
-              <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border border-suv-red rounded-full"></span>
+              <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Conseiller" class="w-9 h-9 rounded-full object-cover border-2 border-black/20">
+              <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border border-black rounded-full"></span>
             </div>
             <div>
-              <h4 class="text-sm font-bold text-white font-display">Conseiller Commercial</h4>
-              <p class="text-xxs text-white/70">En ligne • Répond en direct</p>
+              <h4 class="text-xs font-black text-black font-display uppercase tracking-wide">Conseiller Vobokun</h4>
+              <p class="text-[10px] text-black/75 font-bold uppercase tracking-wider">Showroom Direct</p>
             </div>
           </div>
-          <button id="chat-close-btn" class="text-white/80 hover:text-white transition-colors p-1 hover:bg-white/10 rounded-lg">
+          <button id="chat-close-btn" class="text-black/70 hover:text-black transition-colors p-1.5 hover:bg-black/10 rounded-xl">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
@@ -336,7 +336,7 @@ export function initFloatingChat(vehicleContext = null) {
 
       list.innerHTML = messages.map(msg => {
         const isSelf = msg.sender_id === currentUserId;
-        const bgClass = isSelf ? 'bg-suv-red text-white self-end rounded-br-none' : 'bg-suv-slate text-suv-light self-start rounded-bl-none';
+        const bgClass = isSelf ? 'btn-premium-gold text-black self-end rounded-br-none shadow-md font-semibold' : 'bg-[#161D27] text-white border border-white/10 self-start rounded-bl-none shadow-md';
         const time = new Date(msg.created_at).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
         
         const isAudio = msg.contenu && msg.contenu.startsWith('[audio]:');
@@ -345,9 +345,9 @@ export function initFloatingChat(vehicleContext = null) {
           : `<span>${msg.contenu}</span>`;
 
         return `
-          <div class="max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed ${bgClass} shadow-md flex flex-col" data-msg-id="${msg.id || ''}">
+          <div class="max-w-[80%] p-3.5 rounded-2xl text-xs leading-relaxed ${bgClass} flex flex-col" data-msg-id="${msg.id || ''}">
             ${contentHtml}
-            <span class="text-[9px] opacity-60 text-suv-light self-end mt-1.5">${time}</span>
+            <span class="text-[9px] opacity-60 self-end mt-1.5 font-sans">${time}</span>
           </div>
         `;
       }).join('');

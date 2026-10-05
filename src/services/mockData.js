@@ -43,9 +43,9 @@ export const MOCK_VEHICLES = [
     couleur: "Noir Métallisé",
     description: "Toyota Land Cruiser Prado en excellent état. Moteur 4 cylindres diesel robuste et économique. Intérieur cuir, grand écran tactile, caméra de recul, toit ouvrant. Toujours entretenu dans le réseau officiel. Parfait pour la ville et les pistes difficiles.",
     photos: [
-      "https://images.unsplash.com/photo-1594568284297-7c64464062b1?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1594568284297-7c64464062b1?auto=format&fit=crop&w=800&auto=format&fit=crop&q=75",
+      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&auto=format&fit=crop&q=75",
+      "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&auto=format&fit=crop&q=75"
     ],
     statut: "disponible",
     vues: 245,
@@ -71,8 +71,8 @@ export const MOCK_VEHICLES = [
     couleur: "Gris Eiger",
     description: "Magnifique Land Rover Defender Hybride Rechargeable (PHEV) de 400ch. Version SE tout équipée. Suspension pneumatique active, toit panoramique, système audio Meridian, jantes 20 pouces noires. Autonomie de 40km en 100% électrique.",
     photos: [
-      "https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&w=800&auto=format&fit=crop&q=75",
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&auto=format&fit=crop&q=75"
     ],
     statut: "disponible",
     vues: 512,
@@ -98,8 +98,8 @@ export const MOCK_VEHICLES = [
     couleur: "Bleu Phonic",
     description: "BMW X5 finition M Sport. Moteur 6 cylindres diesel de 265ch, boîte automatique sport à 8 rapports. Cockpit virtuel, projecteurs Laser, affichage tête haute, sièges chauffants et ventilés. Véhicule première main avec carnet d'entretien complet.",
     photos: [
-      "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&auto=format&fit=crop&q=75",
+      "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&auto=format&fit=crop&q=75"
     ],
     statut: "disponible",
     vues: 189,
@@ -125,8 +125,8 @@ export const MOCK_VEHICLES = [
     couleur: "Blanc Craie",
     description: "Superbe Porsche Cayenne Coupé S motorisé par le V6 2.9L biturbo de 440ch. Pack sport Chrono, échappement sport actif, jantes RS Spyder 21 pouces, intérieur cuir bi-ton étendu. État proche du neuf, aucune rayure, sous garantie Porsche Approved.",
     photos: [
-      "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1611245807189-8c337fed47c0?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=800&auto=format&fit=crop&q=75",
+      "https://images.unsplash.com/photo-1611245807189-8c337fed47c0?auto=format&fit=crop&w=800&auto=format&fit=crop&q=75"
     ],
     statut: "disponible",
     vues: 432,
@@ -152,7 +152,7 @@ export const MOCK_VEHICLES = [
     couleur: "Jaune HellaYella",
     description: "Le roi du tout-terrain : Jeep Wrangler finition Rubicon. Ponts Dana 44, blocages de différentiels avant/arrière Tru-Lok, barre stabilisatrice déconnectable. Soft top et hard top inclus. Idéal pour les passionnés d'aventure et de plein air.",
     photos: [
-      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&auto=format&fit=crop&q=75"
     ],
     statut: "disponible",
     vues: 304,
@@ -178,7 +178,7 @@ export const MOCK_VEHICLES = [
     couleur: "Gris Daytona",
     description: "Audi Q7 - 7 places. Idéal pour les familles nombreuses. Motorisation V6 MHEV de 286ch avec transmission intégrale permanente quattro. Phares Matrix LED, climatisation automatique 4 zones, cockpit virtuel étendu. Crochet d'attelage électrique.",
     photos: [
-      "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&auto=format&fit=crop&q=75"
     ],
     statut: "disponible",
     vues: 120,
@@ -204,7 +204,7 @@ export const MOCK_VEHICLES = [
     couleur: "Bleu Célèbes",
     description: "Peugeot 3008 GT Hybrid4 de 300ch avec 4 roues motrices. Très dynamique et confortable. Toit ouvrant panoramique, sellerie alcantara/cuir, système d'aide à la conduite Drive Assist Plus. Recharge en 1h45 sur borne publique.",
     photos: [
-      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&auto=format&fit=crop&q=75"
     ],
     statut: "vendu",
     vues: 298,
@@ -230,7 +230,7 @@ export const MOCK_VEHICLES = [
     couleur: "Argent Iridium",
     description: "SUV 100% électrique Mercedes EQC. Puissance cumulée de 408ch. Autonomie réelle d'environ 360km. Double écran MBUX, commande vocale intelligente, phares adaptatifs Multibeam LED. Silence de conduite exceptionnel.",
     photos: [
-      "https://images.unsplash.com/photo-1520050206274-a1ae446cb3cc?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1520050206274-a1ae446cb3cc?auto=format&fit=crop&w=800&auto=format&fit=crop&q=75"
     ],
     statut: "disponible",
     vues: 211,

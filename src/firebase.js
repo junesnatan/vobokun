@@ -55,7 +55,12 @@ export function initMockDatabase() {
     localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(defaultUserProfile));
     
     localStorage.setItem('suv_db_initialized', 'true');
+    localStorage.setItem('suv_v2_optimized', 'true');
     console.log('SUV Marketplace: Local high-speed storage seeded successfully.');
+  } else if (!localStorage.getItem('suv_v2_optimized')) {
+    // Upgrade existing cache with lightweight optimized assets
+    localStorage.setItem(STORAGE_KEYS.VEHICLES, JSON.stringify(MOCK_VEHICLES));
+    localStorage.setItem('suv_v2_optimized', 'true');
   }
 }
 

@@ -47,19 +47,19 @@ export function render() {
       </section>
 
       <!-- SUB-TABS NAVIGATION -->
-      <div class="flex border-b border-white/5 gap-2 overflow-x-auto pb-0.5">
-        <button data-subtab="catalogue" class="subtab-btn pb-3 px-4 text-sm font-semibold transition-all border-b-2 ${activeSubTab === 'catalogue' ? 'border-suv-red text-white' : 'border-transparent text-white/50 hover:text-white'}">
+      <div class="flex border-b border-white/10 gap-2 overflow-x-auto pb-0.5">
+        <button data-subtab="catalogue" class="subtab-btn pb-3 px-4 text-xs font-black uppercase tracking-wider transition-all border-b-2 ${activeSubTab === 'catalogue' ? 'border-suv-gold text-suv-gold' : 'border-transparent text-white/40 hover:text-white'}">
           Gestion Catalogue
         </button>
-        <button data-subtab="requests" class="subtab-btn pb-3 px-4 text-sm font-semibold transition-all border-b-2 ${activeSubTab === 'requests' ? 'border-suv-red text-white' : 'border-transparent text-white/50 hover:text-white'}">
+        <button data-subtab="requests" class="subtab-btn pb-3 px-4 text-xs font-black uppercase tracking-wider transition-all border-b-2 ${activeSubTab === 'requests' ? 'border-suv-gold text-suv-gold' : 'border-transparent text-white/40 hover:text-white'}">
           Demandes / Offres
         </button>
-        <button data-subtab="inbox" class="subtab-btn pb-3 px-4 text-sm font-semibold transition-all border-b-2 flex items-center gap-1.5 ${activeSubTab === 'inbox' ? 'border-suv-red text-white' : 'border-transparent text-white/50 hover:text-white'}">
-          Messagerie Client
-          <span id="admin-inbox-badge" class="bg-suv-gold text-suv-red text-[10px] font-extrabold px-1.5 py-0.5 rounded-full hidden">0</span>
+        <button data-subtab="inbox" class="subtab-btn pb-3 px-4 text-xs font-black uppercase tracking-wider transition-all border-b-2 flex items-center gap-1.5 ${activeSubTab === 'inbox' ? 'border-suv-gold text-suv-gold' : 'border-transparent text-white/40 hover:text-white'}">
+          <span>Messagerie Client</span>
+          <span id="admin-inbox-badge" class="bg-suv-gold text-black text-[10px] font-black px-1.5 py-0.5 rounded-full hidden">0</span>
         </button>
-        <button data-subtab="settings" class="subtab-btn pb-3 px-4 text-sm font-semibold transition-all border-b-2 ${activeSubTab === 'settings' ? 'border-suv-red text-white' : 'border-transparent text-white/50 hover:text-white'}">
-          Paramètres Site
+        <button data-subtab="settings" class="subtab-btn pb-3 px-4 text-xs font-black uppercase tracking-wider transition-all border-b-2 ${activeSubTab === 'settings' ? 'border-suv-gold text-suv-gold' : 'border-transparent text-white/40 hover:text-white'}">
+          Paramètres Showroom
         </button>
       </div>
 
@@ -75,10 +75,13 @@ export function render() {
       <div class="glass-panel border border-white/10 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col animate-slide-up">
         
         <!-- Header -->
-        <div class="bg-gradient-premium-red p-5 flex justify-between items-center text-white sticky top-0 z-10">
-          <h3 class="font-extrabold text-lg font-display" id="vehicle-modal-title">Ajouter un Véhicule</h3>
-          <button id="close-vehicle-modal-btn" class="p-1 hover:bg-white/10 rounded-lg">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        <div class="bg-gradient-premium-gold p-6 flex justify-between items-center text-black sticky top-0 z-10 shadow-md">
+          <div>
+            <span class="text-[10px] font-black uppercase tracking-widest text-black/70">Flotte Automobile</span>
+            <h3 class="font-black text-xl font-display uppercase tracking-tight" id="vehicle-modal-title">Ajouter un Véhicule</h3>
+          </div>
+          <button id="close-vehicle-modal-btn" class="p-1.5 hover:bg-black/10 rounded-xl transition-colors">
+            <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
           </button>
         </div>
 
@@ -208,12 +211,12 @@ export function render() {
           </div>
 
           <!-- Actions -->
-          <div class="flex gap-4 pt-4 border-t border-white/5 sticky bottom-0 bg-suv-dark/95 py-2">
-            <button type="button" id="cancel-vehicle-btn" class="flex-1 border border-white/10 hover:bg-white/5 text-white py-3 rounded-xl font-bold transition-all">
+          <div class="flex gap-4 pt-4 border-t border-white/10 sticky bottom-0 bg-[#0E1218]/95 py-2">
+            <button type="button" id="cancel-vehicle-btn" class="flex-1 border border-white/10 hover:bg-white/5 text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all">
               Annuler
             </button>
-            <button type="submit" class="flex-1 bg-suv-red hover:bg-suv-purple text-white py-3 rounded-xl font-bold transition-all shadow-lg">
-              Sauvegarder
+            <button type="submit" class="flex-1 btn-premium-gold py-3.5 rounded-xl font-black text-xs uppercase tracking-wider transition-all shadow-lg">
+              Sauvegarder le Véhicule
             </button>
           </div>
 
@@ -231,9 +234,9 @@ export async function init() {
     tabButtons.forEach(btn => {
       const isMatch = btn.getAttribute('data-subtab') === tab;
       if (isMatch) {
-        btn.className = "subtab-btn pb-3 px-4 text-sm font-semibold transition-all border-b-2 border-suv-red text-white";
+        btn.className = "subtab-btn pb-3 px-4 text-xs font-black uppercase tracking-wider transition-all border-b-2 border-suv-gold text-suv-gold";
       } else {
-        btn.className = "subtab-btn pb-3 px-4 text-sm font-semibold transition-all border-b-2 border-transparent text-white/50 hover:text-white";
+        btn.className = "subtab-btn pb-3 px-4 text-xs font-black uppercase tracking-wider transition-all border-b-2 border-transparent text-white/40 hover:text-white";
       }
     });
     
@@ -516,9 +519,9 @@ async function renderBoardContent() {
                 Importer Excel
               </button>
 
-              <button id="add-vehicle-btn" class="bg-suv-red hover:bg-suv-purple text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-lg shadow-suv-red/10">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                Ajouter un SUV
+              <button id="add-vehicle-btn" class="btn-premium-gold px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md">
+                <svg class="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+                <span>Ajouter un SUV</span>
               </button>
             </div>
           </div>

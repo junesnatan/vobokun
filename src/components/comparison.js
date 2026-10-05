@@ -100,7 +100,7 @@ export function updateComparisonBar() {
       </div>
       <div class="flex items-center gap-3">
         <button id="clear-compare-btn" class="text-xxs text-white/50 hover:text-white uppercase font-bold tracking-wider">Vider</button>
-        <button id="open-compare-modal-btn" class="bg-gradient-premium-red hover:shadow-lg text-white py-2 px-5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all">
+        <button id="open-compare-modal-btn" class="btn-premium-gold py-2 px-5 rounded-xl font-black text-xs uppercase tracking-wider transition-all shadow-md">
           Lancer la comparaison
         </button>
       </div>
@@ -253,10 +253,13 @@ function openComparisonModal() {
   modalRoot.innerHTML = `
     <div class="glass-panel border border-white/10 rounded-2xl w-full max-w-4xl max-h-[85vh] overflow-y-auto shadow-2xl flex flex-col animate-slide-up">
       <!-- Header -->
-      <div class="bg-gradient-premium-red p-5 flex justify-between items-center text-white sticky top-0 z-10">
-        <h3 class="font-extrabold text-lg font-display">Comparaison Technique</h3>
-        <button id="close-compare-modal-btn" class="p-1 hover:bg-white/10 rounded-lg">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      <div class="bg-gradient-premium-gold p-6 flex justify-between items-center text-black sticky top-0 z-10 shadow-md">
+        <div>
+          <span class="text-[10px] font-black uppercase tracking-widest text-black/70">Analyse Comparative</span>
+          <h3 class="font-black text-xl font-display uppercase tracking-tight">Comparaison Technique</h3>
+        </div>
+        <button id="close-compare-modal-btn" class="p-1.5 hover:bg-black/10 rounded-xl transition-colors">
+          <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
 
