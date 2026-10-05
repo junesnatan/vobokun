@@ -18,47 +18,49 @@ let activeOffers = [];
 
 export function render() {
   return `
-    <div class="animate-fade-in space-y-8 text-left">
+    <div class="container py-4 text-start">
       
       <!-- Page Header -->
-      <div class="border-b border-white/5 pb-6">
-        <span class="text-suv-gold font-bold text-xs uppercase tracking-widest font-display">Console</span>
-        <h1 class="text-3xl font-extrabold text-white mt-1">Espace Concessionnaire</h1>
+      <div class="border-bottom pb-3 mb-4">
+        <span class="badge bg-danger text-white text-uppercase" style="font-size: 0.65rem;">Console Showroom</span>
+        <h1 class="h2 fw-black text-dark font-display text-uppercase mt-1 mb-0">Espace Concessionnaire</h1>
       </div>
 
       <!-- KPI METRICS GRID -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6" id="admin-kpis">
+      <div class="row row-cols-2 row-cols-lg-4 g-3 mb-4" id="admin-kpis">
         <!-- Loaded dynamically in init() -->
       </div>
 
       <!-- ANALYTICS DYNAMIC LINE CHART -->
-      <section class="glass-panel border border-white/5 rounded-3xl p-6 shadow-xl relative overflow-hidden text-left">
-        <h3 class="text-xs font-bold uppercase tracking-widest text-suv-gray mb-6">Évolution de l'activité du Showroom (7 derniers jours)</h3>
+      <section class="toyota-panel rounded-4 p-4 border shadow-sm mb-4">
+        <h5 class="small fw-bold text-uppercase text-secondary mb-3 font-display" style="font-size: 0.75rem;">
+          <i class="bi bi-graph-up-arrow text-danger me-2"></i>Évolution de l'activité du Showroom (7 derniers jours)
+        </h5>
         
-        <div id="admin-analytics-chart-container" class="h-48 w-full relative">
-          <div class="absolute inset-0 flex items-center justify-center text-xs text-white/30">
+        <div id="admin-analytics-chart-container" class="position-relative" style="height: 190px;">
+          <div class="position-absolute top-50 start-50 translate-middle text-muted small">
             Chargement des statistiques...
           </div>
         </div>
 
-        <div class="flex justify-between text-[10px] text-suv-gray font-bold mt-3 px-2" id="admin-chart-dates-labels">
+        <div class="d-flex justify-content-between small text-muted fw-bold mt-2 px-1" id="admin-chart-dates-labels">
           <!-- Populated dynamically -->
         </div>
       </section>
 
       <!-- SUB-TABS NAVIGATION -->
-      <div class="flex border-b border-white/10 gap-2 overflow-x-auto pb-0.5">
-        <button data-subtab="catalogue" class="subtab-btn pb-3 px-4 text-xs font-black uppercase tracking-wider transition-all border-b-2 ${activeSubTab === 'catalogue' ? 'border-suv-gold text-suv-gold' : 'border-transparent text-white/40 hover:text-white'}">
+      <div class="d-flex border-bottom mb-4 overflow-auto pb-1 gap-2">
+        <button data-subtab="catalogue" class="subtab-btn btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 ${activeSubTab === 'catalogue' ? 'border-danger text-danger' : 'border-transparent text-secondary'}" style="font-size: 0.8rem; border-radius: 0;">
           Gestion Catalogue
         </button>
-        <button data-subtab="requests" class="subtab-btn pb-3 px-4 text-xs font-black uppercase tracking-wider transition-all border-b-2 ${activeSubTab === 'requests' ? 'border-suv-gold text-suv-gold' : 'border-transparent text-white/40 hover:text-white'}">
+        <button data-subtab="requests" class="subtab-btn btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 ${activeSubTab === 'requests' ? 'border-danger text-danger' : 'border-transparent text-secondary'}" style="font-size: 0.8rem; border-radius: 0;">
           Demandes / Offres
         </button>
-        <button data-subtab="inbox" class="subtab-btn pb-3 px-4 text-xs font-black uppercase tracking-wider transition-all border-b-2 flex items-center gap-1.5 ${activeSubTab === 'inbox' ? 'border-suv-gold text-suv-gold' : 'border-transparent text-white/40 hover:text-white'}">
+        <button data-subtab="inbox" class="subtab-btn btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 d-flex align-items-center gap-2 ${activeSubTab === 'inbox' ? 'border-danger text-danger' : 'border-transparent text-secondary'}" style="font-size: 0.8rem; border-radius: 0;">
           <span>Messagerie Client</span>
-          <span id="admin-inbox-badge" class="bg-suv-gold text-black text-[10px] font-black px-1.5 py-0.5 rounded-full hidden">0</span>
+          <span id="admin-inbox-badge" class="badge rounded-pill bg-danger text-white d-none" style="font-size: 0.65rem;">0</span>
         </button>
-        <button data-subtab="settings" class="subtab-btn pb-3 px-4 text-xs font-black uppercase tracking-wider transition-all border-b-2 ${activeSubTab === 'settings' ? 'border-suv-gold text-suv-gold' : 'border-transparent text-white/40 hover:text-white'}">
+        <button data-subtab="settings" class="subtab-btn btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 ${activeSubTab === 'settings' ? 'border-danger text-danger' : 'border-transparent text-secondary'}" style="font-size: 0.8rem; border-radius: 0;">
           Paramètres Showroom
         </button>
       </div>
@@ -71,57 +73,57 @@ export function render() {
     </div>
 
     <!-- ADD/EDIT VEHICLE MODAL -->
-    <div id="vehicle-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm hidden animate-fade-in">
-      <div class="glass-panel border border-white/10 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col animate-slide-up">
+    <div id="vehicle-modal" class="position-fixed top-0 start-0 w-100 h-100 d-none align-items-center justify-content-center p-3" style="background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(8px); z-index: 1055;">
+      <div class="toyota-panel rounded-4 w-100 shadow-2xl p-0 overflow-hidden text-start" style="max-width: 680px; max-height: 90vh; display: flex; flex-direction: column;">
         
         <!-- Header -->
-        <div class="bg-gradient-premium-gold p-6 flex justify-between items-center text-black sticky top-0 z-10 shadow-md">
+        <div class="p-3 p-sm-4 d-flex justify-content-between align-items-center text-white" style="background: var(--toyota-red);">
           <div>
-            <span class="text-[10px] font-black uppercase tracking-widest text-black/70">Flotte Automobile</span>
-            <h3 class="font-black text-xl font-display uppercase tracking-tight" id="vehicle-modal-title">Ajouter un Véhicule</h3>
+            <span class="badge bg-black text-white text-uppercase tracking-wider mb-1" style="font-size: 0.65rem;">Flotte Automobile</span>
+            <h4 class="fw-black mb-0 font-display text-uppercase" id="vehicle-modal-title">Ajouter un Véhicule</h4>
           </div>
-          <button id="close-vehicle-modal-btn" class="p-1.5 hover:bg-black/10 rounded-xl transition-colors">
-            <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+          <button id="close-vehicle-modal-btn" class="btn btn-sm btn-outline-light rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+            <i class="bi bi-x-lg"></i>
           </button>
         </div>
 
         <!-- Form content -->
-        <form id="vehicle-form" class="p-6 space-y-6 text-left">
+        <form id="vehicle-form" class="p-3 p-sm-4 overflow-auto flex-grow-1">
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Marque</label>
-              <input type="text" id="v-marque" placeholder="Ex: Toyota" class="w-full suv-input text-sm" required>
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Marque</label>
+              <input type="text" id="v-marque" placeholder="Ex: Toyota" class="form-control toyota-input" required>
             </div>
             
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Modèle</label>
-              <input type="text" id="v-modele" placeholder="Ex: Land Cruiser" class="w-full suv-input text-sm" required>
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Modèle</label>
+              <input type="text" id="v-modele" placeholder="Ex: Land Cruiser" class="form-control toyota-input" required>
             </div>
 
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Année de fabrication</label>
-              <input type="number" id="v-annee" placeholder="Ex: 2022" class="w-full suv-input text-sm" required min="1990" max="2027">
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Année de fabrication</label>
+              <input type="number" id="v-annee" placeholder="Ex: 2022" class="form-control toyota-input" required min="1990" max="2027">
             </div>
 
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Prix (FCFA)</label>
-              <input type="number" id="v-prix" placeholder="Ex: 45000000" class="w-full suv-input text-sm" required>
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Prix (FCFA)</label>
+              <input type="number" id="v-prix" placeholder="Ex: 45000000" class="form-control toyota-input" required>
             </div>
 
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Kilométrage (km)</label>
-              <input type="number" id="v-kilometrage" placeholder="Ex: 25000" class="w-full suv-input text-sm" required>
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Kilométrage (km)</label>
+              <input type="number" id="v-kilometrage" placeholder="Ex: 25000" class="form-control toyota-input" required>
             </div>
 
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Couleur</label>
-              <input type="text" id="v-couleur" placeholder="Ex: Noir Métallisé" class="w-full suv-input text-sm" required>
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Couleur</label>
+              <input type="text" id="v-couleur" placeholder="Ex: Noir Métallisé" class="form-control toyota-input" required>
             </div>
 
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Carburant</label>
-              <select id="v-carburant" class="w-full suv-input bg-suv-slate border-white/10 text-sm focus:border-suv-gold" required>
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Carburant</label>
+              <select id="v-carburant" class="form-select toyota-input" required>
                 <option value="Essence">Essence</option>
                 <option value="Diesel">Diesel</option>
                 <option value="Hybride">Hybride</option>
@@ -129,93 +131,94 @@ export function render() {
               </select>
             </div>
 
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Transmission</label>
-              <input type="text" id="v-transmission" placeholder="Ex: AWD Auto 9 rapports" class="w-full suv-input text-sm" required>
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Transmission</label>
+              <input type="text" id="v-transmission" placeholder="Ex: AWD Auto 9 rapports" class="form-control toyota-input" required>
             </div>
 
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Motorisation</label>
-              <input type="text" id="v-motorisation" placeholder="Ex: 3.5L V6 Hybrid" class="w-full suv-input text-sm" required>
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Motorisation</label>
+              <input type="text" id="v-motorisation" placeholder="Ex: 3.5L V6 Hybrid" class="form-control toyota-input" required>
             </div>
 
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Puissance</label>
-              <input type="text" id="v-puissance" placeholder="Ex: 385 ch" class="w-full suv-input text-sm" required>
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Puissance</label>
+              <input type="text" id="v-puissance" placeholder="Ex: 385 ch" class="form-control toyota-input" required>
             </div>
 
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Accélération (0-100 km/h)</label>
-              <input type="text" id="v-acceleration" placeholder="Ex: 5.8 s" class="w-full suv-input text-sm" required>
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Accélération (0-100 km/h)</label>
+              <input type="text" id="v-acceleration" placeholder="Ex: 5.8 s" class="form-control toyota-input" required>
             </div>
 
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Consommation</label>
-              <input type="text" id="v-consommation" placeholder="Ex: 7.4 L/100 km" class="w-full suv-input text-sm" required>
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Consommation</label>
+              <input type="text" id="v-consommation" placeholder="Ex: 7.4 L/100 km" class="form-control toyota-input" required>
             </div>
 
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Nombre de places</label>
-              <input type="number" id="v-places" placeholder="Ex: 7" class="w-full suv-input text-sm" required min="1" max="15">
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Nombre de places</label>
+              <input type="number" id="v-places" placeholder="Ex: 7" class="form-control toyota-input" required min="1" max="15">
             </div>
 
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Capacité Coffre</label>
-              <input type="text" id="v-coffre" placeholder="Ex: 750 L" class="w-full suv-input text-sm" required>
+            <div class="col-12 col-md-6">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Capacité Coffre</label>
+              <input type="text" id="v-coffre" placeholder="Ex: 750 L" class="form-control toyota-input" required>
             </div>
 
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Couleurs disponibles</label>
-              <input type="text" id="v-couleurs-dispo" placeholder="Ex: Silver / Noir / Blanc" class="w-full suv-input text-sm" required>
+            <div class="col-12">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Couleurs disponibles</label>
+              <input type="text" id="v-couleurs-dispo" placeholder="Ex: Silver / Noir / Blanc" class="form-control toyota-input" required>
             </div>
 
-            <div class="space-y-1.5 md:col-span-2">
-              <label class="text-xs font-bold uppercase tracking-wider text-suv-gray flex items-center justify-between">
+            <div class="col-12">
+              <label class="form-label small fw-bold text-uppercase text-secondary d-flex justify-content-between" style="font-size: 0.75rem;">
                 <span>Statut de visibilité</span>
-                <span class="text-xxs text-white/35 lowercase">(disponible = public catalogue)</span>
+                <span class="text-muted text-lowercase font-normal">(disponible = public showroom)</span>
               </label>
-              <select id="v-statut" class="w-full suv-input bg-suv-slate border-white/10 text-sm focus:border-suv-gold" required>
+              <select id="v-statut" class="form-select toyota-input" required>
                 <option value="disponible">Disponible</option>
                 <option value="vendu">Vendu</option>
                 <option value="archivé">Archivé</option>
               </select>
             </div>
 
-            <div class="flex items-center gap-3 md:col-span-2 py-2">
-              <input type="checkbox" id="v-featured" class="rounded border-white/10 bg-white/5 text-suv-red focus:ring-suv-red w-4.5 h-4.5 cursor-pointer">
-              <label for="v-featured" class="text-sm font-semibold text-white/90 cursor-pointer">Mettre ce véhicule en Vedette (Homepage)</label>
-            </div>
-          </div>
-
-          <!-- Description -->
-          <div class="space-y-1.5">
-            <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Description longue</label>
-            <textarea id="v-description" rows="4" placeholder="Détails, équipements, carnet d'entretien..." class="w-full suv-input text-sm" required></textarea>
-          </div>
-
-          <!-- Photos drag & drop file upload panel -->
-          <div class="space-y-3">
-            <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Photos du SUV (Max 10)</label>
-            
-            <div id="photos-drop-zone" class="border-2 border-dashed border-white/10 hover:border-suv-gold/50 rounded-xl p-8 text-center cursor-pointer hover:bg-white/5 transition-colors flex flex-col items-center justify-center gap-2">
-              <svg class="w-10 h-10 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-              <p class="text-sm font-bold text-white/80">Glissez-déposez des photos ou cliquez pour naviguer</p>
-              <p class="text-xxs text-white/35 font-medium">JPEG, PNG max 5Mo par fichier</p>
-              <input type="file" id="modal-photos-input" multiple accept="image/*" class="hidden">
+            <div class="col-12 py-1">
+              <div class="form-check">
+                <input type="checkbox" id="v-featured" class="form-check-input">
+                <label for="v-featured" class="form-check-label small fw-bold text-dark">Mettre ce véhicule en Vedette (Homepage)</label>
+              </div>
             </div>
 
-            <!-- Uploaded photos preview grid -->
-            <div id="photos-preview-grid" class="grid grid-cols-4 md:grid-cols-6 gap-3 pt-2">
-              <!-- Rendered dynamically on image select -->
+            <!-- Description -->
+            <div class="col-12">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Description longue</label>
+              <textarea id="v-description" rows="3" placeholder="Détails, équipements, carnet d'entretien..." class="form-control toyota-input" required></textarea>
+            </div>
+
+            <!-- Photos upload drop zone -->
+            <div class="col-12">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Photos du SUV (Max 10)</label>
+              
+              <div id="photos-drop-zone" class="border border-2 border-dashed rounded-3 p-4 text-center cursor-pointer bg-light d-flex flex-column align-items-center justify-content-center gap-1" style="cursor: pointer;">
+                <i class="bi bi-cloud-arrow-up fs-2 text-secondary"></i>
+                <p class="small fw-bold text-dark mb-0">Glissez-déposez des photos ou cliquez pour parcourir</p>
+                <span class="small text-muted" style="font-size: 0.7rem;">JPEG, PNG max 5Mo par fichier</span>
+                <input type="file" id="modal-photos-input" multiple accept="image/*" class="d-none">
+              </div>
+
+              <!-- Uploaded photos preview grid -->
+              <div id="photos-preview-grid" class="row row-cols-3 row-cols-md-6 g-2 mt-2">
+              </div>
             </div>
           </div>
 
           <!-- Actions -->
-          <div class="flex gap-4 pt-4 border-t border-white/10 sticky bottom-0 bg-[#0E1218]/95 py-2">
-            <button type="button" id="cancel-vehicle-btn" class="flex-1 border border-white/10 hover:bg-white/5 text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all">
+          <div class="d-flex gap-2 pt-4 mt-4 border-top">
+            <button type="button" id="cancel-vehicle-btn" class="btn btn-toyota-outline flex-grow-1 py-2 fw-bold text-uppercase" style="font-size: 0.8rem;">
               Annuler
             </button>
-            <button type="submit" class="flex-1 btn-premium-gold py-3.5 rounded-xl font-black text-xs uppercase tracking-wider transition-all shadow-lg">
+            <button type="submit" class="btn btn-toyota-red flex-grow-1 py-2 fw-black text-uppercase shadow-sm" style="font-size: 0.8rem;">
               Sauvegarder le Véhicule
             </button>
           </div>
@@ -234,9 +237,9 @@ export async function init() {
     tabButtons.forEach(btn => {
       const isMatch = btn.getAttribute('data-subtab') === tab;
       if (isMatch) {
-        btn.className = "subtab-btn pb-3 px-4 text-xs font-black uppercase tracking-wider transition-all border-b-2 border-suv-gold text-suv-gold";
+        btn.className = "subtab-btn btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 border-danger text-danger";
       } else {
-        btn.className = "subtab-btn pb-3 px-4 text-xs font-black uppercase tracking-wider transition-all border-b-2 border-transparent text-white/40 hover:text-white";
+        btn.className = "subtab-btn btn btn-link text-decoration-none pb-2 fw-black text-uppercase border-bottom border-3 border-transparent text-secondary";
       }
     });
     
@@ -256,9 +259,9 @@ export async function init() {
     if (inboxBadge) {
       if (state.unreadMessagesCount > 0) {
         inboxBadge.textContent = state.unreadMessagesCount;
-        inboxBadge.classList.remove('hidden');
+        inboxBadge.classList.remove('d-none');
       } else {
-        inboxBadge.classList.add('hidden');
+        inboxBadge.classList.add('d-none');
       }
     }
   });
@@ -286,21 +289,29 @@ async function updateKPIs() {
     const unreadMessages = conversations.reduce((acc, c) => acc + c.unreadCount, 0);
 
     kpiContainer.innerHTML = `
-      <div class="glass-card rounded-2xl p-5 border border-white/5">
-        <p class="text-xxs uppercase tracking-wider text-suv-gray font-bold">SUV en ligne</p>
-        <p class="text-2xl font-black font-display text-white mt-1.5">${activeCount}</p>
+      <div class="col">
+        <div class="toyota-panel rounded-4 p-3 p-md-4 border shadow-sm h-100">
+          <span class="small fw-bold text-uppercase text-secondary d-block" style="font-size: 0.7rem;">SUV en ligne</span>
+          <span class="h3 fw-black text-dark font-display mt-1 d-block mb-0">${activeCount}</span>
+        </div>
       </div>
-      <div class="glass-card rounded-2xl p-5 border border-white/5">
-        <p class="text-xxs uppercase tracking-wider text-suv-gray font-bold">Ventes Clôturées</p>
-        <p class="text-2xl font-black font-display text-emerald-400 mt-1.5">${soldCount}</p>
+      <div class="col">
+        <div class="toyota-panel rounded-4 p-3 p-md-4 border shadow-sm h-100">
+          <span class="small fw-bold text-uppercase text-secondary d-block" style="font-size: 0.7rem;">Ventes Clôturées</span>
+          <span class="h3 fw-black text-success font-display mt-1 d-block mb-0">${soldCount}</span>
+        </div>
       </div>
-      <div class="glass-card rounded-2xl p-5 border border-white/5">
-        <p class="text-xxs uppercase tracking-wider text-suv-gray font-bold">Offres en Attente</p>
-        <p class="text-2xl font-black font-display text-amber-400 mt-1.5">${pendingOffers}</p>
+      <div class="col">
+        <div class="toyota-panel rounded-4 p-3 p-md-4 border shadow-sm h-100">
+          <span class="small fw-bold text-uppercase text-secondary d-block" style="font-size: 0.7rem;">Offres en Attente</span>
+          <span class="h3 fw-black text-warning font-display mt-1 d-block mb-0">${pendingOffers}</span>
+        </div>
       </div>
-      <div class="glass-card rounded-2xl p-5 border border-white/5">
-        <p class="text-xxs uppercase tracking-wider text-suv-gray font-bold">Chats Non Lus</p>
-        <p class="text-2xl font-black font-display text-suv-red mt-1.5">${unreadMessages}</p>
+      <div class="col">
+        <div class="toyota-panel rounded-4 p-3 p-md-4 border shadow-sm h-100">
+          <span class="small fw-bold text-uppercase text-secondary d-block" style="font-size: 0.7rem;">Chats Non Lus</span>
+          <span class="h3 fw-black text-danger font-display mt-1 d-block mb-0">${unreadMessages}</span>
+        </div>
       </div>
     `;
 
@@ -318,11 +329,9 @@ async function initDynamicChart() {
   if (!container) return;
 
   try {
-    // 1. Fetch data
     const { data: offers } = await getAllOffers();
     const { data: vehicles } = await getVehicles({}, 'dateDesc', 1, 100);
 
-    // 2. Generate last 7 days dates and labels
     const days = [...Array(7)].map((_, i) => {
       const d = new Date();
       d.setDate(d.getDate() - (6 - i));
@@ -332,7 +341,6 @@ async function initDynamicChart() {
     const labels = days.map(d => d.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric' }));
     const fullLabels = days.map(d => d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }));
 
-    // 3. Calculate metrics per day
     const requests = days.map(day => {
       const startOfDay = new Date(day); startOfDay.setHours(0, 0, 0, 0);
       const endOfDay = new Date(day); endOfDay.setHours(23, 59, 59, 999);
@@ -350,69 +358,61 @@ async function initDynamicChart() {
       return Math.max(5, base + noise);
     });
 
-    // 4. Build dates labels row
     if (labelsContainer) {
-      labelsContainer.innerHTML = labels.map((l, i) => `<span>${i === 6 ? "Aujourd'hui" : l}</span>`).join('');
+      labelsContainer.innerHTML = labels.map(l => `<span>${l}</span>`).join('');
     }
 
-    // 5. Calculate coordinates for SVG
-    const maxVisits = Math.max(...visits, 100);
-    const maxRequests = Math.max(...requests, 10);
+    const maxVal = Math.max(...visits, ...requests, 10);
+    const height = 180;
+    const width = 700;
 
-    const pointsVisits = visits.map((v, i) => ({
-      x: (i / 6) * 700,
-      y: 150 - (v / maxVisits) * 120
-    }));
+    const getX = (idx) => (idx / 6) * width;
+    const getY = (val) => height - (val / maxVal) * (height - 30) - 15;
 
-    const pointsRequests = requests.map((r, i) => ({
-      x: (i / 6) * 700,
-      y: 150 - (r / maxRequests) * 120
-    }));
+    const pointsVisits = visits.map((v, i) => `${getX(i)},${getY(v)}`);
+    const pathVisits = `M ${pointsVisits.join(' L ')}`;
+    const areaVisits = `${pathVisits} L ${width},${height} L 0,${height} Z`;
 
-    const pathVisits = pointsVisits.map((p, i) => i === 0 ? `M ${p.x} ${p.y}` : `L ${p.x} ${p.y}`).join(' ');
-    const areaVisits = `${pathVisits} L 700 180 L 0 180 Z`;
+    const pointsRequests = requests.map((r, i) => `${getX(i)},${getY(r)}`);
+    const pathRequests = `M ${pointsRequests.join(' L ')}`;
 
-    const pathRequests = pointsRequests.map((p, i) => i === 0 ? `M ${p.x} ${p.y}` : `L ${p.x} ${p.y}`).join(' ');
-
-    const circlesVisitsHTML = pointsVisits.map((p, i) => `
-      <circle cx="${p.x}" cy="${p.y}" r="4" fill="#ffffff" stroke="#FFB74D" stroke-width="2" class="chart-dot chart-dot-visits transition-all duration-200" data-idx="${i}" />
+    const circlesVisitsHTML = visits.map((v, i) => `
+      <circle cx="${getX(i)}" cy="${getY(v)}" r="4" fill="#0A0A0A" stroke="#EB0A1E" stroke-width="2" class="chart-dot" data-idx="${i}" />
     `).join('');
 
-    const circlesRequestsHTML = pointsRequests.map((p, i) => `
-      <circle cx="${p.x}" cy="${p.y}" r="4" fill="#ffffff" stroke="#92000A" stroke-width="2" class="chart-dot chart-dot-requests transition-all duration-200" data-idx="${i}" />
+    const circlesRequestsHTML = requests.map((r, i) => `
+      <circle cx="${getX(i)}" cy="${getY(r)}" r="4" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2" class="chart-dot" data-idx="${i}" />
     `).join('');
 
-    // 6. Draw SVG Chart
     container.innerHTML = `
-      <svg id="admin-svg-chart" viewBox="0 0 700 180" class="w-full h-full cursor-crosshair relative z-10" preserveAspectRatio="none">
+      <svg viewBox="0 0 ${width} ${height}" class="w-100 h-100 overflow-visible" preserveAspectRatio="none" id="admin-svg-chart">
         <defs>
           <linearGradient id="visits-grad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#FFB74D" stop-opacity="0.2"/>
-            <stop offset="100%" stop-color="#FFB74D" stop-opacity="0"/>
+            <stop offset="0%" stop-color="#EB0A1E" stop-opacity="0.25"/>
+            <stop offset="100%" stop-color="#EB0A1E" stop-opacity="0.0"/>
           </linearGradient>
         </defs>
 
         <!-- Grid Lines -->
-        <line x1="0" y1="30" x2="700" y2="30" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
-        <line x1="0" y1="90" x2="700" y2="90" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
-        <line x1="0" y1="150" x2="700" y2="150" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+        <line x1="0" y1="${height/4}" x2="${width}" y2="${height/4}" stroke="#E5E7EB" stroke-dasharray="3" stroke-width="1" />
+        <line x1="0" y1="${height/2}" x2="${width}" y2="${height/2}" stroke="#E5E7EB" stroke-dasharray="3" stroke-width="1" />
+        <line x1="0" y1="${(height*3)/4}" x2="${width}" y2="${(height*3)/4}" stroke="#E5E7EB" stroke-dasharray="3" stroke-width="1" />
 
         <!-- Vertical Pointer Line -->
-        <line id="chart-vertical-pointer" x1="0" y1="0" x2="0" y2="180" stroke="rgba(255, 255, 255, 0.15)" stroke-dasharray="4" stroke-width="1.5" class="hidden" />
+        <line id="chart-vertical-pointer" x1="0" y1="0" x2="0" y2="180" stroke="#0A0A0A" stroke-dasharray="4" stroke-width="1.5" class="d-none" />
 
         <!-- Visits Area & Line -->
         <path d="${areaVisits}" fill="url(#visits-grad)" />
-        <path d="${pathVisits}" fill="none" stroke="#FFB74D" stroke-width="2.5" stroke-linecap="round" />
+        <path d="${pathVisits}" fill="none" stroke="#EB0A1E" stroke-width="2.5" stroke-linecap="round" />
         ${circlesVisitsHTML}
 
         <!-- Requests Line -->
-        <path d="${pathRequests}" fill="none" stroke="#92000A" stroke-width="2.5" stroke-linecap="round" />
+        <path d="${pathRequests}" fill="none" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round" />
         ${circlesRequestsHTML}
       </svg>
-      <div id="chart-floating-tooltip" class="chart-tooltip hidden"></div>
+      <div id="chart-floating-tooltip" class="chart-tooltip d-none position-absolute p-2 rounded-3 bg-dark text-white small shadow-lg" style="pointer-events: none; z-index: 10;"></div>
     `;
 
-    // 7. Add Interactive Hover Effects
     const svg = document.getElementById('admin-svg-chart');
     const pointer = document.getElementById('chart-vertical-pointer');
     const tooltip = document.getElementById('chart-floating-tooltip');
@@ -427,7 +427,7 @@ async function initDynamicChart() {
 
         pointer.setAttribute('x1', activeX);
         pointer.setAttribute('x2', activeX);
-        pointer.classList.remove('hidden');
+        pointer.classList.remove('d-none');
 
         document.querySelectorAll('.chart-dot').forEach(dot => {
           const dotIdx = parseInt(dot.getAttribute('data-idx'));
@@ -445,22 +445,22 @@ async function initDynamicChart() {
         tooltip.style.left = `${Math.min(rect.width - 160, Math.max(10, tipX - 80))}px`;
         tooltip.style.top = '10px';
         tooltip.innerHTML = `
-          <div class="font-bold text-white mb-1.5">${fullLabels[idx]}</div>
-          <div class="flex items-center gap-2 font-medium">
-            <span class="w-2 h-2 rounded-full bg-[#FFB74D]"></span>
-            <span class="text-white/80">Visites : <span class="text-white font-bold">${visits[idx]}</span></span>
+          <div class="fw-bold text-white mb-1">${fullLabels[idx]}</div>
+          <div class="d-flex align-items-center gap-2 small">
+            <span class="rounded-circle bg-danger d-inline-block" style="width: 8px; height: 8px;"></span>
+            <span>Visites : <strong>${visits[idx]}</strong></span>
           </div>
-          <div class="flex items-center gap-2 font-medium mt-1">
-            <span class="w-2 h-2 rounded-full bg-[#92000A]"></span>
-            <span class="text-white/80">Demandes : <span class="text-white font-bold">${requests[idx]}</span></span>
+          <div class="d-flex align-items-center gap-2 small mt-1">
+            <span class="rounded-circle bg-white d-inline-block" style="width: 8px; height: 8px;"></span>
+            <span>Demandes : <strong>${requests[idx]}</strong></span>
           </div>
         `;
-        tooltip.classList.remove('hidden');
+        tooltip.classList.remove('d-none');
       };
 
       const onLeave = () => {
-        pointer.classList.add('hidden');
-        tooltip.classList.add('hidden');
+        pointer.classList.add('d-none');
+        tooltip.classList.add('d-none');
         document.querySelectorAll('.chart-dot').forEach(dot => {
           dot.setAttribute('r', '4');
           dot.setAttribute('stroke-width', '2');
@@ -473,7 +473,7 @@ async function initDynamicChart() {
 
   } catch (err) {
     console.error('Failed to init dynamic chart:', err);
-    container.innerHTML = `<div class="absolute inset-0 flex items-center justify-center text-xs text-rose-400">Erreur lors de la construction du graphique.</div>`;
+    container.innerHTML = `<div class="position-absolute top-50 start-50 translate-middle text-danger small">Erreur lors de la construction du graphique.</div>`;
   }
 }
 
@@ -494,95 +494,97 @@ async function renderBoardContent() {
     activeOffersListenerUnsub = null;
   }
 
-  board.innerHTML = `<div class="text-center py-12 text-suv-gray">Chargement du module...</div>`;
+  board.innerHTML = `
+    <div class="text-center py-5 text-muted">
+      <div class="spinner-border text-danger mb-3" role="status"></div>
+      <p class="small fw-semibold">Chargement du module...</p>
+    </div>
+  `;
 
   try {
     if (activeSubTab === 'catalogue') {
       const { data: vehicles } = await getVehicles({ limit: 100 });
 
       board.innerHTML = `
-        <div class="glass-panel border border-white/5 rounded-2xl p-6 space-y-6">
-          <div class="flex items-center justify-between gap-4 flex-wrap">
-            <h3 class="text-md font-bold uppercase tracking-wider text-white font-display">Gestion du catalogue</h3>
+        <div class="toyota-panel rounded-4 p-4 border shadow-sm">
+          <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap mb-4">
+            <h5 class="fw-black text-uppercase font-display mb-0">Gestion du Catalogue Showroom</h5>
             
-            <div class="flex items-center gap-3 flex-wrap">
-              <!-- Excel Import Inputs & Buttons -->
-              <input type="file" id="excel-import-input" accept=".xlsx, .xls, .csv" class="hidden">
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+              <input type="file" id="excel-import-input" accept=".xlsx, .xls, .csv" class="d-none">
               
-              <button id="download-template-btn" class="border border-white/10 hover:bg-white/5 text-white/80 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5" title="Télécharger le modèle Excel d'importation">
-                <svg class="w-4 h-4 text-suv-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                Modèle Excel
+              <button id="download-template-btn" class="btn btn-toyota-outline btn-sm fw-bold text-uppercase d-flex align-items-center gap-1" title="Télécharger le modèle Excel d'importation" style="font-size: 0.75rem;">
+                <i class="bi bi-file-earmark-excel text-danger"></i>
+                <span>Modèle Excel</span>
               </button>
 
-              <button id="excel-import-btn" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-lg shadow-emerald-600/10" title="Importer des véhicules depuis un fichier Excel ou CSV">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V4a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-                Importer Excel
+              <button id="excel-import-btn" class="btn btn-outline-success btn-sm fw-bold text-uppercase d-flex align-items-center gap-1" title="Importer des véhicules depuis un fichier Excel ou CSV" style="font-size: 0.75rem;">
+                <i class="bi bi-upload"></i>
+                <span>Importer Excel</span>
               </button>
 
-              <button id="add-vehicle-btn" class="btn-premium-gold px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md">
-                <svg class="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+              <button id="add-vehicle-btn" class="btn btn-toyota-red btn-sm fw-black text-uppercase d-flex align-items-center gap-1 shadow-sm" style="font-size: 0.75rem;">
+                <i class="bi bi-plus-lg"></i>
                 <span>Ajouter un SUV</span>
               </button>
             </div>
           </div>
 
           <!-- Import Progress Alert -->
-          <div id="import-status-banner" class="hidden glass-panel border border-suv-gold/20 p-4 rounded-xl flex items-center justify-between text-xs text-suv-gold animate-pulse">
-            <span class="flex items-center gap-2">
-              <svg class="animate-spin h-4.5 w-4.5 text-suv-gold" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-              Analyse et importation des véhicules en cours... Veuillez patienter et ne pas fermer cette page.
-            </span>
+          <div id="import-status-banner" class="d-none alert alert-warning align-items-center justify-content-between small rounded-3 mb-3">
+            <div class="d-flex align-items-center gap-2">
+              <div class="spinner-border spinner-border-sm text-warning" role="status"></div>
+              <span>Analyse et importation des véhicules en cours... Veuillez patienter.</span>
+            </div>
           </div>
 
           <!-- Table Container -->
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse text-sm">
-              <thead>
-                <tr class="border-b border-white/10 text-suv-gray font-bold">
-                  <th class="py-3 px-4">Aperçu</th>
-                  <th class="py-3 px-4">Véhicule</th>
-                  <th class="py-3 px-4">Année</th>
-                  <th class="py-3 px-4">Prix</th>
-                  <th class="py-3 px-4">Kilométrage</th>
-                  <th class="py-3 px-4">Statut</th>
-                  <th class="py-3 px-4">Vues</th>
-                  <th class="py-3 px-4 text-right">Actions</th>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle text-start mb-0">
+              <thead class="table-light">
+                <tr class="small text-uppercase fw-bold text-secondary" style="font-size: 0.75rem;">
+                  <th style="width: 80px;">Aperçu</th>
+                  <th>Véhicule</th>
+                  <th>Année</th>
+                  <th>Prix</th>
+                  <th>Kilométrage</th>
+                  <th>Statut</th>
+                  <th>Vues</th>
+                  <th class="text-end">Actions</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-white/5">
+              <tbody>
                 ${vehicles.map(v => {
                   const image = v.photos && v.photos.length > 0 ? v.photos[0] : 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=100&q=80';
                   
-                  let statusColor = 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20';
-                  if (v.statut === 'vendu') statusColor = 'text-rose-400 bg-rose-500/10 border-rose-500/20';
-                  if (v.statut === 'archivé') statusColor = 'text-white/40 bg-white/5 border-white/10';
+                  let statusBadge = '<span class="badge bg-success-subtle text-success border border-success-subtle">Disponible</span>';
+                  if (v.statut === 'vendu') statusBadge = '<span class="badge bg-danger-subtle text-danger border border-danger-subtle">Vendu</span>';
+                  if (v.statut === 'archivé') statusBadge = '<span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle">Archivé</span>';
 
                   return `
-                    <tr class="hover:bg-white/5 transition-colors group">
-                      <td class="py-3.5 px-4">
-                        <img src="${image}" class="w-16 aspect-[16/10] object-cover rounded-lg border border-white/10">
+                    <tr>
+                      <td>
+                        <img src="${image}" class="rounded-2 border object-fit-cover" style="width: 64px; height: 42px;">
                       </td>
-                      <td class="py-3.5 px-4 font-semibold">
-                        <p class="text-white group-hover:text-suv-gold transition-colors">${v.marque}</p>
-                        <p class="text-xs text-suv-gray">${v.modele}</p>
+                      <td>
+                        <span class="fw-bold text-dark d-block text-uppercase">${v.marque}</span>
+                        <span class="small text-muted">${v.modele}</span>
                       </td>
-                      <td class="py-3.5 px-4 font-medium">${v.annee}</td>
-                      <td class="py-3.5 px-4 text-suv-gold font-bold font-sans">${new Intl.NumberFormat('fr-FR').format(v.prix)} ${currency}</td>
-                      <td class="py-3.5 px-4 text-white/70">${new Intl.NumberFormat('fr-FR').format(v.kilometrage)} km</td>
-                      <td class="py-3.5 px-4">
-                        <span class="border px-2 py-0.5 rounded-full text-xxs font-bold ${statusColor} capitalize">${v.statut}</span>
-                      </td>
-                      <td class="py-3.5 px-4 font-semibold text-white/60">${v.vues || 0}</td>
-                      <td class="py-3.5 px-4 text-right">
-                        <div class="flex items-center justify-end gap-2">
-                          <button class="edit-v-btn p-1.5 rounded bg-white/5 hover:bg-white/10 text-suv-gold border border-white/5" data-id="${v.id}" title="Modifier">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                      <td class="small fw-semibold">${v.annee}</td>
+                      <td class="fw-black text-danger font-display small">${new Intl.NumberFormat('fr-FR').format(v.prix)} ${currency}</td>
+                      <td class="small text-muted">${new Intl.NumberFormat('fr-FR').format(v.kilometrage)} km</td>
+                      <td>${statusBadge}</td>
+                      <td class="small fw-bold text-muted">${v.vues || 0}</td>
+                      <td class="text-end">
+                        <div class="btn-group btn-group-sm">
+                          <button class="edit-v-btn btn btn-outline-secondary" data-id="${v.id}" title="Modifier">
+                            <i class="bi bi-pencil"></i>
                           </button>
-                          <button class="status-v-btn p-1.5 rounded bg-white/5 hover:bg-emerald-500/10 text-emerald-400 border border-white/5" data-id="${v.id}" data-statut="${v.statut === 'vendu' ? 'disponible' : 'vendu'}" title="${v.statut === 'vendu' ? 'Marquer disponible' : 'Marquer vendu'}">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                          <button class="status-v-btn btn btn-outline-success" data-id="${v.id}" data-statut="${v.statut === 'vendu' ? 'disponible' : 'vendu'}" title="${v.statut === 'vendu' ? 'Marquer disponible' : 'Marquer vendu'}">
+                            <i class="bi bi-check2-circle"></i>
                           </button>
-                          <button class="delete-v-btn p-1.5 rounded bg-white/5 hover:bg-rose-500/10 text-rose-400 border border-white/5" data-id="${v.id}" title="Supprimer">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                          <button class="delete-v-btn btn btn-outline-danger" data-id="${v.id}" title="Supprimer">
+                            <i class="bi bi-trash3"></i>
                           </button>
                         </div>
                       </td>
@@ -603,7 +605,8 @@ async function renderBoardContent() {
 
       if (offers.length === 0) {
         board.innerHTML = `
-          <div class="glass-panel border border-white/5 rounded-2xl p-10 text-center text-suv-gray">
+          <div class="toyota-panel rounded-4 p-5 text-center text-muted border shadow-sm">
+            <i class="bi bi-inbox fs-2 d-block mb-2 text-secondary"></i>
             Aucune demande d'offre n'a été soumise pour le moment.
           </div>
         `;
@@ -611,69 +614,70 @@ async function renderBoardContent() {
       }
 
       board.innerHTML = `
-        <div class="glass-panel border border-white/5 rounded-2xl p-6 space-y-6">
-          <h3 class="text-md font-bold uppercase tracking-wider text-white font-display mb-4">Suivi des Demandes et Négociations</h3>
+        <div class="toyota-panel rounded-4 p-4 border shadow-sm">
+          <h5 class="fw-black text-uppercase font-display mb-4">Suivi des Demandes et Négociations</h5>
           
-          <div class="space-y-6">
+          <div class="d-grid gap-3">
             ${offers.map(o => {
-              let badgeStyle = '';
-              if (o.statut === 'pending') badgeStyle = 'bg-amber-500/10 text-amber-400 border-amber-500/25';
-              else if (o.statut === 'accepted') badgeStyle = 'bg-emerald-500/10 text-emerald-400 border-emerald-500/25';
-              else if (o.statut === 'refused') badgeStyle = 'bg-rose-500/10 text-rose-400 border-rose-500/25';
-              else badgeStyle = 'bg-blue-500/10 text-blue-400 border-blue-500/25';
+              let badgeStyle = 'badge bg-warning-subtle text-warning border border-warning-subtle';
+              if (o.statut === 'accepted') badgeStyle = 'badge bg-success-subtle text-success border border-success-subtle';
+              else if (o.statut === 'refused') badgeStyle = 'badge bg-danger-subtle text-danger border border-danger-subtle';
+              else if (o.statut === 'in_progress') badgeStyle = 'badge bg-info-subtle text-info border border-info-subtle';
 
               const priceHTML = o.prix_propose
-                ? `<span class="text-suv-gold font-bold font-sans text-sm">${new Intl.NumberFormat('fr-FR').format(o.prix_propose)} ${currency}</span>`
-                : `<span class="text-white/40 text-xs">Aucune offre de prix</span>`;
+                ? `<span class="text-danger fw-black font-display fs-6">${new Intl.NumberFormat('fr-FR').format(o.prix_propose)} ${currency}</span>`
+                : `<span class="text-muted small">Aucune offre de prix</span>`;
 
               const p = o.profile || { prenom: 'Utilisateur', nom: 'Anonyme', telephone: '' };
               const v = o.vehicle || { marque: 'SUV', modele: 'supprimé', prix: 0 };
 
               return `
-                <div class="glass-card rounded-2xl p-5 border border-white/5 space-y-4" data-offer-id="${o.id}">
-                  <div class="flex items-start justify-between gap-4 flex-wrap">
+                <div class="toyota-panel rounded-4 p-4 border shadow-sm" data-offer-id="${o.id}">
+                  <div class="d-flex align-items-start justify-content-between gap-3 flex-wrap pb-3 border-bottom">
                     <div>
-                      <h4 class="font-bold text-white text-sm font-display">${v.marque} ${v.modele}</h4>
-                      <p class="text-xs text-suv-gray mt-0.5">Proposé par : <span class="text-white">${p.prenom} ${p.nom}</span> • Tel: <span class="text-white">${p.telephone || 'N/A'}</span></p>
+                      <h5 class="fw-black text-dark font-display text-uppercase mb-1">${v.marque} ${v.modele}</h5>
+                      <p class="small text-muted mb-0">Proposé par : <strong class="text-dark">${p.prenom} ${p.nom}</strong> &bull; Tél : <strong class="text-dark">${p.telephone || 'N/A'}</strong></p>
                     </div>
-                    <div class="flex items-center gap-3">
+                    <div class="d-flex align-items-center gap-2">
                       ${priceHTML}
-                      <span class="border px-2 py-0.5 rounded-full text-[10px] font-bold ${badgeStyle} capitalize">${o.statut}</span>
+                      <span class="${badgeStyle} text-uppercase px-3 py-2 fw-bold" style="font-size: 0.7rem;">${o.statut}</span>
                     </div>
                   </div>
 
-                  <div class="bg-suv-darker/50 p-4 rounded-xl text-sm leading-relaxed border border-white/5">
-                    <p class="text-xxs uppercase tracking-wider text-suv-gray font-bold mb-1">Message de l'acheteur :</p>
-                    <p class="text-white/80">${o.message}</p>
+                  <div class="p-3 rounded-3 my-3 small border" style="background: #F4F5F8;">
+                    <span class="small fw-bold text-uppercase text-danger d-block mb-1" style="font-size: 0.7rem;">Message de l'acheteur :</span>
+                    <p class="text-secondary mb-0">${o.message}</p>
                   </div>
 
                   <!-- Notes & Decision panel -->
-                  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end pt-2">
+                  <div class="row g-2 align-items-end pt-2">
                     
                     <!-- Admin internal note -->
-                    <div class="md:col-span-2 space-y-1">
-                      <label class="text-xxs font-bold uppercase tracking-wider text-suv-gray">Note ou réponse client (admin)</label>
-                      <input type="text" class="note-admin-input w-full suv-input py-2 px-3 text-xs" value="${o.note_admin || ''}" placeholder="Ajouter une note de suivi...">
+                    <div class="col-12 col-md-6">
+                      <label class="form-label small fw-bold text-uppercase text-secondary mb-1" style="font-size: 0.7rem;">Note ou réponse client (admin)</label>
+                      <input type="text" class="note-admin-input form-control form-control-sm toyota-input" value="${o.note_admin || ''}" placeholder="Ajouter une note de suivi...">
                     </div>
 
                     <!-- Action selection buttons -->
-                    <div class="flex gap-2">
-                      <button class="decision-btn flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-2 rounded-lg transition-all" data-action="accepted">
-                        Accepter
-                      </button>
-                      <button class="decision-btn flex-1 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs py-2 rounded-lg transition-all" data-action="refused">
-                        Refuser
-                      </button>
-                      <button class="decision-btn flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs py-2 rounded-lg transition-all" data-action="in_progress">
-                        Négocier
-                      </button>
+                    <div class="col-12 col-md-3">
+                      <div class="btn-group btn-group-sm w-100">
+                        <button class="decision-btn btn btn-success fw-bold text-uppercase" data-action="accepted" style="font-size: 0.7rem;">
+                          Accepter
+                        </button>
+                        <button class="decision-btn btn btn-danger fw-bold text-uppercase" data-action="refused" style="font-size: 0.7rem;">
+                          Refuser
+                        </button>
+                        <button class="decision-btn btn btn-outline-dark fw-bold text-uppercase" data-action="in_progress" style="font-size: 0.7rem;">
+                          Négocier
+                        </button>
+                      </div>
                     </div>
 
                     <!-- PDF Devis Button -->
-                    <div>
-                      <button class="devis-btn w-full bg-suv-gold hover:bg-[#fff77f] text-suv-dark font-extrabold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5" data-offer-id="${o.id}">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                        Générer Devis
+                    <div class="col-12 col-md-3">
+                      <button class="devis-btn btn btn-toyota-red btn-sm w-100 fw-black text-uppercase d-flex align-items-center justify-content-center gap-1 shadow-sm" data-offer-id="${o.id}" style="font-size: 0.75rem;">
+                        <i class="bi bi-file-earmark-pdf"></i>
+                        <span>Générer Devis</span>
                       </button>
                     </div>
 
@@ -699,7 +703,8 @@ async function renderBoardContent() {
 
       if (conversations.length === 0) {
         board.innerHTML = `
-          <div class="glass-panel border border-white/5 rounded-2xl p-10 text-center text-suv-gray">
+          <div class="toyota-panel rounded-4 p-5 text-center text-muted border shadow-sm">
+            <i class="bi bi-chat-quote fs-2 d-block mb-2 text-secondary"></i>
             Aucun chat client démarré pour l'instant.
           </div>
         `;
@@ -708,43 +713,47 @@ async function renderBoardContent() {
 
       // Render Split Inbox Pane
       board.innerHTML = `
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 h-[550px]">
+        <div class="row g-3" style="height: 560px;">
           
-          <!-- LEFT: Thread list sidebar (lg: 4 cols) -->
-          <div class="lg:col-span-4 glass-panel border border-white/5 rounded-2xl flex flex-col overflow-hidden h-full">
-            <div class="px-4 py-3 bg-white/5 border-b border-white/5">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-suv-gray">Conversations Clients</h4>
-            </div>
-            
-            <div class="flex-grow overflow-y-auto divide-y divide-white/5" id="admin-conversations-list">
-              ${conversations.map(c => {
-                const isActive = activeChatContactId === c.contact.id;
-                const activeClass = isActive ? 'bg-suv-red/10 border-l-4 border-suv-gold' : 'hover:bg-white/5';
-                const time = new Date(c.lastMessage.created_at).toLocaleDateString('fr-FR', { hour: '2-digit', minute: '2-digit' });
-                
-                return `
-                  <button class="w-full text-left p-4 transition-all flex items-center justify-between gap-3 ${activeClass} conversation-thread-btn" data-contact-id="${c.contact.id}">
-                    <div class="flex items-center gap-3 overflow-hidden">
-                      <img src="${c.contact.avatar_url || 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'}" class="w-10 h-10 rounded-full object-cover border border-white/10 flex-shrink-0">
-                      <div class="overflow-hidden">
-                        <p class="text-sm font-bold text-white truncate">${c.contact.prenom} ${c.contact.nom}</p>
-                        <p class="text-xs text-suv-gray truncate mt-0.5">${c.lastMessage.contenu.startsWith('[audio]:') ? '🎤 Note vocale' : c.lastMessage.contenu}</p>
+          <!-- LEFT: Thread list sidebar (col-lg-4) -->
+          <div class="col-lg-4 h-100">
+            <div class="toyota-panel rounded-4 border shadow-sm d-flex flex-column h-100 overflow-hidden">
+              <div class="px-3 py-3 border-bottom bg-light">
+                <h6 class="small fw-black text-uppercase font-display mb-0 text-dark">Conversations Clients</h6>
+              </div>
+              
+              <div class="overflow-auto flex-grow-1" id="admin-conversations-list">
+                ${conversations.map(c => {
+                  const isActive = activeChatContactId === c.contact.id;
+                  const activeClass = isActive ? 'bg-danger-subtle border-start border-4 border-danger' : 'bg-white';
+                  const time = new Date(c.lastMessage.created_at).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+                  
+                  return `
+                    <button class="w-100 text-start p-3 border-bottom d-flex align-items-center justify-content-between gap-2 conversation-thread-btn ${activeClass}" data-contact-id="${c.contact.id}" style="border: 0;">
+                      <div class="d-flex align-items-center gap-2 overflow-hidden">
+                        <img src="${c.contact.avatar_url || 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'}" class="rounded-circle object-fit-cover border flex-shrink-0" style="width: 38px; height: 38px;">
+                        <div class="overflow-hidden">
+                          <p class="small fw-bold text-dark mb-0 text-truncate">${c.contact.prenom} ${c.contact.nom}</p>
+                          <p class="small text-muted mb-0 text-truncate" style="font-size: 0.75rem;">${c.lastMessage.contenu.startsWith('[audio]:') ? '🎤 Note vocale' : c.lastMessage.contenu}</p>
+                        </div>
                       </div>
-                    </div>
-                    <div class="text-right flex-shrink-0 flex flex-col items-end gap-1.5">
-                      <span class="text-[9px] text-white/30">${time}</span>
-                      ${c.unreadCount > 0 ? `<span class="bg-suv-gold text-suv-red text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center">${c.unreadCount}</span>` : ''}
-                    </div>
-                  </button>
-                `;
-              }).join('')}
+                      <div class="text-end flex-shrink-0 d-flex flex-column align-items-end gap-1">
+                        <span class="small text-muted font-monospace" style="font-size: 0.65rem;">${time}</span>
+                        ${c.unreadCount > 0 ? `<span class="badge rounded-pill bg-danger text-white" style="font-size: 0.65rem;">${c.unreadCount}</span>` : ''}
+                      </div>
+                    </button>
+                  `;
+                }).join('')}
+              </div>
             </div>
           </div>
 
-          <!-- RIGHT: Chat Board Pane (lg: 8 cols) -->
-          <div class="lg:col-span-8 glass-panel border border-white/5 rounded-2xl flex flex-col overflow-hidden h-full" id="admin-chat-pane">
-            <div class="flex items-center justify-center h-full text-suv-gray text-xs">
-              Sélectionnez une discussion à gauche pour répondre en direct.
+          <!-- RIGHT: Chat Board Pane (col-lg-8) -->
+          <div class="col-lg-8 h-100">
+            <div class="toyota-panel rounded-4 border shadow-sm d-flex flex-column h-100 overflow-hidden" id="admin-chat-pane">
+              <div class="d-flex align-items-center justify-content-center h-100 text-muted small">
+                Sélectionnez une discussion à gauche pour répondre en direct.
+              </div>
             </div>
           </div>
 
@@ -754,7 +763,6 @@ async function renderBoardContent() {
       initInboxTabListeners();
 
     } else if (activeSubTab === 'settings') {
-      // Load current site settings from store or localStorage
       const currency = localStorage.getItem('suv_site_currency') || 'FCFA';
       const address = localStorage.getItem('suv_site_address') || "Haie Vive, Cotonou, Bénin";
       const tel = localStorage.getItem('suv_site_tel') || "+229 01 00 00 00 00";
@@ -762,16 +770,16 @@ async function renderBoardContent() {
       const bannerText = localStorage.getItem('suv_site_banner_text') || "✨ Arrivage exceptionnel ce mois-ci : Découvrez nos nouveaux Range Rover 2024 !";
 
       board.innerHTML = `
-        <div class="glass-panel border border-white/5 rounded-2xl p-6 md:p-8 space-y-8">
-          <h3 class="text-md font-bold uppercase tracking-wider text-white font-display border-b border-white/5 pb-4">Configuration Générale de la Plateforme</h3>
+        <div class="toyota-panel rounded-4 p-4 p-md-5 border shadow-sm">
+          <h5 class="fw-black text-uppercase font-display border-bottom pb-3 mb-4">Configuration Générale de la Plateforme</h5>
           
-          <form id="settings-form" class="space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <form id="settings-form">
+            <div class="row g-3">
               
               <!-- Devise -->
-              <div class="space-y-2">
-                <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Devise de la plateforme</label>
-                <select id="set-currency" class="w-full suv-input bg-suv-slate border-white/10 text-sm focus:border-suv-gold">
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Devise de la plateforme</label>
+                <select id="set-currency" class="form-select toyota-input">
                   <option value="FCFA" ${currency === 'FCFA' ? 'selected' : ''}>FCFA (Afrique de l'Ouest / XOF)</option>
                   <option value="EUR" ${currency === 'EUR' ? 'selected' : ''}>Euro (€)</option>
                   <option value="USD" ${currency === 'USD' ? 'selected' : ''}>Dollar ($)</option>
@@ -779,36 +787,36 @@ async function renderBoardContent() {
               </div>
 
               <!-- Coordonnées Tel -->
-              <div class="space-y-2">
-                <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Téléphone de contact</label>
-                <input type="text" id="set-tel" value="${tel}" class="w-full suv-input" required>
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Téléphone de contact</label>
+                <input type="text" id="set-tel" value="${tel}" class="form-control toyota-input" required>
               </div>
 
               <!-- Adresse Physique -->
-              <div class="space-y-2 md:col-span-2">
-                <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Adresse physique de l'exposition</label>
-                <input type="text" id="set-address" value="${address}" class="w-full suv-input" required>
+              <div class="col-12">
+                <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Adresse physique du Showroom</label>
+                <input type="text" id="set-address" value="${address}" class="form-control toyota-input" required>
               </div>
             </div>
 
             <!-- Bandeau Promotionnel Section -->
-            <div class="border-t border-white/5 pt-6 space-y-4 text-left">
-              <h4 class="text-xs font-bold uppercase tracking-widest text-suv-gold">Bandeau d'actualités (Top Header)</h4>
+            <div class="border-top pt-4 mt-4 text-start">
+              <h6 class="small fw-black text-uppercase text-danger mb-3 font-display" style="font-size: 0.75rem;">Bandeau d'actualités (Top Header)</h6>
               
-              <div class="flex items-center gap-3">
-                <input type="checkbox" id="set-banner-active" ${bannerActive ? 'checked' : ''} class="rounded border-white/10 bg-white/5 text-suv-red focus:ring-suv-red w-4.5 h-4.5 cursor-pointer">
-                <label for="set-banner-active" class="text-sm font-semibold text-white/90 cursor-pointer">Activer le bandeau promotionnel en haut du site</label>
+              <div class="form-check mb-3">
+                <input type="checkbox" id="set-banner-active" ${bannerActive ? 'checked' : ''} class="form-check-input">
+                <label for="set-banner-active" class="form-check-label small fw-bold text-dark">Activer le bandeau promotionnel en haut du site</label>
               </div>
 
-              <div class="space-y-2">
-                <label class="text-xs font-bold uppercase tracking-wider text-suv-gray">Message du bandeau</label>
-                <input type="text" id="set-banner-text" value="${bannerText}" class="w-full suv-input text-sm" placeholder="Ex: Offre spéciale fin d'année...">
+              <div>
+                <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Message du bandeau</label>
+                <input type="text" id="set-banner-text" value="${bannerText}" class="form-control toyota-input" placeholder="Ex: Offre spéciale fin d'année...">
               </div>
             </div>
 
             <!-- Submit -->
-            <div class="text-right pt-6 border-t border-white/5">
-              <button type="submit" class="bg-suv-red hover:bg-suv-purple text-white px-8 py-3 rounded-xl font-bold transition-all text-sm shadow-lg shadow-suv-red/10">
+            <div class="text-end pt-4 mt-4 border-top">
+              <button type="submit" class="btn btn-toyota-red px-4 py-3 fw-black text-uppercase shadow-sm" style="font-size: 0.8rem;">
                 Sauvegarder les paramètres
               </button>
             </div>
@@ -862,11 +870,11 @@ async function renderBoardContent() {
     }
   } catch (err) {
     console.error('Workspace sub-tab build failed:', err);
-    board.innerHTML = `<div class="text-center py-12 text-rose-400">Erreur lors de la construction du module.</div>`;
+    board.innerHTML = `<div class="text-center py-5 text-danger">Erreur lors de la construction du module.</div>`;
   }
 }
 
-// Dynamic on-demand loader for SheetJS (keeps public pages ultra-light)
+// Dynamic on-demand loader for SheetJS
 async function loadSheetJS() {
   if (window.XLSX) return window.XLSX;
   return new Promise((resolve, reject) => {
@@ -891,7 +899,6 @@ function initCatalogueTabListeners() {
   const downloadBtn = document.getElementById('download-template-btn');
   const statusBanner = document.getElementById('import-status-banner');
 
-  // Excel template downloader using SheetJS
   if (downloadBtn) {
     downloadBtn.addEventListener('click', async () => {
       try {
@@ -943,7 +950,6 @@ function initCatalogueTabListeners() {
     });
   }
 
-  // Excel importer listener
   if (importBtn && importInput) {
     importBtn.addEventListener('click', () => {
       importInput.click();
@@ -953,9 +959,12 @@ function initCatalogueTabListeners() {
       const file = e.target.files[0];
       if (!file) return;
 
-      importInput.value = ''; // Reset to allow re-upload
+      importInput.value = '';
 
-      if (statusBanner) statusBanner.classList.remove('hidden');
+      if (statusBanner) {
+        statusBanner.classList.remove('d-none');
+        statusBanner.classList.add('d-flex');
+      }
 
       const reader = new FileReader();
       reader.onload = async (evt) => {
@@ -979,9 +988,9 @@ function initCatalogueTabListeners() {
               for (const key of Object.keys(row)) {
                 const normalizedKey = key.toLowerCase()
                   .normalize("NFD")
-                  .replace(/[\u0300-\u036f]/g, "") // remove accents
-                  .replace(/\s+/g, '') // remove spaces
-                  .replace(/_/g, ''); // remove underscores
+                  .replace(/[\u0300-\u036f]/g, "")
+                  .replace(/\s+/g, '')
+                  .replace(/_/g, '');
                 
                 if (synonyms.some(s => s.toLowerCase() === normalizedKey)) {
                   return row[key];
@@ -1007,7 +1016,6 @@ function initCatalogueTabListeners() {
             const coffre = getVal(['coffre', 'boot', 'capacitedecoffre']);
             const couleurs_dispo = getVal(['couleursdispo', 'couleursdisponibles', 'colors', 'couleursdispos', 'couleurdispo']);
 
-            // Validation
             if (!marque || !modele || isNaN(annee) || isNaN(prix)) {
               console.warn('Saut de ligne invalide dans le fichier Excel:', row);
               continue;
@@ -1049,7 +1057,6 @@ function initCatalogueTabListeners() {
             throw new Error("Aucun véhicule valide n'a pu être extrait. Assurez-vous d'avoir rempli les colonnes obligatoires (Marque, Modèle, Année, Prix).");
           }
 
-          // Always insert into local storage first for 0ms immediate access
           const list = mockDb.getCollection(mockDb.KEYS.VEHICLES);
           parsedVehicles.forEach((v, index) => {
             v.id = 'suv-excel-' + index + '-' + Math.random().toString(36).substr(2, 5);
@@ -1059,7 +1066,6 @@ function initCatalogueTabListeners() {
           });
           mockDb.saveCollection(mockDb.KEYS.VEHICLES, list);
 
-          // Sync to Firestore in background if active
           if (!isMock && db) {
             try {
               for (const v of parsedVehicles) {
@@ -1078,12 +1084,18 @@ function initCatalogueTabListeners() {
           console.error(err);
           alert("Erreur lors de l'importation : " + (err.message || JSON.stringify(err)));
         } finally {
-          if (statusBanner) statusBanner.classList.add('hidden');
+          if (statusBanner) {
+            statusBanner.classList.add('d-none');
+            statusBanner.classList.remove('d-flex');
+          }
         }
       };
       reader.onerror = () => {
         alert("Impossible de lire le fichier.");
-        if (statusBanner) statusBanner.classList.add('hidden');
+        if (statusBanner) {
+          statusBanner.classList.add('d-none');
+          statusBanner.classList.remove('d-flex');
+        }
       };
       reader.readAsArrayBuffer(file);
     });
@@ -1100,11 +1112,17 @@ function initCatalogueTabListeners() {
     currentUploadedPhotos = [];
     document.getElementById('photos-preview-grid').innerHTML = '';
     
-    if (modal) modal.classList.remove('hidden');
+    if (modal) {
+      modal.classList.remove('d-none');
+      modal.classList.add('d-flex');
+    }
   };
 
   const hideModal = () => {
-    if (modal) modal.classList.add('hidden');
+    if (modal) {
+      modal.classList.add('d-none');
+      modal.classList.remove('d-flex');
+    }
     if (vForm) vForm.reset();
   };
 
@@ -1117,28 +1135,24 @@ function initCatalogueTabListeners() {
     dropZone.addEventListener('click', () => fileInput.click());
     fileInput.addEventListener('click', (e) => e.stopPropagation());
     
-    // Drag Over
     dropZone.addEventListener('dragover', (e) => {
       e.preventDefault();
-      dropZone.classList.add('border-suv-gold');
+      dropZone.classList.add('border-danger');
     });
 
-    // Drag Leave
     dropZone.addEventListener('dragleave', () => {
-      dropZone.classList.remove('border-suv-gold');
+      dropZone.classList.remove('border-danger');
     });
 
-    // Drop Files
     dropZone.addEventListener('drop', async (e) => {
       e.preventDefault();
-      dropZone.classList.remove('border-suv-gold');
+      dropZone.classList.remove('border-danger');
       const files = e.dataTransfer.files;
       if (files.length > 0) {
         await handleImageUpload(files);
       }
     });
 
-    // File selection
     fileInput.addEventListener('change', async (e) => {
       const files = e.target.files;
       if (files.length > 0) {
@@ -1147,7 +1161,6 @@ function initCatalogueTabListeners() {
     });
   }
 
-  // Upload and show preview
   const handleImageUpload = async (files) => {
     try {
       const urls = await uploadVehiclePhotos(files);
@@ -1159,23 +1172,21 @@ function initCatalogueTabListeners() {
     }
   };
 
-  // Render previews
   const renderImagePreviews = () => {
     const grid = document.getElementById('photos-preview-grid');
     if (!grid) return;
 
     grid.innerHTML = currentUploadedPhotos.map((url, idx) => `
-      <div class="aspect-[16/10] rounded-lg border border-white/10 overflow-hidden relative group">
-        <img src="${url}" class="w-full h-full object-cover">
-        
-        <!-- Delete overlay btn -->
-        <button type="button" class="delete-photo-btn absolute inset-0 bg-rose-600/70 opacity-0 group-hover:opacity-100 flex items-center justify-center font-bold text-white transition-opacity text-xs" data-idx="${idx}">
-          Supprimer
-        </button>
+      <div class="col position-relative">
+        <div class="rounded-2 border overflow-hidden position-relative" style="aspect-ratio: 16/10;">
+          <img src="${url}" class="w-100 h-100 object-fit-cover">
+          <button type="button" class="btn btn-danger btn-sm p-1 position-absolute top-0 end-0 m-1 delete-photo-btn" data-idx="${idx}" title="Supprimer">
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
       </div>
     `).join('');
 
-    // Bind delete photo
     grid.querySelectorAll('.delete-photo-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -1249,7 +1260,6 @@ function initCatalogueTabListeners() {
         
         showModal('Modifier le SUV', id);
 
-        // Prepopulate
         document.getElementById('v-marque').value = vehicle.marque;
         document.getElementById('v-modele').value = vehicle.modele;
         document.getElementById('v-annee').value = vehicle.annee;
@@ -1278,7 +1288,6 @@ function initCatalogueTabListeners() {
     });
   });
 
-  // Quick Sold toggle
   document.querySelectorAll('.status-v-btn').forEach(btn => {
     btn.addEventListener('click', async (e) => {
       e.stopPropagation();
@@ -1297,7 +1306,6 @@ function initCatalogueTabListeners() {
     });
   });
 
-  // Delete
   document.querySelectorAll('.delete-v-btn').forEach(btn => {
     btn.addEventListener('click', async (e) => {
       e.stopPropagation();
@@ -1373,11 +1381,11 @@ function generatePDFQuote(offer) {
     <html lang="fr">
     <head>
       <meta charset="UTF-8">
-      <title>Devis Concessionnaire - ${quoteNo}</title>
+      <title>Devis Showroom - ${quoteNo}</title>
       <style>
         body {
-          font-family: 'Plus Jakarta Sans', Arial, sans-serif;
-          color: #1a1a1a;
+          font-family: Arial, sans-serif;
+          color: #0A0A0A;
           margin: 0;
           padding: 40px;
           background: #ffffff;
@@ -1385,34 +1393,34 @@ function generatePDFQuote(offer) {
         .header {
           display: flex;
           justify-content: space-between;
-          border-bottom: 2px solid #92000A;
+          border-bottom: 3px solid #EB0A1E;
           padding-bottom: 20px;
           margin-bottom: 40px;
         }
         .logo {
-          font-family: 'Montserrat', sans-serif;
-          font-size: 24px;
+          font-size: 26px;
           font-weight: 900;
-          color: #1a1a1a;
+          color: #0A0A0A;
+          letter-spacing: 1px;
         }
         .logo span {
-          color: #FFB74D;
+          color: #EB0A1E;
         }
         .company-info, .client-info {
           font-size: 13px;
           line-height: 1.6;
         }
         .client-card {
-          border: 1px solid #e5e5e5;
+          border: 1px solid #E5E7EB;
           padding: 20px;
-          border-radius: 12px;
+          border-radius: 10px;
           margin-bottom: 40px;
-          background: #fcfcfc;
+          background: #F8F9FA;
         }
         .client-card h3 {
           margin-top: 0;
-          color: #92000A;
-          font-size: 14px;
+          color: #EB0A1E;
+          font-size: 13px;
           text-transform: uppercase;
           letter-spacing: 1px;
         }
@@ -1421,11 +1429,10 @@ function generatePDFQuote(offer) {
           font-size: 13px;
         }
         .quote-title {
-          font-size: 28px;
-          font-family: 'Montserrat', sans-serif;
-          font-weight: 800;
+          font-size: 24px;
+          font-weight: 900;
           margin: 0 0 10px 0;
-          color: #120f13;
+          color: #0A0A0A;
         }
         .specs-table {
           width: 100%;
@@ -1433,21 +1440,21 @@ function generatePDFQuote(offer) {
           margin-bottom: 40px;
         }
         .specs-table th {
-          background: #1a1a1a;
+          background: #0A0A0A;
           color: #ffffff;
           font-size: 11px;
           text-transform: uppercase;
           font-weight: bold;
           padding: 12px 16px;
-          border: 1px solid #1a1a1a;
+          border: 1px solid #0A0A0A;
         }
         .specs-table td {
           padding: 14px 16px;
-          border: 1px solid #e5e5e5;
+          border: 1px solid #E5E7EB;
           font-size: 13px;
         }
         .specs-table tr:nth-child(even) {
-          background: #f9f9f9;
+          background: #F8F9FA;
         }
         .total-box {
           text-align: right;
@@ -1455,20 +1462,20 @@ function generatePDFQuote(offer) {
         }
         .total-row {
           display: inline-block;
-          border-top: 1px solid #e5e5e5;
+          border-top: 2px solid #0A0A0A;
           padding-top: 10px;
         }
         .total-val {
-          font-size: 22px;
+          font-size: 24px;
           font-weight: 900;
-          color: #92000A;
+          color: #EB0A1E;
           margin-left: 20px;
         }
         .footer {
-          border-top: 1px solid #e5e5e5;
+          border-top: 1px solid #E5E7EB;
           padding-top: 20px;
           font-size: 11px;
-          color: #777777;
+          color: #6C757D;
           text-align: center;
           margin-top: 80px;
           line-height: 1.6;
@@ -1481,7 +1488,7 @@ function generatePDFQuote(offer) {
         }
         .signature-col {
           width: 200px;
-          border-top: 1px solid #1a1a1a;
+          border-top: 1px solid #0A0A0A;
           text-align: center;
           padding-top: 10px;
           margin-top: 50px;
@@ -1493,7 +1500,7 @@ function generatePDFQuote(offer) {
         <div>
           <div class="logo">VOBO<span>KUN</span></div>
           <div class="company-info" style="margin-top: 10px;">
-            <strong>Vobokun Bénin</strong><br>
+            <strong>Vobokun Atelier Automobiles</strong><br>
             ${siteAddr}<br>
             Tél: ${siteTel}<br>
             contact@vobokun.com
@@ -1560,7 +1567,7 @@ function generatePDFQuote(offer) {
 
       <div class="footer">
         Vobokun - Showroom de prestige. Ce document commercial est valable pour une durée de 15 jours à compter de sa date d'émission.<br>
-        &copy; 2026 Vobokun. Tous droits réservés.
+        &copy; 2026 Vobokun Atelier Automobiles. Tous droits réservés.
       </div>
 
       <script>
@@ -1582,19 +1589,23 @@ function initInboxTabListeners() {
   const openThread = async (contactId) => {
     activeChatContactId = contactId;
     
-    // Highlight active contact thread in DOM
     threads.forEach(btn => {
       const isMatch = btn.getAttribute('data-contact-id') === contactId;
       if (isMatch) {
-        btn.className = "w-full text-left p-4 transition-all flex items-center justify-between gap-3 bg-suv-red/10 border-l-4 border-suv-gold conversation-thread-btn";
-        const badge = btn.querySelector('.bg-suv-gold');
-        if (badge) badge.outerHTML = ''; // Clear unread locally
+        btn.className = "w-100 text-start p-3 border-bottom d-flex align-items-center justify-content-between gap-2 conversation-thread-btn bg-danger-subtle border-start border-4 border-danger";
+        const badge = btn.querySelector('.badge');
+        if (badge) badge.outerHTML = '';
       } else {
-        btn.className = "w-full text-left p-4 transition-all flex items-center justify-between gap-3 hover:bg-white/5 conversation-thread-btn";
+        btn.className = "w-100 text-start p-3 border-bottom d-flex align-items-center justify-content-between gap-2 conversation-thread-btn bg-white";
       }
     });
 
-    chatPane.innerHTML = `<div class="text-center py-12 text-suv-gray my-auto">Chargement des messages...</div>`;
+    chatPane.innerHTML = `
+      <div class="text-center py-5 text-muted my-auto">
+        <div class="spinner-border spinner-border-sm text-danger mb-2" role="status"></div>
+        <p class="small mb-0">Chargement des messages...</p>
+      </div>
+    `;
 
     let contactProfile = { id: contactId, prenom: 'Utilisateur', nom: 'Client' };
     const mockProfiles = mockDb.getCollection(mockDb.KEYS.PROFILES);
@@ -1614,7 +1625,6 @@ function initInboxTabListeners() {
     drawChatConsole(contactProfile);
   };
 
-  // Bind thread buttons click
   threads.forEach(btn => {
     btn.addEventListener('click', () => {
       openThread(btn.getAttribute('data-contact-id'));
@@ -1629,37 +1639,33 @@ function initInboxTabListeners() {
     const time = new Date(lastMsg.created_at).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
     if (threadBtn) {
-      // Update message text
-      const textEl = threadBtn.querySelector('.text-suv-gray.truncate');
+      const textEl = threadBtn.querySelector('.text-muted.text-truncate');
       if (textEl) {
         textEl.textContent = lastMsg.contenu.startsWith('[audio]:') ? '🎤 Note vocale' : lastMsg.contenu;
       }
 
-      // Update time
-      const timeEl = threadBtn.querySelector('.text-right span');
+      const timeEl = threadBtn.querySelector('.text-end span');
       if (timeEl) timeEl.textContent = time;
 
-      // Update unread count if requested
       if (incrementUnread && contactId !== activeChatContactId) {
-        const rightCol = threadBtn.querySelector('.text-right');
+        const rightCol = threadBtn.querySelector('.text-end');
         if (rightCol) {
-          let badge = rightCol.querySelector('.bg-suv-gold');
+          let badge = rightCol.querySelector('.badge');
           if (badge) {
             const currentCount = parseInt(badge.textContent) || 0;
             badge.textContent = (currentCount + 1).toString();
           } else {
             const newBadge = document.createElement('span');
-            newBadge.className = 'bg-suv-gold text-suv-red text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center';
+            newBadge.className = 'badge rounded-pill bg-danger text-white';
+            newBadge.style.fontSize = '0.65rem';
             newBadge.textContent = '1';
             rightCol.appendChild(newBadge);
           }
         }
       }
 
-      // Move thread to top of list
       sidebarList.prepend(threadBtn);
     } else {
-      // Load and add new contact thread dynamically
       const fetchAndPrependThread = async () => {
         let contactProfile = { id: contactId, prenom: 'Utilisateur', nom: 'Client' };
         const mockProfiles = mockDb.getCollection(mockDb.KEYS.PROFILES);
@@ -1676,20 +1682,20 @@ function initInboxTabListeners() {
         }
 
         const isActive = activeChatContactId === contactId;
-        const activeClass = isActive ? 'bg-suv-red/10 border-l-4 border-suv-gold' : 'hover:bg-white/5';
-        const badgeHTML = (incrementUnread && !isActive) ? `<span class="bg-suv-gold text-suv-red text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center">1</span>` : '';
+        const activeClass = isActive ? 'bg-danger-subtle border-start border-4 border-danger' : 'bg-white';
+        const badgeHTML = (incrementUnread && !isActive) ? `<span class="badge rounded-pill bg-danger text-white" style="font-size: 0.65rem;">1</span>` : '';
 
         const btnHTML = `
-          <button class="w-full text-left p-4 transition-all flex items-center justify-between gap-3 ${activeClass} conversation-thread-btn" data-contact-id="${contactId}">
-            <div class="flex items-center gap-3 overflow-hidden">
-              <img src="${contactProfile.avatar_url || 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'}" class="w-10 h-10 rounded-full object-cover border border-white/10 flex-shrink-0">
+          <button class="w-100 text-start p-3 border-bottom d-flex align-items-center justify-content-between gap-2 conversation-thread-btn ${activeClass}" data-contact-id="${contactId}">
+            <div class="d-flex align-items-center gap-2 overflow-hidden">
+              <img src="${contactProfile.avatar_url || 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'}" class="rounded-circle object-fit-cover border flex-shrink-0" style="width: 38px; height: 38px;">
               <div class="overflow-hidden">
-                <p class="text-sm font-bold text-white truncate">${contactProfile.prenom} ${contactProfile.nom}</p>
-                <p class="text-xs text-suv-gray truncate mt-0.5">${lastMsg.contenu.startsWith('[audio]:') ? '🎤 Note vocale' : lastMsg.contenu}</p>
+                <p class="small fw-bold text-dark mb-0 text-truncate">${contactProfile.prenom} ${contactProfile.nom}</p>
+                <p class="small text-muted mb-0 text-truncate" style="font-size: 0.75rem;">${lastMsg.contenu.startsWith('[audio]:') ? '🎤 Note vocale' : lastMsg.contenu}</p>
               </div>
             </div>
-            <div class="text-right flex-shrink-0 flex flex-col items-end gap-1.5">
-              <span class="text-[9px] text-white/30">${time}</span>
+            <div class="text-end flex-shrink-0 d-flex flex-column align-items-end gap-1">
+              <span class="small text-muted font-monospace" style="font-size: 0.65rem;">${time}</span>
               ${badgeHTML}
             </div>
           </button>
@@ -1712,72 +1718,60 @@ function initInboxTabListeners() {
   // Draw chat board wrapper
   const drawChatConsole = async (profile) => {
     chatPane.innerHTML = `
-      <div class="flex flex-col h-full overflow-hidden">
+      <div class="d-flex flex-column h-100 overflow-hidden">
         
-        <!-- header details -->
-        <div class="bg-white/5 border-b border-white/5 px-6 py-4 flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <img src="${profile.avatar_url || 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'}" class="w-10 h-10 rounded-full object-cover border border-white/10">
+        <!-- Header details -->
+        <div class="px-4 py-3 d-flex align-items-center justify-content-between text-white" style="background: var(--toyota-red);">
+          <div class="d-flex align-items-center gap-2">
+            <img src="${profile.avatar_url || 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'}" class="rounded-circle object-fit-cover border border-white" style="width: 36px; height: 36px;">
             <div>
-              <h4 class="font-bold text-white text-sm font-display">${profile.prenom} ${profile.nom}</h4>
-              <p class="text-xxs text-suv-gray">Tel: ${profile.telephone || 'Non spécifié'}</p>
+              <h6 class="fw-black text-white text-uppercase font-display mb-0">${profile.prenom} ${profile.nom}</h6>
+              <span class="text-white-50 small" style="font-size: 0.7rem;">Tél : ${profile.telephone || 'Non spécifié'}</span>
             </div>
           </div>
         </div>
 
         <!-- Chat messages view list -->
-        <div id="admin-chat-messages" class="flex-grow p-6 overflow-y-auto space-y-4 bg-suv-darker flex flex-col">
-          <div class="text-center py-12 text-suv-gray my-auto">Chargement des messages...</div>
+        <div id="admin-chat-messages" class="flex-grow-1 p-3 p-md-4 overflow-y-auto d-flex flex-column gap-2" style="background: #FAFBFD;">
+          <div class="text-center py-5 text-muted small my-auto">Chargement des messages...</div>
         </div>
 
         <!-- Typing Indicator -->
-        <div id="admin-chat-typing-indicator" class="hidden bg-suv-darker px-6 py-2 text-xxs text-white/50 italic flex items-center gap-1.5 border-t border-white/5">
-          <div class="flex gap-0.5 items-center">
-            <span class="w-1.5 h-1.5 bg-suv-gold rounded-full animate-bounce"></span>
-            <span class="w-1.5 h-1.5 bg-suv-gold rounded-full animate-bounce [animation-delay:0.2s]"></span>
-            <span class="w-1.5 h-1.5 bg-suv-gold rounded-full animate-bounce [animation-delay:0.4s]"></span>
-          </div>
+        <div id="admin-chat-typing-indicator" class="d-none bg-light px-3 py-1 small text-muted fst-italic align-items-center gap-2 border-top" style="font-size: 0.75rem;">
+          <div class="spinner-grow spinner-grow-sm text-danger" style="width: 0.65rem; height: 0.65rem;" role="status"></div>
           <span>Le client écrit...</span>
         </div>
 
         <!-- Input Form -->
-        <form id="admin-chat-send-form" class="p-4 bg-suv-slate border-t border-white/5 flex items-center gap-3 relative">
+        <form id="admin-chat-send-form" class="p-2 p-md-3 bg-light border-top d-flex align-items-center gap-2 position-relative">
           <!-- Text Input Container -->
-          <div id="admin-chat-text-container" class="flex-grow flex items-center gap-2">
-            <input type="text" id="admin-chat-input" placeholder="Écrire votre réponse..." class="flex-grow suv-input py-2 px-4 focus:border-suv-gold text-sm" required autocomplete="off">
-            <button type="button" id="admin-chat-mic-btn" class="text-white/60 hover:text-suv-gold p-2 hover:bg-white/5 rounded-lg flex items-center justify-center transition-all duration-200" title="Enregistrer une note vocale">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-              </svg>
+          <div id="admin-chat-text-container" class="flex-grow-1 d-flex align-items-center gap-2">
+            <input type="text" id="admin-chat-input" placeholder="Écrire votre réponse..." class="form-control toyota-input form-control-sm" required autocomplete="off">
+            <button type="button" id="admin-chat-mic-btn" class="btn btn-sm btn-outline-secondary rounded-3" title="Enregistrer une note vocale">
+              <i class="bi bi-mic"></i>
             </button>
           </div>
 
           <!-- Recording State Container -->
-          <div id="admin-chat-recording-container" class="hidden flex-grow flex items-center justify-between bg-black/20 rounded-xl px-4 py-1.5 border border-suv-gold/20 animate-pulse-glow">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 bg-rose-600 rounded-full animate-ping"></span>
-              <span class="text-xs text-rose-500 font-bold font-mono" id="admin-chat-recording-timer">0:00</span>
-              <span class="text-xxs text-white/50">Enregistrement...</span>
+          <div id="admin-chat-recording-container" class="d-none flex-grow-1 d-flex align-items-center justify-content-between bg-danger-subtle rounded-3 px-2 py-1 border border-danger-subtle">
+            <div class="d-flex align-items-center gap-2">
+              <span class="rounded-circle bg-danger d-inline-block animate-pulse" style="width: 8px; height: 8px;"></span>
+              <span class="small text-danger fw-bold font-monospace" id="admin-chat-recording-timer">0:00</span>
+              <span class="small text-secondary" style="font-size: 0.7rem;">Enregistrement...</span>
             </div>
-            <div class="flex items-center gap-1.5">
-              <!-- Cancel Button -->
-              <button type="button" id="admin-chat-cancel-record-btn" class="text-white/40 hover:text-rose-500 p-1.5 hover:bg-white/5 rounded-lg transition-colors" title="Annuler">
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
+            <div class="d-flex align-items-center gap-1">
+              <button type="button" id="admin-chat-cancel-record-btn" class="btn btn-sm btn-link text-muted p-1" title="Annuler">
+                <i class="bi bi-trash3 text-danger"></i>
               </button>
-              <!-- Send/Stop Button -->
-              <button type="button" id="admin-chat-send-record-btn" class="bg-suv-gold hover:bg-suv-yellow text-suv-darker p-1.5 rounded-lg transition-colors flex items-center justify-center" title="Envoyer la note vocale">
-                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                </svg>
+              <button type="button" id="admin-chat-send-record-btn" class="btn btn-sm btn-danger rounded-circle p-1 d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;" title="Envoyer la note vocale">
+                <i class="bi bi-arrow-up text-white"></i>
               </button>
             </div>
           </div>
 
           <!-- Submit Text Button -->
-          <button type="submit" id="admin-chat-submit-btn" class="bg-suv-red hover:bg-suv-purple text-white px-6 py-2.5 rounded-xl font-bold transition-all text-sm flex items-center justify-center gap-1.5 shadow-lg">
-            Répondre
+          <button type="submit" id="admin-chat-submit-btn" class="btn btn-toyota-red btn-sm rounded-3 px-3">
+            <i class="bi bi-send-fill text-white"></i>
           </button>
         </form>
 
@@ -1804,14 +1798,14 @@ function initInboxTabListeners() {
         const { data: messages } = await getMessages(profile.id);
         
         if (messages.length === 0) {
-          msgList.innerHTML = `<div class="text-center py-12 text-suv-gray my-auto">Aucun message échangé.</div>`;
+          msgList.innerHTML = `<div class="text-center py-5 text-muted small my-auto">Aucun message échangé.</div>`;
           return;
         }
 
         const myId = store.getState().user.id;
         msgList.innerHTML = messages.map(msg => {
           const isSelf = msg.sender_id === myId;
-          const align = isSelf ? 'self-end bg-suv-red text-white rounded-br-none' : 'self-start bg-suv-slate text-suv-light rounded-bl-none';
+          const align = isSelf ? 'btn-toyota-red text-white align-self-end rounded-4 rounded-bottom-end-0 shadow-sm' : 'bg-white text-dark border align-self-start rounded-4 rounded-bottom-start-0 shadow-sm';
           const time = new Date(msg.created_at).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
           const isAudio = msg.contenu && msg.contenu.startsWith('[audio]:');
@@ -1820,26 +1814,24 @@ function initInboxTabListeners() {
             : `<span>${msg.contenu}</span>`;
 
           return `
-            <div class="max-w-[75%] p-3.5 rounded-2xl shadow-md ${align} text-sm flex flex-col" data-msg-id="${msg.id || ''}">
+            <div class="p-3 small lh-base ${align} d-flex flex-column" style="max-width: 80%;" data-msg-id="${msg.id || ''}">
               ${contentHtml}
-              <span class="text-[9px] opacity-60 text-suv-light self-end mt-1">${time}</span>
+              <span class="opacity-75 align-self-end mt-1 font-monospace" style="font-size: 0.65rem;">${time}</span>
             </div>
           `;
         }).join('');
 
-        // Initialize voice note players
         msgList.querySelectorAll('.voice-note-player').forEach(playerEl => {
           initAudioPlayer(playerEl);
         });
 
         msgList.scrollTop = msgList.scrollHeight;
-        await updateKPIs(); // Recalculate global unread messages metrics
+        await updateKPIs();
       } catch (err) {
         console.error(err);
       }
     };
 
-    // Keyboard typing indicator broadcast
     let typingTimeout = null;
     let isCurrentlyTyping = false;
 
@@ -1874,10 +1866,10 @@ function initInboxTabListeners() {
             }
           });
 
-          // Switch UI state
-          textContainer.classList.add('hidden');
-          submitBtn.classList.add('hidden');
-          recordingContainer.classList.remove('hidden');
+          textContainer.classList.add('d-none');
+          submitBtn.classList.add('d-none');
+          recordingContainer.classList.remove('d-none');
+          recordingContainer.classList.add('d-flex');
           input.required = false;
 
           broadcastTyping(profile.id, 'recording');
@@ -1889,9 +1881,10 @@ function initInboxTabListeners() {
       });
 
       const stopRecordingAndResetUI = () => {
-        textContainer.classList.remove('hidden');
-        submitBtn.classList.remove('hidden');
-        recordingContainer.classList.add('hidden');
+        textContainer.classList.remove('d-none');
+        submitBtn.classList.remove('d-none');
+        recordingContainer.classList.add('d-none');
+        recordingContainer.classList.remove('d-flex');
         input.required = true;
         if (recordingTimer) recordingTimer.textContent = '0:00';
 
@@ -1919,24 +1912,21 @@ function initInboxTabListeners() {
           return;
         }
 
-        // Send Voice Note optimistically
         const tempId = 'msg-temp-' + Date.now();
-        const align = 'self-end bg-suv-red text-white rounded-br-none opacity-70';
+        const align = 'btn-toyota-red text-white align-self-end rounded-4 rounded-bottom-end-0 opacity-75';
         const time = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
         const localAudioUrl = URL.createObjectURL(audioBlob);
 
         const msgDiv = document.createElement('div');
-        msgDiv.className = `max-w-[75%] p-3.5 rounded-2xl shadow-md ${align} text-sm flex flex-col transition-all duration-300`;
+        msgDiv.className = `p-3 small lh-base ${align} shadow-sm d-flex flex-column`;
+        msgDiv.style.maxWidth = '80%';
         msgDiv.setAttribute('data-msg-id', tempId);
         msgDiv.setAttribute('data-pending', 'true');
         msgDiv.innerHTML = `
           ${renderAudioPlayer(localAudioUrl, tempId)}
-          <span class="text-[9px] opacity-60 text-suv-light self-end mt-1 flex items-center gap-1">
+          <span class="opacity-75 align-self-end mt-1 font-monospace d-flex align-items-center gap-1" style="font-size: 0.65rem;">
             ${time}
-            <svg class="animate-spin h-3 w-3 text-white/50" fill="none" viewBox="0 0 24 24">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
+            <div class="spinner-border spinner-border-sm text-white" style="width: 0.6rem; height: 0.6rem;" role="status"></div>
           </span>
         `;
 
@@ -1965,7 +1955,7 @@ function initInboxTabListeners() {
             if (existingTemp) {
               existingTemp.setAttribute('data-msg-id', sentMsg.id);
               existingTemp.removeAttribute('data-pending');
-              existingTemp.classList.remove('opacity-70');
+              existingTemp.classList.remove('opacity-75');
               
               const player = existingTemp.querySelector('.voice-note-player');
               if (player) {
@@ -1983,24 +1973,22 @@ function initInboxTabListeners() {
           console.error('Failed to send voice note:', err);
           const existingTemp = msgList.querySelector(`[data-msg-id="${tempId}"]`);
           if (existingTemp) {
-            existingTemp.classList.remove('opacity-70');
-            existingTemp.classList.add('border', 'border-rose-500/50', 'bg-rose-950/20');
+            existingTemp.classList.remove('opacity-75');
+            existingTemp.classList.add('border', 'border-danger');
             const timeSpan = existingTemp.querySelector('span:last-child');
             if (timeSpan) {
-              timeSpan.innerHTML = `<span class="text-rose-400 flex items-center gap-1">Échec <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></span>`;
+              timeSpan.innerHTML = `<span class="text-danger small">Échec</span>`;
             }
           }
         }
       });
     }
 
-    // Form Reply Message
     sendForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const text = input.value.trim();
       if (!text) return;
 
-      // Stop typing broadcasting
       clearTimeout(typingTimeout);
       isCurrentlyTyping = false;
       broadcastTyping(profile.id, false);
@@ -2008,23 +1996,20 @@ function initInboxTabListeners() {
       input.value = '';
       input.focus();
 
-      // Generate temp ID and append optimistically
       const tempId = 'msg-temp-' + Date.now();
-      const align = 'self-end bg-suv-red text-white rounded-br-none opacity-70';
+      const align = 'btn-toyota-red text-white align-self-end rounded-4 rounded-bottom-end-0 opacity-75';
       const time = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
       const msgDiv = document.createElement('div');
-      msgDiv.className = `max-w-[75%] p-3.5 rounded-2xl shadow-md ${align} text-sm flex flex-col transition-all duration-300`;
+      msgDiv.className = `p-3 small lh-base ${align} shadow-sm d-flex flex-column`;
+      msgDiv.style.maxWidth = '80%';
       msgDiv.setAttribute('data-msg-id', tempId);
       msgDiv.setAttribute('data-pending', 'true');
       msgDiv.innerHTML = `
         <span>${text}</span>
-        <span class="text-[9px] opacity-60 text-suv-light self-end mt-1 flex items-center gap-1">
+        <span class="opacity-75 align-self-end mt-1 font-monospace d-flex align-items-center gap-1" style="font-size: 0.65rem;">
           ${time}
-          <svg class="animate-spin h-3 w-3 text-white/50" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-          </svg>
+          <div class="spinner-border spinner-border-sm text-white" style="width: 0.6rem; height: 0.6rem;" role="status"></div>
         </span>
       `;
       
@@ -2045,7 +2030,7 @@ function initInboxTabListeners() {
           if (existingTemp) {
             existingTemp.setAttribute('data-msg-id', sentMsg.id);
             existingTemp.removeAttribute('data-pending');
-            existingTemp.classList.remove('opacity-70');
+            existingTemp.classList.remove('opacity-75');
             const timeSpan = existingTemp.querySelector('span:last-child');
             if (timeSpan) {
               timeSpan.innerHTML = new Date(sentMsg.created_at).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
@@ -2057,20 +2042,18 @@ function initInboxTabListeners() {
         console.error('Failed to send admin reply', err);
         const existingTemp = msgList.querySelector(`[data-msg-id="${tempId}"]`);
         if (existingTemp) {
-          existingTemp.classList.remove('opacity-70');
-          existingTemp.classList.add('border', 'border-rose-500/50', 'bg-rose-950/20');
+          existingTemp.classList.remove('opacity-75');
+          existingTemp.classList.add('border', 'border-danger');
           const timeSpan = existingTemp.querySelector('span:last-child');
           if (timeSpan) {
-            timeSpan.innerHTML = `<span class="text-rose-400 flex items-center gap-1">Échec <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667(1.732)-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></span>`;
+            timeSpan.innerHTML = `<span class="text-danger small">Échec</span>`;
           }
         }
       }
     });
 
-    // Initial load
     await loadInboxMessages();
 
-    // Bind real-time listener for replies
     if (activeChatListenerUnsub) {
       activeChatListenerUnsub();
     }
@@ -2085,7 +2068,6 @@ function initInboxTabListeners() {
           const isSelf = newMsg.sender_id === myId;
           
           if (isSelf) {
-            // Find a pending element with the same text/audio
             const pendingEl = Array.from(msgList.querySelectorAll('[data-pending="true"]')).find(el => {
               const isAudio = newMsg.contenu.startsWith('[audio]:');
               if (isAudio) {
@@ -2100,7 +2082,7 @@ function initInboxTabListeners() {
             if (pendingEl) {
               pendingEl.setAttribute('data-msg-id', newMsg.id);
               pendingEl.removeAttribute('data-pending');
-              pendingEl.classList.remove('opacity-70');
+              pendingEl.classList.remove('opacity-75');
               const timeSpan = pendingEl.querySelector('span:last-child');
               if (timeSpan) {
                 const time = new Date(newMsg.created_at).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
@@ -2110,11 +2092,12 @@ function initInboxTabListeners() {
             }
           }
 
-          const align = isSelf ? 'self-end bg-suv-red text-white rounded-br-none' : 'self-start bg-suv-slate text-suv-light rounded-bl-none';
+          const align = isSelf ? 'btn-toyota-red text-white align-self-end rounded-4 rounded-bottom-end-0 shadow-sm' : 'bg-white text-dark border align-self-start rounded-4 rounded-bottom-start-0 shadow-sm';
           const time = new Date(newMsg.created_at).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
           const msgDiv = document.createElement('div');
-          msgDiv.className = `max-w-[75%] p-3.5 rounded-2xl shadow-md ${align} text-sm flex flex-col`;
+          msgDiv.className = `p-3 small lh-base ${align} d-flex flex-column`;
+          msgDiv.style.maxWidth = '80%';
           msgDiv.setAttribute('data-msg-id', newMsg.id || '');
           
           const isAudio = newMsg.contenu && newMsg.contenu.startsWith('[audio]:');
@@ -2124,7 +2107,7 @@ function initInboxTabListeners() {
 
           msgDiv.innerHTML = `
             ${contentHtml}
-            <span class="text-[9px] opacity-60 text-suv-light self-end mt-1">${time}</span>
+            <span class="opacity-75 align-self-end mt-1 font-monospace" style="font-size: 0.65rem;">${time}</span>
           `;
           
           const placeholder = msgList.querySelector('.my-auto');
@@ -2142,19 +2125,16 @@ function initInboxTabListeners() {
             }
           }
 
-          // If received, mark as read in database
           if (newMsg.receiver_id === myId && !newMsg.lu) {
-            await getMessages(profile.id); // marks as read
+            await getMessages(profile.id);
           }
         }
       }
       
-      // Update conversations sidebar thread list
       const contactId = newMsg.sender_id === myId ? newMsg.receiver_id : newMsg.sender_id;
       updateSidebarThread(contactId, newMsg, true);
     });
 
-    // Subscribe to typing indicator
     let activeTypingListenerUnsub = null;
     activeTypingListenerUnsub = subscribeToTyping(profile.id, (payload) => {
       if (payload.sender_id === profile.id) {
@@ -2166,18 +2146,19 @@ function initInboxTabListeners() {
                 ? 'Le client enregistre un audio...'
                 : 'Le client écrit...';
             }
-            typingIndicator.classList.remove('hidden');
+            typingIndicator.classList.remove('d-none');
+            typingIndicator.classList.add('d-flex');
             msgList.scrollTop = msgList.scrollHeight;
           }
         } else {
           if (typingIndicator) {
-            typingIndicator.classList.add('hidden');
+            typingIndicator.classList.add('d-none');
+            typingIndicator.classList.remove('d-flex');
           }
         }
       }
     });
 
-    // Cleanup typing sub when switching chats
     const originalUnsub = activeChatListenerUnsub;
     activeChatListenerUnsub = () => {
       if (originalUnsub) originalUnsub();
@@ -2185,7 +2166,6 @@ function initInboxTabListeners() {
     };
   };
 
-  // If a chat was previously selected, restore it on tab load
   if (activeChatContactId) {
     openThread(activeChatContactId);
   }

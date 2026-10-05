@@ -6,93 +6,93 @@ let currentTab = 'login';
 
 export function render() {
   return `
-    <div class="flex items-center justify-center min-h-[75vh] animate-fade-in py-12 px-4">
-      <div class="glass-panel border border-white/10 rounded-3xl w-full max-w-md overflow-hidden shadow-2xl p-8 sm:p-10 space-y-7 relative text-left">
-        
-        <!-- Ambient Champagne Backdrop -->
-        <div class="absolute -right-20 -top-20 w-48 h-48 rounded-full bg-suv-gold/10 blur-[50px] pointer-events-none"></div>
-        <div class="absolute -left-20 -bottom-20 w-48 h-48 rounded-full bg-sky-500/5 blur-[50px] pointer-events-none"></div>
+    <div class="container py-5 my-4 d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+      <div class="toyota-panel rounded-4 shadow-lg p-4 p-sm-5 w-100 position-relative text-start" style="max-width: 480px;">
         
         <!-- Header Brand Monogram -->
-        <div class="text-center space-y-2 relative z-10">
-          <div class="w-14 h-14 rounded-2xl bg-gradient-premium-gold flex items-center justify-center font-black text-black text-2xl shadow-xl shadow-suv-gold/25 mx-auto">V</div>
-          <h2 class="text-2xl font-black font-display tracking-tight text-white mt-3 uppercase">Espace Membre Vobokun</h2>
-          <p class="text-xs text-suv-gray">Accédez à votre compte ou découvrez nos services en direct</p>
+        <div class="text-center mb-4">
+          <div class="rounded-3 d-inline-flex align-items-center justify-content-center text-white fw-black fs-3 shadow-sm mb-2" style="width: 54px; height: 54px; background: var(--toyota-red);">V</div>
+          <h3 class="fw-black font-display tracking-tight text-dark text-uppercase mb-1">Espace Membre Vobokun</h3>
+          <p class="small text-muted mb-0">Accédez à votre compte VIP ou à la console showroom</p>
         </div>
 
         <!-- 1-Click Demo Profiles Ribbon -->
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-3.5 space-y-2 relative z-10">
-          <div class="text-[9px] font-black uppercase tracking-widest text-suv-gold text-center">Connexion Express Démo</div>
-          <div class="grid grid-cols-2 gap-2">
-            <button type="button" id="demo-user-btn" class="py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-[11px] font-bold transition-all text-center">
-              Compte Client VIP
-            </button>
-            <button type="button" id="demo-admin-btn" class="py-2 px-3 rounded-xl bg-suv-gold/15 hover:bg-suv-gold/25 border border-suv-gold/30 text-suv-gold text-[11px] font-bold transition-all text-center">
-              Console Concessionnaire
-            </button>
+        <div class="p-3 rounded-3 mb-4 border" style="background: #F4F5F8;">
+          <div class="text-uppercase fw-bold text-danger text-center mb-2" style="font-size: 0.7rem; letter-spacing: 0.05em;">Connexion Express Démo</div>
+          <div class="row g-2">
+            <div class="col-6">
+              <button type="button" id="demo-user-btn" class="btn btn-toyota-outline btn-sm w-100 py-2 fw-bold" style="font-size: 0.75rem;">
+                Compte Client VIP
+              </button>
+            </div>
+            <div class="col-6">
+              <button type="button" id="demo-admin-btn" class="btn btn-toyota-red btn-sm w-100 py-2 fw-bold" style="font-size: 0.75rem;">
+                Console Showroom
+              </button>
+            </div>
           </div>
         </div>
 
         <!-- Tab Switcher -->
-        <div class="flex border-b border-white/10 relative z-10">
-          <button id="tab-login-btn" class="flex-1 pb-3 text-xs font-black uppercase tracking-wider transition-all border-b-2 ${currentTab === 'login' ? 'border-suv-gold text-suv-gold' : 'border-transparent text-white/40 hover:text-white'}">
+        <div class="d-flex border-bottom mb-4">
+          <button id="tab-login-btn" class="btn btn-link text-decoration-none flex-grow-1 pb-2 fw-black text-uppercase border-bottom border-3 ${currentTab === 'login' ? 'border-danger text-danger' : 'border-transparent text-secondary'}" style="font-size: 0.8rem; border-radius: 0;">
             Connexion
           </button>
-          <button id="tab-register-btn" class="flex-1 pb-3 text-xs font-black uppercase tracking-wider transition-all border-b-2 ${currentTab === 'register' ? 'border-suv-gold text-suv-gold' : 'border-transparent text-white/40 hover:text-white'}">
+          <button id="tab-register-btn" class="btn btn-link text-decoration-none flex-grow-1 pb-2 fw-black text-uppercase border-bottom border-3 ${currentTab === 'register' ? 'border-danger text-danger' : 'border-transparent text-secondary'}" style="font-size: 0.8rem; border-radius: 0;">
             Créer un compte
           </button>
         </div>
 
         <!-- Error Alert -->
-        <div id="auth-error-alert" class="bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs px-4 py-3 rounded-xl font-semibold hidden leading-relaxed">
+        <div id="auth-error-alert" class="alert alert-danger py-2 px-3 small rounded-3 d-none mb-3 fw-semibold">
         </div>
 
         <!-- LOGIN FORM -->
-        <form id="login-form" class="space-y-4 relative z-10 ${currentTab === 'login' ? '' : 'hidden'}">
-          <div class="space-y-1.5">
-            <label class="text-[10px] font-black uppercase tracking-widest text-suv-gold">Adresse Email</label>
-            <input type="email" id="login-email" placeholder="jean@vobokun.com" class="w-full suv-input text-xs font-semibold" required>
+        <form id="login-form" class="${currentTab === 'login' ? '' : 'd-none'}">
+          <div class="mb-3">
+            <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Adresse Email</label>
+            <input type="email" id="login-email" placeholder="jean@vobokun.com" class="form-control toyota-input" required>
           </div>
 
-          <div class="space-y-1.5">
-            <label class="text-[10px] font-black uppercase tracking-widest text-suv-gold">Mot de passe</label>
-            <input type="password" id="login-password" placeholder="••••••••" class="w-full suv-input text-xs font-semibold" required>
+          <div class="mb-3">
+            <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Mot de passe</label>
+            <input type="password" id="login-password" placeholder="••••••••" class="form-control toyota-input" required>
           </div>
 
-          <button type="submit" class="w-full btn-premium-gold py-4 rounded-xl font-black text-xs uppercase tracking-wider transition-all duration-300 shadow-lg mt-2">
+          <button type="submit" class="btn btn-toyota-red w-100 py-3 fw-black text-uppercase shadow-sm mt-3" style="font-size: 0.85rem;">
             Se Connecter
           </button>
         </form>
 
         <!-- REGISTER FORM -->
-        <form id="register-form" class="space-y-3.5 relative z-10 ${currentTab === 'register' ? '' : 'hidden'}">
-          <div class="grid grid-cols-2 gap-3">
-            <div class="space-y-1.5">
-              <label class="text-[10px] font-black uppercase tracking-widest text-suv-gold">Prénom</label>
-              <input type="text" id="reg-prenom" placeholder="Jean" class="w-full suv-input text-xs font-semibold" required>
+        <form id="register-form" class="${currentTab === 'register' ? '' : 'd-none'}">
+          <div class="row g-2 mb-3">
+            <div class="col-6">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Prénom</label>
+              <input type="text" id="reg-prenom" placeholder="Jean" class="form-control toyota-input" required>
             </div>
-            <div class="space-y-1.5">
-              <label class="text-[10px] font-black uppercase tracking-widest text-suv-gold">Nom</label>
-              <input type="text" id="reg-nom" placeholder="Dossou" class="w-full suv-input text-xs font-semibold" required>
+            <div class="col-6">
+              <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Nom</label>
+              <input type="text" id="reg-nom" placeholder="Dossou" class="form-control toyota-input" required>
             </div>
           </div>
 
-          <div class="space-y-1.5">
-            <label class="text-[10px] font-black uppercase tracking-widest text-suv-gold">Téléphone WhatsApp</label>
-            <input type="tel" id="reg-telephone" placeholder="+229 01 00 00 00 00" class="w-full suv-input text-xs font-semibold" required>
+          <div class="mb-3">
+            <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Téléphone WhatsApp</label>
+            <input type="tel" id="reg-telephone" placeholder="+229 01 00 00 00 00" class="form-control toyota-input" required>
           </div>
 
-          <div class="space-y-1.5">
-            <label class="text-[10px] font-black uppercase tracking-widest text-suv-gold">Adresse Email</label>
-            <input type="email" id="reg-email" placeholder="nom@exemple.com" class="w-full suv-input text-xs font-semibold" required>
+          <div class="mb-3">
+            <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Adresse Email</label>
+            <input type="email" id="reg-email" placeholder="nom@exemple.com" class="form-control toyota-input" required>
           </div>
 
-          <div class="space-y-1.5">
-            <label class="text-[10px] font-black uppercase tracking-widest text-suv-gold">Mot de passe</label>
-            <input type="password" id="reg-password" placeholder="••••••••" class="w-full suv-input text-xs font-semibold" required minlength="6">
+          <div class="mb-3">
+            <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Mot de passe</label>
+            <input type="password" id="reg-password" placeholder="••••••••" class="form-control toyota-input" required minlength="6">
           </div>
 
-          <button type="submit" class="w-full btn-premium-gold py-4 rounded-xl font-black text-xs uppercase tracking-wider transition-all duration-300 shadow-lg mt-2">
+          <button type="submit" class="btn btn-toyota-red w-100 py-3 fw-black text-uppercase shadow-sm mt-3" style="font-size: 0.85rem;">
             Créer Mon Compte VIP
           </button>
         </form>
@@ -115,19 +115,19 @@ export function init() {
     currentTab = tab;
     
     if (tab === 'login') {
-      tabLoginBtn.className = "flex-1 pb-3 text-xs font-black uppercase tracking-wider transition-all border-b-2 border-suv-gold text-suv-gold";
-      tabRegisterBtn.className = "flex-1 pb-3 text-xs font-black uppercase tracking-wider transition-all border-b-2 border-transparent text-white/40 hover:text-white";
-      loginForm.classList.remove('hidden');
-      registerForm.classList.add('hidden');
+      tabLoginBtn.className = "btn btn-link text-decoration-none flex-grow-1 pb-2 fw-black text-uppercase border-bottom border-3 border-danger text-danger";
+      tabRegisterBtn.className = "btn btn-link text-decoration-none flex-grow-1 pb-2 fw-black text-uppercase border-bottom border-3 border-transparent text-secondary";
+      loginForm.classList.remove('d-none');
+      registerForm.classList.add('d-none');
     } else {
-      tabRegisterBtn.className = "flex-1 pb-3 text-xs font-black uppercase tracking-wider transition-all border-b-2 border-suv-gold text-suv-gold";
-      tabLoginBtn.className = "flex-1 pb-3 text-xs font-black uppercase tracking-wider transition-all border-b-2 border-transparent text-white/40 hover:text-white";
-      registerForm.classList.remove('hidden');
-      loginForm.classList.add('hidden');
+      tabRegisterBtn.className = "btn btn-link text-decoration-none flex-grow-1 pb-2 fw-black text-uppercase border-bottom border-3 border-danger text-danger";
+      tabLoginBtn.className = "btn btn-link text-decoration-none flex-grow-1 pb-2 fw-black text-uppercase border-bottom border-3 border-transparent text-secondary";
+      registerForm.classList.remove('d-none');
+      loginForm.classList.add('d-none');
     }
     
     if (errorAlert) {
-      errorAlert.classList.add('hidden');
+      errorAlert.classList.add('d-none');
       errorAlert.textContent = '';
     }
   };
@@ -138,7 +138,7 @@ export function init() {
   const showError = (message) => {
     if (errorAlert) {
       errorAlert.textContent = message;
-      errorAlert.classList.remove('hidden');
+      errorAlert.classList.remove('d-none');
     }
   };
 

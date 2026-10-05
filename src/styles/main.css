@@ -1,297 +1,404 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ==========================================================================
+   VOBOKUN 2026 - TOYOTA-INSPIRED CORPORATE DESIGN SYSTEM
+   3 Iconic Colors:
+   1. Toyota Crimson Red   : #EB0A1E
+   2. Toyota Midnight Black: #0A0A0A
+   3. Toyota Pure White    : #FFFFFF (with Metallic Slate #F4F5F8)
+   ========================================================================== */
 
 :root {
-  /* Atelier Obsidian & Champagne Gold Theme (Dark Mode) */
-  --color-suv-dark: #0E1218;
-  --color-suv-darker: #080A0E;
-  --color-suv-slate: #161D27;
-  --color-suv-gray: #8A94A6;
-  --color-suv-light: #F8FAFC;
-  --color-text: #FFFFFF;
-  --color-text-muted: rgba(255, 255, 255, 0.7);
-  --color-border: rgba(255, 255, 255, 0.08);
+  /* Toyota 3-Color Palette */
+  --toyota-red: #EB0A1E;
+  --toyota-red-hover: #CC0000;
+  --toyota-red-dark: #B80817;
+  --toyota-red-soft: rgba(235, 10, 30, 0.08);
+  --toyota-red-glow: rgba(235, 10, 30, 0.25);
   
-  /* Brand color accents */
-  --color-suv-gold: #F59E0B;
-  --color-suv-gold-light: #FCD34D;
-  --color-suv-amber: #D97706;
-  --color-suv-yellow: #FDE047;
-  --color-suv-red: #E11D48;
-  --color-suv-purple: #1E293B;
-  --color-suv-cyan: #0284C7;
-  --color-suv-emerald: #10B981;
+  --toyota-black: #0A0A0A;
+  --toyota-midnight: #111215;
+  --toyota-charcoal: #1C1E23;
+  --toyota-dark-card: #18191E;
+
+  --toyota-white: #FFFFFF;
+  --toyota-silver: #F4F5F8;
+  --toyota-silver-dark: #E9EBEF;
+  --toyota-border: #E2E5EA;
+  --toyota-border-dark: #2B2D33;
+
+  --toyota-text: #0A0A0A;
+  --toyota-text-muted: #5A606B;
+  --toyota-text-subtle: #8A92A0;
+
+  /* Fonts */
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Montserrat', sans-serif;
 }
 
-html.light {
-  /* Atelier Alabaster & Amber Theme (Light Mode) */
-  --color-suv-dark: #FFFFFF;
-  --color-suv-darker: #F8FAFC;
-  --color-suv-slate: #F1F5F9;
-  --color-suv-gray: #64748B;
-  --color-suv-light: #0F172A;
-  --color-text: #0F172A;
-  --color-text-muted: #475569;
-  --color-border: #E2E8F0;
-  
-  --color-suv-gold: #D97706;
-  --color-suv-gold-light: #F59E0B;
-  --color-suv-amber: #B45309;
-  --color-suv-yellow: #D97706;
-  --color-suv-red: #E11D48;
-  --color-suv-purple: #E2E8F0;
-  --color-suv-cyan: #0284C7;
-  --color-suv-emerald: #059669;
+/* Base Body Setup */
+body.toyota-corporate-body {
+  font-family: var(--font-main);
+  background-color: var(--toyota-silver);
+  color: var(--toyota-text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@layer base {
-  body {
-    background-color: var(--color-suv-darker);
-    color: var(--color-text);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    transition: background-color 0.25s ease, color 0.25s ease;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
-    letter-spacing: -0.025em;
-    font-weight: 800;
-  }
-}
-
-/* --- LUXURY GLASSMORPHISM SYSTEM --- */
-.glass-panel {
-  background: rgba(14, 18, 24, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.7),
-              inset 0 1px 1px rgba(255, 255, 255, 0.06);
-}
-
-.glass-card {
-  background: rgba(18, 24, 33, 0.55);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5),
-              inset 0 1px 0px rgba(255, 255, 255, 0.04);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glass-card:hover {
-  background: rgba(24, 32, 44, 0.8);
-  border-color: rgba(245, 158, 11, 0.35); /* Warm Champagne Gold edge */
-  transform: translateY(-5px);
-  box-shadow: 0 24px 45px -12px rgba(0, 0, 0, 0.75),
-              0 0 20px 2px rgba(245, 158, 11, 0.08),
-              inset 0 1px 1px rgba(255, 255, 255, 0.1);
-}
-
-/* --- BUTTONS SYSTEM --- */
-.btn-premium-gold {
-  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-  color: #080A0E;
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-display);
   font-weight: 800;
-  border: 1px solid rgba(254, 243, 199, 0.3);
-  box-shadow: 0 8px 24px -6px rgba(245, 158, 11, 0.45);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: -0.02em;
 }
-.btn-premium-gold:hover {
-  background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
-  box-shadow: 0 12px 32px -4px rgba(245, 158, 11, 0.65),
-              0 0 16px 2px rgba(251, 191, 36, 0.25);
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ==========================================================================
+   1. CORPORATE BUTTONS SYSTEM
+   ========================================================================== */
+.btn-toyota-red {
+  background-color: var(--toyota-red);
+  color: #FFFFFF !important;
+  font-weight: 800;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.75rem 1.6rem;
+  border-radius: 10px;
+  border: 1px solid var(--toyota-red);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 14px var(--toyota-red-glow);
+}
+.btn-toyota-red:hover,
+.btn-toyota-red:focus {
+  background-color: var(--toyota-red-hover);
+  border-color: var(--toyota-red-hover);
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(235, 10, 30, 0.35);
+}
+
+.btn-toyota-dark {
+  background-color: var(--toyota-black);
+  color: #FFFFFF !important;
+  font-weight: 800;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.75rem 1.6rem;
+  border-radius: 10px;
+  border: 1px solid var(--toyota-black);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.btn-toyota-dark:hover {
+  background-color: var(--toyota-charcoal);
+  border-color: var(--toyota-charcoal);
+  color: #FFFFFF !important;
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.btn-toyota-outline {
+  background-color: transparent;
+  color: var(--toyota-black) !important;
+  font-weight: 800;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.75rem 1.4rem;
+  border-radius: 10px;
+  border: 1.5px solid var(--toyota-border);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.btn-toyota-outline:hover {
+  border-color: var(--toyota-red);
+  color: var(--toyota-red) !important;
+  background-color: var(--toyota-red-soft);
   transform: translateY(-1.5px);
 }
 
-.btn-premium-dark {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #FFFFFF;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.btn-premium-dark:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(245, 158, 11, 0.5);
-  color: #F59E0B;
-  transform: translateY(-1px);
-}
-
-.btn-premium-red {
-  background: linear-gradient(135deg, #E11D48 0%, #BE123C 100%);
-  color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 20px -6px rgba(225, 29, 72, 0.4);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.btn-premium-red:hover {
-  background: linear-gradient(135deg, #F43F5E 0%, #E11D48 100%);
-  box-shadow: 0 12px 28px -4px rgba(225, 29, 72, 0.6);
-  transform: translateY(-1.5px);
-}
-
-.btn-premium-glass {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #FFFFFF;
-  backdrop-filter: blur(12px);
+.btn-toyota-outline-white {
+  background-color: transparent;
+  color: #FFFFFF !important;
+  font-weight: 800;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.75rem 1.6rem;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
   transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
-.btn-premium-glass:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.25);
-}
-
-/* --- GRADIENTS & TEXT CLIPPING --- */
-.bg-gradient-premium-gold {
-  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-}
-
-.bg-gradient-premium-dark {
-  background: linear-gradient(135deg, #161D27 0%, #0B0E14 100%);
+.btn-toyota-outline-white:hover {
+  background-color: #FFFFFF;
+  color: var(--toyota-black) !important;
+  border-color: #FFFFFF;
 }
 
-.bg-gradient-premium-red {
-  background: linear-gradient(135deg, #E11D48 0%, #9F1239 100%);
+/* ==========================================================================
+   2. CORPORATE CARDS & CONTAINERS
+   ========================================================================== */
+.toyota-card {
+  background-color: var(--toyota-white);
+  border: 1px solid var(--toyota-border);
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.toyota-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(235, 10, 30, 0.4);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
 }
 
-.text-gradient-gold {
-  background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #D97706 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-title {
-  background: linear-gradient(135deg, #FFFFFF 45%, #FCD34D 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-glow-gold {
-  text-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
-}
-
-/* --- INPUT BOXES OVERRIDE --- */
-.suv-input {
-  background: rgba(14, 18, 24, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 14px;
-  padding: 0.85rem 1.15rem;
+.toyota-card-dark {
+  background-color: var(--toyota-midnight);
   color: #FFFFFF;
-  transition: all 0.25s ease;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
-}
-.suv-input:focus {
-  outline: none;
-  border-color: rgba(245, 158, 11, 0.6);
-  background: rgba(20, 26, 36, 0.85);
-  box-shadow: 0 0 16px rgba(245, 158, 11, 0.12),
-              inset 0 2px 4px rgba(0, 0, 0, 0.25);
-}
-.suv-input::placeholder {
-  color: rgba(255, 255, 255, 0.35);
+  border: 1px solid var(--toyota-border-dark);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* --- RANGE SLIDER STYLING --- */
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 9999px;
-  height: 6px;
-}
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #F59E0B;
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.7);
-  cursor: pointer;
-  transition: transform 0.15s, background-color 0.2s;
-}
-input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-  background: #FBBF24;
+.toyota-panel {
+  background-color: var(--toyota-white);
+  border: 1px solid var(--toyota-border);
+  border-radius: 20px;
+  padding: 1.75rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
 }
 
-/* --- SPEC GRID ITEMS --- */
-.spec-grid-item {
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  padding: 1.1rem;
+/* ==========================================================================
+   3. CORPORATE BADGES & PILLS
+   ========================================================================== */
+.badge-toyota-red {
+  background-color: var(--toyota-red);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.badge-toyota-dark {
+  background-color: var(--toyota-black);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.badge-toyota-silver {
+  background-color: var(--toyota-silver);
+  color: var(--toyota-black);
+  border: 1px solid var(--toyota-border);
+  font-weight: 800;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+}
+
+/* ==========================================================================
+   4. CORPORATE INPUTS & SELECTS
+   ========================================================================== */
+.toyota-input,
+.form-control.toyota-input,
+.form-select.toyota-input {
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--toyota-border);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--toyota-black);
   transition: all 0.2s ease;
 }
-.spec-grid-item:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(245, 158, 11, 0.2);
+.toyota-input:focus,
+.form-control.toyota-input:focus,
+.form-select.toyota-input:focus {
+  border-color: var(--toyota-red);
+  box-shadow: 0 0 0 3px var(--toyota-red-soft);
+  outline: none;
 }
 
-/* --- BRAND CARD HOVER STATE --- */
-.brand-card {
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 16px;
+/* Custom range slider with Toyota Red */
+input[type="range"].toyota-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: var(--toyota-border);
+  border-radius: 999px;
+  outline: none;
+}
+input[type="range"].toyota-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--toyota-red);
+  cursor: pointer;
+  border: 3px solid #FFFFFF;
+  box-shadow: 0 2px 8px rgba(235, 10, 30, 0.4);
+  transition: transform 0.15s ease;
+}
+input[type="range"].toyota-range::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* ==========================================================================
+   5. SPECIFICATIONS & METRICS GRID
+   ========================================================================== */
+.toyota-spec-box {
+  background-color: var(--toyota-silver);
+  border: 1px solid var(--toyota-border);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  transition: border-color 0.2s ease;
+}
+.toyota-spec-box:hover {
+  border-color: var(--toyota-red);
+}
+.toyota-spec-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--toyota-text-muted);
+  letter-spacing: 0.06em;
+  display: block;
+}
+.toyota-spec-value {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--toyota-black);
+  margin-top: 0.2rem;
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   6. NAVBAR & BRANDING
+   ========================================================================== */
+.toyota-navbar {
+  background-color: #FFFFFF;
+  border-bottom: 1.5px solid var(--toyota-border);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.04);
+  padding: 0.85rem 0;
   transition: all 0.3s ease;
 }
-.brand-card:hover {
-  background: rgba(245, 158, 11, 0.08);
-  border-color: rgba(245, 158, 11, 0.35);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 25px -8px rgba(0, 0, 0, 0.5);
+.toyota-nav-link {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--toyota-black);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.toyota-nav-link:hover {
+  color: var(--toyota-red);
+  background-color: var(--toyota-red-soft);
+}
+.toyota-nav-link.active {
+  color: var(--toyota-red);
+  background-color: var(--toyota-red-soft);
 }
 
-/* --- FAST CRISP ANIMATIONS --- */
-@keyframes fadeInFast {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+.brand-emblem {
+  width: 42px;
+  height: 42px;
+  background-color: var(--toyota-black);
+  color: #FFFFFF;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.3rem;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-.animate-fade-in {
-  animation: fadeInFast 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes slideUpFast {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-slide-up {
-  animation: slideUpFast 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes pulseGold {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.25); }
-  50% { box-shadow: 0 0 16px 4px rgba(245, 158, 11, 0.4); }
-}
-.animate-pulse-glow {
-  animation: pulseGold 2.5s infinite;
-}
-
-/* Float Animation */
-@keyframes floatGentle {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-}
-.animate-float-slow {
-  animation: floatGentle 5s ease-in-out infinite;
+.brand-emblem::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background-color: var(--toyota-red);
+  border-radius: 3px 0 10px 0;
 }
 
-/* --- COMPARISON FLOATING BAR --- */
+/* ==========================================================================
+   7. FOOTER STYLING
+   ========================================================================== */
+.toyota-footer {
+  background-color: var(--toyota-black);
+  color: #FFFFFF;
+  padding: 4.5rem 0 2.5rem 0;
+  border-top: 4px solid var(--toyota-red);
+}
+.toyota-footer a {
+  color: #A0A5B0;
+  transition: color 0.2s ease;
+  font-size: 0.82rem;
+}
+.toyota-footer a:hover {
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   8. COMPARISON FLOATING BAR & MODAL
+   ========================================================================== */
 .comparison-floating-bar {
   position: fixed;
   bottom: 24px;
   left: 50%;
   transform: translateX(-50%) translateY(140%);
-  background: rgba(14, 18, 24, 0.92);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(245, 158, 11, 0.3);
-  border-radius: 24px;
+  background-color: var(--toyota-black);
+  color: #FFFFFF;
+  border: 1.5px solid var(--toyota-border-dark);
+  border-radius: 20px;
   padding: 12px 24px;
-  box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.85),
-              0 0 25px 2px rgba(245, 158, 11, 0.1);
-  z-index: 40;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  z-index: 1040;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -301,403 +408,76 @@ input[type="range"]::-webkit-slider-thumb:hover {
   transform: translateX(-50%) translateY(0);
 }
 
-/* --- CUSTOM SCROLLBARS --- */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* ==========================================================================
+   9. GLOBAL CHAT & VOICE NOTE WIDGET
+   ========================================================================== */
+#floating-chat-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1050;
 }
-::-webkit-scrollbar-track {
-  background: var(--color-suv-darker);
+#chat-toggle-bubble {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background-color: var(--toyota-red);
+  color: #FFFFFF;
+  border: none;
+  box-shadow: 0 10px 25px var(--toyota-red-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  transition: all 0.25s ease;
+  position: relative;
 }
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 9999px;
+#chat-toggle-bubble:hover {
+  background-color: var(--toyota-red-hover);
+  transform: scale(1.08);
 }
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(245, 158, 11, 0.4);
-}
-
-/* --- LIGHT MODE REFINEMENTS & COMPREHENSIVE CONTRAST ENGINE --- */
-html.light body {
-  background-color: #F8FAFC !important;
-  color: #0F172A !important;
-}
-
-/* 1. Global Headings and Title Typography in Light Mode */
-html.light h1,
-html.light h2,
-html.light h3,
-html.light h4,
-html.light h5,
-html.light h6 {
-  color: #0F172A !important;
-}
-
-/* Text Gradients in Light Mode */
-html.light .text-gradient-title {
-  background: linear-gradient(135deg, #0F172A 35%, #D97706 100%) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-}
-
-html.light .text-gradient-gold {
-  background: linear-gradient(135deg, #B45309 0%, #D97706 50%, #92400E 100%) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
+#chat-box-panel {
+  width: 360px;
+  height: 500px;
+  border-radius: 20px;
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--toyota-border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-bottom: 12px;
 }
 
-/* 2. Glass Surfaces in Light Mode */
-html.light .glass-panel {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border-color: #E2E8F0 !important;
-  box-shadow: 0 20px 45px -15px rgba(15, 23, 42, 0.07),
-              inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+.voice-note-player {
+  background-color: var(--toyota-silver);
+  border: 1px solid var(--toyota-border);
+  border-radius: 12px;
+  padding: 0.5rem 0.75rem;
+}
+.voice-play-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--toyota-red);
+  color: #FFFFFF;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.voice-play-btn:hover {
+  background-color: var(--toyota-red-hover);
+  transform: scale(1.08);
 }
 
-html.light .glass-card {
-  background: #FFFFFF !important;
-  border-color: #E2E8F0 !important;
-  box-shadow: 0 10px 25px -10px rgba(15, 23, 42, 0.05),
-              inset 0 1px 0px rgba(255, 255, 255, 0.8) !important;
+/* Animations */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
 }
-
-html.light .glass-card:hover {
-  background: #FFFFFF !important;
-  border-color: #D97706 !important;
-  box-shadow: 0 20px 40px -12px rgba(217, 119, 6, 0.15),
-              inset 0 1px 1px rgba(255, 255, 255, 1) !important;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-/* 3. Text Classes High-Contrast Hierarchy in Light Mode */
-/* Deep charcoal for primary text */
-html.light .text-white,
-html.light .text-white\/95,
-html.light .text-white\/90,
-html.light .text-white\/85,
-html.light .text-white\/80,
-html.light .text-white\/75 {
-  color: #0F172A !important;
-}
-
-/* Crisp slate for secondary / descriptions */
-html.light .text-white\/70,
-html.light .text-white\/65,
-html.light .text-white\/60,
-html.light .text-white\/50 {
-  color: #334155 !important;
-}
-
-/* Slate-500 for tertiary / metadata / labels (WCAG AA compliant contrast) */
-html.light .text-white\/40,
-html.light .text-white\/30,
-html.light .text-white\/20,
-html.light .text-white\/10 {
-  color: #64748B !important;
-}
-
-html.light .text-suv-gray {
-  color: #64748B !important;
-}
-
-/* Never disappear into white on hover */
-html.light .hover\:text-white:hover {
-  color: #D97706 !important;
-}
-html.light .hover\:bg-white\/5:hover,
-html.light .hover\:bg-white\/10:hover {
-  background-color: rgba(15, 23, 42, 0.05) !important;
-}
-
-/* Backgrounds & Borders in Light Mode */
-html.light .bg-white\/5 {
-  background-color: #F1F5F9 !important;
-  border-color: #E2E8F0 !important;
-}
-html.light .bg-white\/10 {
-  background-color: #E2E8F0 !important;
-}
-
-html.light .border-white\/5,
-html.light .border-white\/10,
-html.light .border-white\/15,
-html.light .border-white\/20 {
-  border-color: #E2E8F0 !important;
-}
-
-html.light .bg-black\/40,
-html.light .bg-black\/60,
-html.light .bg-black\/80 {
-  background-color: #FFFFFF !important;
-  border-color: #E2E8F0 !important;
-}
-
-/* 4. Luxury Buttons State in Light Mode */
-html.light .btn-premium-gold {
-  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%) !important;
-  color: #080A0E !important;
-  border: 1px solid rgba(217, 119, 6, 0.3) !important;
-}
-html.light .btn-premium-gold * {
-  color: #080A0E !important;
-}
-
-html.light .btn-premium-dark {
-  background: #F1F5F9 !important;
-  border-color: #CBD5E1 !important;
-  color: #0F172A !important;
-}
-html.light .btn-premium-dark:hover {
-  background: #E2E8F0 !important;
-  color: #D97706 !important;
-}
-
-html.light .btn-premium-red,
-html.light .btn-premium-red * {
-  color: #FFFFFF !important;
-}
-
-/* 5. Inputs & Controls in Light Mode */
-html.light .suv-input {
-  background: #FFFFFF !important;
-  border-color: #CBD5E1 !important;
-  color: #0F172A !important;
-}
-html.light .suv-input:focus {
-  border-color: #D97706 !important;
-  box-shadow: 0 0 12px rgba(217, 119, 6, 0.15) !important;
-}
-html.light .suv-input::placeholder {
-  color: #94A3B8 !important;
-}
-html.light select option {
-  background: #FFFFFF !important;
-  color: #0F172A !important;
-}
-
-/* 6. Technical Spec Grid & Brand Cards in Light Mode */
-html.light .spec-grid-item {
-  background: #F8FAFC !important;
-  border-color: #E2E8F0 !important;
-}
-html.light .spec-grid-item span {
-  color: #64748B !important;
-}
-html.light .spec-grid-item p {
-  color: #0F172A !important;
-}
-html.light .spec-grid-item p.text-suv-gold {
-  color: #D97706 !important;
-}
-
-html.light .brand-card {
-  background: #FFFFFF !important;
-  border-color: #E2E8F0 !important;
-  color: #0F172A !important;
-}
-html.light .brand-card:hover {
-  background: rgba(217, 119, 6, 0.05) !important;
-  border-color: #D97706 !important;
-  color: #D97706 !important;
-}
-
-/* 7. Special Container: Hero Showroom Banner (Dark Showcase Mode Preserved) */
-html.light .hero-showroom-banner {
-  background-color: #0E1218 !important;
-  border-color: rgba(255, 255, 255, 0.15) !important;
-  box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.3) !important;
-}
-html.light .hero-showroom-banner h1,
-html.light .hero-showroom-banner .text-white {
-  color: #FFFFFF !important;
-}
-html.light .hero-showroom-banner p,
-html.light .hero-showroom-banner .text-white\/80 {
-  color: rgba(255, 255, 255, 0.85) !important;
-}
-html.light .hero-showroom-banner .text-white\/50 {
-  color: rgba(255, 255, 255, 0.65) !important;
-}
-html.light .hero-showroom-banner .border-white\/10 {
-  border-color: rgba(255, 255, 255, 0.15) !important;
-}
-html.light .hero-showroom-banner .btn-premium-dark {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border-color: rgba(255, 255, 255, 0.2) !important;
-  color: #FFFFFF !important;
-}
-html.light .hero-showroom-banner .btn-premium-dark:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
-  color: #F59E0B !important;
-}
-html.light .hero-showroom-banner .text-gradient-gold {
-  background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #D97706 100%) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-}
-
-/* 8. Special Container: Catalogue Header Showcase */
-html.light .catalogue-header-showcase {
-  background: #FFFFFF !important;
-  border-color: #E2E8F0 !important;
-  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.06) !important;
-}
-html.light .catalogue-header-showcase h1,
-html.light .catalogue-header-showcase .text-white {
-  color: #0F172A !important;
-}
-html.light .catalogue-header-showcase p,
-html.light .catalogue-header-showcase .text-white\/70 {
-  color: #475569 !important;
-}
-html.light .catalogue-header-showcase .border-white\/10 {
-  border-color: #E2E8F0 !important;
-}
-html.light .catalogue-header-showcase .chip-filter {
-  background: #F8FAFC !important;
-  border-color: #CBD5E1 !important;
-  color: #334155 !important;
-}
-html.light .catalogue-header-showcase .chip-filter:hover {
-  background: #F1F5F9 !important;
-  border-color: #D97706 !important;
-  color: #D97706 !important;
-}
-html.light .catalogue-header-showcase .chip-filter[data-type="all"].border-suv-gold,
-html.light .catalogue-header-showcase .chip-filter.active {
-  background: rgba(217, 119, 6, 0.12) !important;
-  border-color: #D97706 !important;
-  color: #B45309 !important;
-}
-
-/* 9. Special Container: Global Footer Container */
-html.light .global-footer-container {
-  background-color: #FFFFFF !important;
-  border-color: #E2E8F0 !important;
-  box-shadow: 0 -10px 30px -10px rgba(15, 23, 42, 0.04) !important;
-}
-html.light .global-footer-container .text-white {
-  color: #0F172A !important;
-}
-html.light .global-footer-container .text-suv-gray {
-  color: #475569 !important;
-}
-html.light .global-footer-container .border-white\/5,
-html.light .global-footer-container .border-white\/10 {
-  border-color: #E2E8F0 !important;
-}
-html.light .global-footer-container .bg-suv-gold\/10 {
-  background-color: rgba(217, 119, 6, 0.1) !important;
-}
-html.light .global-footer-container a {
-  color: #475569 !important;
-}
-html.light .global-footer-container a:hover {
-  color: #D97706 !important;
-}
-
-/* 10. Special Container: Mobile Menu & Global Chat & Dashboards */
-html.light #mobile-menu {
-  background-color: rgba(255, 255, 255, 0.98) !important;
-  border-color: #E2E8F0 !important;
-}
-html.light #mobile-menu a {
-  color: #0F172A !important;
-}
-html.light #mobile-menu a:hover {
-  color: #D97706 !important;
-}
-
-html.light #chat-box-panel {
-  background: #FFFFFF !important;
-  border-color: #E2E8F0 !important;
-}
-html.light #chat-messages-list {
-  background-color: #F8FAFC !important;
-}
-html.light #dashboard-messages-list {
-  background-color: #F8FAFC !important;
-}
-html.light #dashboard-chat-form {
-  background-color: #FFFFFF !important;
-  border-color: #E2E8F0 !important;
-}
-html.light #chat-messages-list .bg-\[\#161D27\],
-html.light #dashboard-messages-list .bg-\[\#161D27\] {
-  background-color: #FFFFFF !important;
-  color: #0F172A !important;
-  border: 1px solid #E2E8F0 !important;
-  box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.08) !important;
-}
-html.light #primary-photo-view .text-white {
-  color: #FFFFFF !important;
-}
-
-/* 11. Navigation Tabs & Sub-tabs in Light Mode */
-html.light .tab-btn:not(.btn-premium-gold) {
-  color: #475569 !important;
-}
-html.light .tab-btn:not(.btn-premium-gold):hover {
-  background-color: #F1F5F9 !important;
-  color: #D97706 !important;
-}
-html.light .subtab-btn:not(.border-suv-gold) {
-  color: #64748B !important;
-}
-html.light .subtab-btn:not(.border-suv-gold):hover {
-  color: #D97706 !important;
-}
-
-/* 12. Tables in Light Mode */
-html.light table thead tr {
-  border-color: #E2E8F0 !important;
-}
-html.light table thead th {
-  color: #64748B !important;
-}
-html.light table tbody tr {
-  border-color: #E2E8F0 !important;
-}
-html.light table tbody tr:hover {
-  background-color: #F8FAFC !important;
-}
-html.light table tbody td {
-  color: #0F172A !important;
-  border-color: #E2E8F0 !important;
-}
-html.light table tbody td p.text-white {
-  color: #0F172A !important;
-}
-html.light table tbody td p.text-suv-gray {
-  color: #64748B !important;
-}
-
-/* 13. Comparison System in Light Mode */
-html.light .comparison-floating-bar {
-  background: #FFFFFF !important;
-  border-color: #D97706 !important;
-  box-shadow: 0 20px 50px -10px rgba(15, 23, 42, 0.15) !important;
-}
-html.light .comparison-floating-bar .text-white,
-html.light .comparison-floating-bar .text-white\/95 {
-  color: #0F172A !important;
-}
-html.light .comparison-floating-bar .text-white\/50,
-html.light .comparison-floating-bar .text-white\/40 {
-  color: #64748B !important;
-}
-html.light .comparison-floating-bar .bg-white\/5 {
-  background-color: #F1F5F9 !important;
-  border-color: #E2E8F0 !important;
-}
-
-/* Fixed ambient glow spots soft in light mode */
-html.light body > div[class*="fixed"] {
-  opacity: 0.25;
-}
-
-/* Theme toggle condition CSS icons */
-html.light .html-light-block { display: block !important; }
-html.light .html-dark-block { display: none !important; }
-html:not(.light) .html-dark-block { display: block !important; }
-html:not(.light) .html-light-block { display: none !important; }
-

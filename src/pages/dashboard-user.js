@@ -13,14 +13,12 @@ export function render() {
   const user = store.getState().user || getCachedUser();
   if (!user) {
     return `
-      <div class="flex flex-col items-center justify-center min-h-[50vh] text-center px-4 animate-fade-in space-y-6">
-        <div class="w-16 h-16 rounded-2xl bg-gradient-premium-gold flex items-center justify-center font-black text-black text-2xl shadow-xl shadow-suv-gold/20 mx-auto">V</div>
-        <div class="space-y-2">
-          <h2 class="text-2xl font-black text-white font-display uppercase tracking-tight">Espace Client Vobokun</h2>
-          <p class="text-xs text-suv-gray max-w-md">Connectez-vous pour retrouver vos véhicules favoris, suivre vos négociations et discuter avec nos conseillers.</p>
-        </div>
+      <div class="container py-5 text-center my-4">
+        <div class="rounded-3 d-inline-flex align-items-center justify-content-center text-white fw-black fs-2 shadow-sm mb-3" style="width: 60px; height: 60px; background: var(--toyota-red);">V</div>
+        <h2 class="fw-black text-dark font-display text-uppercase mb-2">Espace Client Vobokun</h2>
+        <p class="small text-muted max-w-md mx-auto mb-4">Connectez-vous pour retrouver vos véhicules favoris, suivre vos négociations et discuter avec nos conseillers showroom.</p>
         <div>
-          <a href="/login" class="btn-premium-gold px-8 py-3.5 rounded-xl font-black text-xs uppercase tracking-wider" data-link>
+          <a href="/login" class="btn btn-toyota-red px-4 py-3 fw-black text-uppercase shadow-sm" data-link>
             Se Connecter / S'inscrire
           </a>
         </div>
@@ -31,67 +29,68 @@ export function render() {
   const avatar = user.avatar_url || 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80';
 
   return `
-    <div class="animate-fade-in space-y-8 text-left">
+    <div class="container py-4 text-start">
       
       <!-- Profile Header Summary Banner -->
-      <div class="glass-panel border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden shadow-2xl">
-        <div class="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-suv-gold/10 blur-[50px] pointer-events-none"></div>
+      <div class="toyota-panel rounded-4 p-4 p-md-5 mb-4 shadow-sm border d-flex flex-column flex-md-row align-items-center justify-content-between gap-4">
         
-        <div class="flex items-center gap-5 text-center md:text-left flex-col md:flex-row relative z-10">
-          <div class="relative group cursor-pointer" id="header-avatar-container" title="Modifier mon profil">
-            <img id="dashboard-header-avatar" src="${avatar}" alt="${user.prenom}" class="w-20 h-20 rounded-full object-cover border-2 border-suv-gold/50 shadow-xl group-hover:opacity-80 transition-opacity" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'">
-            <div class="absolute bottom-0 right-0 w-6 h-6 rounded-full bg-suv-gold border border-black flex items-center justify-center text-black shadow-md group-hover:scale-110 transition-transform">
-              <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-              </svg>
+        <div class="d-flex align-items-center gap-4 text-center text-md-start flex-column flex-md-row">
+          <div class="position-relative cursor-pointer" id="header-avatar-container" title="Modifier mon profil" style="cursor: pointer;">
+            <img id="dashboard-header-avatar" src="${avatar}" alt="${user.prenom}" class="rounded-circle object-fit-cover border border-danger shadow-sm" style="width: 80px; height: 80px;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'">
+            <div class="position-absolute bottom-0 end-0 rounded-circle text-white d-flex align-items-center justify-content-center shadow-sm" style="width: 26px; height: 26px; background: var(--toyota-red);">
+              <i class="bi bi-camera-fill" style="font-size: 0.75rem;"></i>
             </div>
           </div>
           <div>
-            <div class="flex items-center justify-center md:justify-start gap-2">
-              <h1 class="text-2xl font-black text-white font-display uppercase tracking-tight">${user.prenom} ${user.nom}</h1>
-              <span class="bg-suv-gold/15 border border-suv-gold/30 text-suv-gold text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md">VIP</span>
+            <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2">
+              <h2 class="h3 fw-black text-dark font-display text-uppercase mb-0">${user.prenom} ${user.nom}</h2>
+              <span class="badge bg-danger text-white text-uppercase" style="font-size: 0.65rem;">VIP</span>
             </div>
-            <p class="text-xs text-suv-gray font-medium mt-1">Espace Client Vobokun &middot; Membre depuis ${new Date(user.created_at || Date.now()).toLocaleDateString('fr-FR')}</p>
+            <p class="small text-muted mb-0 mt-1">Espace Client Vobokun &middot; Membre depuis ${new Date(user.created_at || Date.now()).toLocaleDateString('fr-FR')}</p>
           </div>
         </div>
 
-        <div class="flex flex-wrap items-center gap-3 text-xs relative z-10">
-          <span class="bg-white/5 border border-white/10 px-3.5 py-2 rounded-xl text-white/80 font-semibold">Tél : ${user.telephone || 'Non renseigné'}</span>
-          <span class="bg-suv-gold/15 border border-suv-gold/30 text-suv-gold px-3.5 py-2 rounded-xl font-bold uppercase tracking-wider">${user.role === 'admin' ? 'Admin' : 'Client Privilège'}</span>
+        <div class="d-flex flex-wrap align-items-center gap-2 small">
+          <span class="badge bg-light text-secondary border p-2 px-3 fw-bold">Tél : ${user.telephone || 'Non renseigné'}</span>
+          <span class="badge bg-danger-subtle text-danger border border-danger-subtle p-2 px-3 fw-black text-uppercase">${user.role === 'admin' ? 'Admin' : 'Client Privilège'}</span>
         </div>
       </div>
 
       <!-- Dashboard Grid: Sidebar & Workspace -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div class="row g-4 align-items-start">
         
         <!-- Sidebar Navigation Tabs -->
-        <nav class="lg:col-span-3 glass-panel border border-white/10 rounded-3xl p-3 flex flex-row lg:flex-col overflow-x-auto lg:overflow-visible gap-2 shadow-xl">
-          
-          <button data-tab="favorites" class="tab-btn flex-1 lg:flex-none text-left px-4 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-3 ${activeTab === 'favorites' ? 'btn-premium-gold text-black font-black shadow-lg' : 'text-white/70 hover:bg-white/5 hover:text-white'}">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-            <span>Mes Favoris</span>
-          </button>
-          
-          <button data-tab="offers" class="tab-btn flex-1 lg:flex-none text-left px-4 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-3 ${activeTab === 'offers' ? 'btn-premium-gold text-black font-black shadow-lg' : 'text-white/70 hover:bg-white/5 hover:text-white'}">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
-            <span>Mes Négociations</span>
-          </button>
-          
-          <button data-tab="chat" class="tab-btn flex-1 lg:flex-none text-left px-4 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-3 relative ${activeTab === 'chat' ? 'btn-premium-gold text-black font-black shadow-lg' : 'text-white/70 hover:bg-white/5 hover:text-white'}">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-            <span>Messagerie Directe</span>
-            <span id="inbox-badge" class="absolute right-4 bg-suv-gold text-black text-[10px] font-black px-1.5 py-0.5 rounded-full hidden">0</span>
-          </button>
-          
-          <button data-tab="profile" class="tab-btn flex-1 lg:flex-none text-left px-4 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-3 ${activeTab === 'profile' ? 'btn-premium-gold text-black font-black shadow-lg' : 'text-white/70 hover:bg-white/5 hover:text-white'}">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-            <span>Mon Profil</span>
-          </button>
+        <nav class="col-lg-3">
+          <div class="toyota-panel rounded-4 p-3 shadow-sm border d-flex flex-row flex-lg-column overflow-auto gap-2">
+            
+            <button data-tab="favorites" class="tab-btn btn ${activeTab === 'favorites' ? 'btn-toyota-red' : 'btn-light text-secondary'} text-start px-3 py-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-grow-1 flex-lg-grow-0" style="font-size: 0.75rem;">
+              <i class="bi bi-heart fs-6"></i>
+              <span>Mes Favoris</span>
+            </button>
+            
+            <button data-tab="offers" class="tab-btn btn ${activeTab === 'offers' ? 'btn-toyota-red' : 'btn-light text-secondary'} text-start px-3 py-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-grow-1 flex-lg-grow-0" style="font-size: 0.75rem;">
+              <i class="bi bi-tag fs-6"></i>
+              <span>Mes Négociations</span>
+            </button>
+            
+            <button data-tab="chat" class="tab-btn btn ${activeTab === 'chat' ? 'btn-toyota-red' : 'btn-light text-secondary'} text-start px-3 py-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center justify-content-between gap-2 flex-grow-1 flex-lg-grow-0 position-relative" style="font-size: 0.75rem;">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-chat-dots fs-6"></i>
+                <span>Messagerie Directe</span>
+              </div>
+              <span id="inbox-badge" class="badge rounded-pill bg-danger text-white d-none" style="font-size: 0.65rem;">0</span>
+            </button>
+            
+            <button data-tab="profile" class="tab-btn btn ${activeTab === 'profile' ? 'btn-toyota-red' : 'btn-light text-secondary'} text-start px-3 py-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-grow-1 flex-lg-grow-0" style="font-size: 0.75rem;">
+              <i class="bi bi-person fs-6"></i>
+              <span>Mon Profil</span>
+            </button>
 
+          </div>
         </nav>
 
         <!-- Main Workspace Pane -->
-        <main class="lg:col-span-9" id="dashboard-workspace">
+        <main class="col-lg-9" id="dashboard-workspace">
           <!-- Populated dynamically based on activeTab -->
         </main>
 
@@ -109,9 +108,9 @@ export async function init() {
     tabButtons.forEach(btn => {
       const isMatch = btn.getAttribute('data-tab') === tab;
       if (isMatch) {
-        btn.className = "tab-btn flex-1 lg:flex-none text-left px-4 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-3 btn-premium-gold text-black font-black shadow-lg";
+        btn.className = "tab-btn btn btn-toyota-red text-start px-3 py-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-grow-1 flex-lg-grow-0 shadow-sm";
       } else {
-        btn.className = "tab-btn flex-1 lg:flex-none text-left px-4 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-3 text-white/70 hover:bg-white/5 hover:text-white";
+        btn.className = "tab-btn btn btn-light text-secondary text-start px-3 py-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-grow-1 flex-lg-grow-0";
       }
     });
 
@@ -129,9 +128,9 @@ export async function init() {
   tabButtons.forEach(btn => {
     const btnTab = btn.getAttribute('data-tab');
     if (btnTab === activeTab) {
-      btn.className = "tab-btn flex-1 lg:flex-none text-left px-4 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-3 btn-premium-gold text-black font-black shadow-lg";
+      btn.className = "tab-btn btn btn-toyota-red text-start px-3 py-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-grow-1 flex-lg-grow-0 shadow-sm";
     } else {
-      btn.className = "tab-btn flex-1 lg:flex-none text-left px-4 py-3.5 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-3 text-white/70 hover:bg-white/5 hover:text-white";
+      btn.className = "tab-btn btn btn-light text-secondary text-start px-3 py-3 rounded-3 small fw-bold text-uppercase d-flex align-items-center gap-2 flex-grow-1 flex-lg-grow-0";
     }
   });
 
@@ -157,9 +156,9 @@ export async function init() {
     if (inboxBadge) {
       if (state.unreadMessagesCount > 0) {
         inboxBadge.textContent = state.unreadMessagesCount;
-        inboxBadge.classList.remove('hidden');
+        inboxBadge.classList.remove('d-none');
       } else {
-        inboxBadge.classList.add('hidden');
+        inboxBadge.classList.add('d-none');
       }
     }
   });
@@ -182,7 +181,12 @@ async function renderTabContent() {
     offersListenerUnsub = null;
   }
 
-  space.innerHTML = `<div class="text-center py-16 text-suv-gray font-medium">Chargement instantané...</div>`;
+  space.innerHTML = `
+    <div class="text-center py-5 text-muted">
+      <div class="spinner-border text-danger mb-3" role="status"></div>
+      <p class="small fw-semibold">Chargement instantané...</p>
+    </div>
+  `;
 
   try {
     if (activeTab === 'favorites') {
@@ -190,21 +194,25 @@ async function renderTabContent() {
       
       if (favorites.length === 0) {
         space.innerHTML = `
-          <div class="glass-panel border border-white/10 rounded-3xl p-12 text-center space-y-4">
-            <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-suv-gold">
-              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          <div class="toyota-panel rounded-4 p-5 text-center shadow-sm border">
+            <div class="rounded-circle bg-danger-subtle text-danger d-inline-flex align-items-center justify-content-center mb-3" style="width: 56px; height: 56px;">
+              <i class="bi bi-heart fs-3"></i>
             </div>
-            <h3 class="font-black text-xl text-white font-display uppercase tracking-tight">Aucun favori enregistré</h3>
-            <p class="text-xs text-suv-gray max-w-sm mx-auto">Parcourez le catalogue et cliquez sur le cœur pour sauvegarder vos modèles préférés.</p>
-            <a href="/catalogue" class="btn-premium-gold inline-block px-7 py-3 rounded-xl font-black text-xs uppercase tracking-wider mt-2" data-link>Découvrir les SUV</a>
+            <h4 class="fw-black text-dark font-display text-uppercase mb-2">Aucun favori enregistré</h4>
+            <p class="small text-muted max-w-sm mx-auto mb-4">Parcourez le showroom et cliquez sur le cœur pour sauvegarder vos SUV préférés.</p>
+            <a href="/catalogue" class="btn btn-toyota-red px-4 py-2 fw-bold text-uppercase" data-link>Découvrir les SUV</a>
           </div>
         `;
         return;
       }
 
       space.innerHTML = `
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" id="fav-dashboard-grid">
-          ${favorites.map(v => renderVehicleCard(v, true)).join('')}
+        <div class="row g-4" id="fav-dashboard-grid">
+          ${favorites.map(v => `
+            <div class="col-12 col-md-6 col-xl-4">
+              ${renderVehicleCard(v, true)}
+            </div>
+          `).join('')}
         </div>
       `;
       initVehicleCards(document.getElementById('fav-dashboard-grid'));
@@ -214,13 +222,13 @@ async function renderTabContent() {
 
       if (offers.length === 0) {
         space.innerHTML = `
-          <div class="glass-panel border border-white/10 rounded-3xl p-12 text-center space-y-4">
-            <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-suv-gold">
-              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2"/></svg>
+          <div class="toyota-panel rounded-4 p-5 text-center shadow-sm border">
+            <div class="rounded-circle bg-danger-subtle text-danger d-inline-flex align-items-center justify-content-center mb-3" style="width: 56px; height: 56px;">
+              <i class="bi bi-tag fs-3"></i>
             </div>
-            <h3 class="font-black text-xl text-white font-display uppercase tracking-tight">Aucune négociation en cours</h3>
-            <p class="text-xs text-suv-gray max-w-sm mx-auto">Lorsque vous faites une offre de prix sur un véhicule, elle s'affiche ici avec son statut en temps réel.</p>
-            <a href="/catalogue" class="btn-premium-gold inline-block px-7 py-3 rounded-xl font-black text-xs uppercase tracking-wider mt-2" data-link>Voir les véhicules</a>
+            <h4 class="fw-black text-dark font-display text-uppercase mb-2">Aucune négociation en cours</h4>
+            <p class="small text-muted max-w-sm mx-auto mb-4">Lorsque vous soumettez une offre de prix sur un véhicule, elle s'affiche ici avec son statut en temps réel.</p>
+            <a href="/catalogue" class="btn btn-toyota-red px-4 py-2 fw-bold text-uppercase" data-link>Voir les véhicules</a>
           </div>
         `;
         return;
@@ -229,64 +237,64 @@ async function renderTabContent() {
       const offersHTML = offers.map(o => {
         let statusBadge = '';
         if (o.statut === 'pending') {
-          statusBadge = '<span class="bg-amber-500/15 text-amber-400 border border-amber-500/30 px-3 py-1 rounded-full text-[10px] font-black uppercase">En attente</span>';
+          statusBadge = '<span class="badge bg-warning-subtle text-warning border border-warning-subtle px-3 py-2 fw-bold text-uppercase">En attente</span>';
         } else if (o.statut === 'accepted') {
-          statusBadge = '<span class="bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full text-[10px] font-black uppercase">Offre Acceptée</span>';
+          statusBadge = '<span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 fw-bold text-uppercase">Offre Acceptée</span>';
         } else if (o.statut === 'refused') {
-          statusBadge = '<span class="bg-rose-500/15 text-rose-400 border border-rose-500/30 px-3 py-1 rounded-full text-[10px] font-black uppercase">Déclinée</span>';
+          statusBadge = '<span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2 fw-bold text-uppercase">Déclinée</span>';
         } else {
-          statusBadge = '<span class="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-3 py-1 rounded-full text-[10px] font-black uppercase">En Négociation</span>';
+          statusBadge = '<span class="badge bg-info-subtle text-info border border-info-subtle px-3 py-2 fw-bold text-uppercase">En Négociation</span>';
         }
 
         const priceHTML = o.prix_propose 
-          ? `<p class="text-xs text-white/50">Offre proposée : <span class="text-suv-gold font-black text-sm font-sans">${new Intl.NumberFormat('fr-FR').format(o.prix_propose)} ${currency}</span></p>`
-          : '<p class="text-xs text-white/50">Demande d\'information générale</p>';
+          ? `<p class="small text-muted mb-0">Offre proposée : <span class="text-danger fw-black font-display">${new Intl.NumberFormat('fr-FR').format(o.prix_propose)} ${currency}</span></p>`
+          : '<p class="small text-muted mb-0">Demande d\'information générale</p>';
 
         const vehicleTitle = o.vehicle 
-          ? `<a href="/vehicle/${o.vehicle.id}" class="font-black text-base text-white hover:text-suv-gold transition-colors font-display uppercase" data-link>${o.vehicle.marque} ${o.vehicle.modele} (${o.vehicle.annee})</a>`
-          : '<span class="font-bold text-white/60">Modèle archivé</span>';
+          ? `<a href="/vehicle/${o.vehicle.id}" class="h5 fw-black text-dark text-decoration-none hover-danger font-display text-uppercase mb-1 d-block" data-link>${o.vehicle.marque} ${o.vehicle.modele} (${o.vehicle.annee})</a>`
+          : '<span class="h5 fw-bold text-secondary mb-1 d-block">Modèle archivé</span>';
 
         return `
-          <div class="glass-card rounded-3xl p-6 border border-white/10 space-y-4">
-            <div class="flex justify-between items-start gap-4 flex-wrap pb-3 border-b border-white/5">
-              <div class="space-y-0.5">
+          <div class="toyota-panel rounded-4 p-4 border mb-3 shadow-sm">
+            <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap pb-3 border-bottom">
+              <div>
                 ${vehicleTitle}
                 ${priceHTML}
               </div>
-              ${statusBadge}
+              <div>${statusBadge}</div>
             </div>
 
-            <div class="bg-white/5 p-4 rounded-2xl text-xs leading-relaxed border border-white/5">
-              <p class="text-[9px] uppercase tracking-wider text-suv-gold font-black mb-1">Votre message :</p>
-              <p class="text-white/80 font-normal">${o.message}</p>
+            <div class="p-3 rounded-3 my-3 small border" style="background: #F4F5F8;">
+              <span class="small fw-bold text-uppercase text-danger d-block mb-1" style="font-size: 0.7rem;">Votre message :</span>
+              <p class="text-secondary mb-0">${o.message}</p>
             </div>
 
             ${o.note_admin ? `
-              <div class="bg-suv-gold/10 p-4 rounded-2xl text-xs leading-relaxed border border-suv-gold/25">
-                <p class="text-[9px] uppercase tracking-wider text-suv-gold font-black mb-1">Réponse du Concessionnaire :</p>
-                <p class="text-white font-medium">${o.note_admin}</p>
+              <div class="p-3 rounded-3 mb-3 small border border-danger-subtle" style="background: rgba(235, 10, 30, 0.04);">
+                <span class="small fw-bold text-uppercase text-danger d-block mb-1" style="font-size: 0.7rem;">Réponse du Concessionnaire :</span>
+                <p class="text-dark fw-semibold mb-0">${o.note_admin}</p>
               </div>
             ` : ''}
 
             ${o.statut === 'in_progress' ? `
-              <div class="flex gap-3 pt-2" data-offer-id="${o.id}">
-                <button class="client-accept-btn bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-3 px-5 rounded-xl transition-all shadow-lg">
+              <div class="d-flex gap-2 pt-2" data-offer-id="${o.id}">
+                <button class="client-accept-btn btn btn-success btn-sm fw-bold px-3 py-2 text-uppercase" style="font-size: 0.75rem;">
                   Accepter la contre-proposition
                 </button>
-                <button class="client-refuse-btn bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs py-3 px-5 rounded-xl transition-all">
+                <button class="client-refuse-btn btn btn-danger btn-sm fw-bold px-3 py-2 text-uppercase" style="font-size: 0.75rem;">
                   Refuser
                 </button>
               </div>
             ` : ''}
 
-            <div class="text-[10px] text-white/30 text-right">
+            <div class="small text-muted text-end mt-2" style="font-size: 0.7rem;">
               Soumis le ${new Date(o.created_at).toLocaleDateString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
             </div>
           </div>
         `;
       }).join('');
 
-      space.innerHTML = `<div class="space-y-6">${offersHTML}</div>`;
+      space.innerHTML = `<div>${offersHTML}</div>`;
 
       document.querySelectorAll('.client-accept-btn').forEach(btn => {
         btn.addEventListener('click', async () => {
@@ -332,33 +340,33 @@ async function renderTabContent() {
       }
 
       space.innerHTML = `
-        <div class="glass-panel border border-white/10 rounded-3xl h-[580px] flex flex-col overflow-hidden shadow-2xl">
+        <div class="toyota-panel rounded-4 shadow-sm border overflow-hidden p-0 d-flex flex-column" style="height: 580px;">
           
           <!-- Chat Box Header -->
-          <div class="bg-white/5 border-b border-white/10 px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="relative">
-                <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Conseiller" class="w-10 h-10 rounded-full object-cover border border-suv-gold/30">
-                <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border-2 border-black rounded-full"></span>
+          <div class="px-4 py-3 d-flex align-items-center justify-content-between text-white" style="background: var(--toyota-red);">
+            <div class="d-flex align-items-center gap-2">
+              <div class="position-relative">
+                <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Conseiller" class="rounded-circle object-fit-cover border border-white" style="width: 36px; height: 36px;">
+                <span class="position-absolute bottom-0 end-0 rounded-circle bg-success border border-white" style="width: 10px; height: 10px;"></span>
               </div>
               <div>
-                <h3 class="font-black text-white text-sm font-display uppercase tracking-wide">Conseiller Vobokun</h3>
-                <p class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">Showroom en direct</p>
+                <h6 class="fw-black text-white text-uppercase font-display mb-0">Conseiller Vobokun</h6>
+                <span class="text-white-50 small" style="font-size: 0.7rem;">Showroom Direct VIP</span>
               </div>
             </div>
-            <span class="text-[10px] text-white/40 uppercase tracking-widest font-bold">Messagerie Sécurisée</span>
+            <span class="badge bg-black text-white text-uppercase" style="font-size: 0.65rem;">Messagerie Sécurisée</span>
           </div>
 
           <!-- Messages Container -->
-          <div id="dashboard-messages-list" class="flex-grow p-6 overflow-y-auto space-y-3.5 bg-[#080A0E] flex flex-col">
+          <div id="dashboard-messages-list" class="flex-grow-1 p-4 overflow-y-auto d-flex flex-column gap-2" style="background: #FAFBFD;">
           </div>
 
           <!-- Input Form -->
-          <form id="dashboard-chat-form" class="p-4 bg-[#0E1218] border-t border-white/10 flex gap-3">
-            <input type="text" id="dashboard-chat-input" placeholder="Écrivez votre message à notre conseiller..." class="flex-grow suv-input py-3 px-4 text-xs font-semibold focus:border-suv-gold" required autocomplete="off">
-            <button type="submit" class="btn-premium-gold px-6 rounded-xl font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg">
+          <form id="dashboard-chat-form" class="p-3 bg-light border-top d-flex gap-2">
+            <input type="text" id="dashboard-chat-input" placeholder="Écrivez votre message à notre conseiller..." class="form-control toyota-input flex-grow-1" required autocomplete="off">
+            <button type="submit" class="btn btn-toyota-red px-4 fw-black text-uppercase d-flex align-items-center gap-2 shadow-sm" style="font-size: 0.8rem;">
               <span>Envoyer</span>
-              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+              <i class="bi bi-send-fill text-white"></i>
             </button>
           </form>
 
@@ -375,12 +383,12 @@ async function renderTabContent() {
           
           if (messages.length === 0) {
             list.innerHTML = `
-              <div class="text-center py-20 text-suv-gray space-y-2 my-auto">
-                <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-suv-gold">
-                  <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+              <div class="text-center py-5 text-muted small my-auto">
+                <div class="rounded-circle bg-light border d-inline-flex align-items-center justify-content-center mb-3" style="width: 52px; height: 52px;">
+                  <i class="bi bi-chat-dots fs-4 text-danger"></i>
                 </div>
-                <p class="font-black text-white text-sm font-display uppercase tracking-wider">Démarrez votre conversation</p>
-                <p class="text-xs text-white/40">Posez vos questions ou négociez le véhicule de votre choix.</p>
+                <h5 class="fw-black text-dark font-display text-uppercase mb-1">Démarrez votre conversation</h5>
+                <p class="small text-muted mb-0">Posez vos questions ou négociez le SUV de votre choix.</p>
               </div>
             `;
             return;
@@ -389,13 +397,13 @@ async function renderTabContent() {
           const myId = store.getState().user.id;
           list.innerHTML = messages.map(msg => {
             const isSelf = msg.sender_id === myId;
-            const align = isSelf ? 'self-end btn-premium-gold text-black rounded-br-none' : 'self-start bg-[#161D27] text-white rounded-bl-none border border-white/10';
+            const align = isSelf ? 'btn-toyota-red text-white align-self-end rounded-4 rounded-bottom-end-0 shadow-sm' : 'bg-white text-dark border align-self-start rounded-4 rounded-bottom-start-0 shadow-sm';
             const time = new Date(msg.created_at).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
             return `
-              <div class="max-w-[75%] p-3.5 rounded-2xl shadow-md ${align} text-xs flex flex-col" data-msg-id="${msg.id || ''}">
-                <span class="leading-relaxed font-semibold">${msg.contenu}</span>
-                <span class="text-[9px] opacity-60 self-end mt-1.5 font-sans">${time}</span>
+              <div class="p-3 small lh-base ${align} d-flex flex-column" style="max-width: 78%;" data-msg-id="${msg.id || ''}">
+                <span>${msg.contenu}</span>
+                <span class="opacity-75 align-self-end mt-1 font-monospace" style="font-size: 0.65rem;">${time}</span>
               </div>
             `;
           }).join('');
@@ -422,11 +430,12 @@ async function renderTabContent() {
             if (!existing) {
               const time = new Date(sentMsg.created_at).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
               const msgDiv = document.createElement('div');
-              msgDiv.className = `max-w-[75%] p-3.5 rounded-2xl shadow-md self-end btn-premium-gold text-black rounded-br-none text-xs flex flex-col`;
+              msgDiv.className = `p-3 small lh-base btn-toyota-red text-white align-self-end rounded-4 rounded-bottom-end-0 shadow-sm d-flex flex-column`;
+              msgDiv.style.maxWidth = '78%';
               msgDiv.setAttribute('data-msg-id', sentMsg.id || '');
               msgDiv.innerHTML = `
-                <span class="leading-relaxed font-semibold">${sentMsg.contenu}</span>
-                <span class="text-[9px] opacity-60 self-end mt-1.5 font-sans">${time}</span>
+                <span>${sentMsg.contenu}</span>
+                <span class="opacity-75 align-self-end mt-1 font-monospace" style="font-size: 0.65rem;">${time}</span>
               `;
 
               const placeholder = list.querySelector('.my-auto');
@@ -454,15 +463,16 @@ async function renderTabContent() {
           const existing = list.querySelector(`[data-msg-id="${newMsg.id}"]`);
           if (!existing) {
             const isSelf = newMsg.sender_id === myId;
-            const align = isSelf ? 'self-end btn-premium-gold text-black rounded-br-none' : 'self-start bg-[#161D27] text-white rounded-bl-none border border-white/10';
+            const align = isSelf ? 'btn-toyota-red text-white align-self-end rounded-4 rounded-bottom-end-0 shadow-sm' : 'bg-white text-dark border align-self-start rounded-4 rounded-bottom-start-0 shadow-sm';
             const time = new Date(newMsg.created_at).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
             const msgDiv = document.createElement('div');
-            msgDiv.className = `max-w-[75%] p-3.5 rounded-2xl shadow-md ${align} text-xs flex flex-col`;
+            msgDiv.className = `p-3 small lh-base ${align} d-flex flex-column`;
+            msgDiv.style.maxWidth = '78%';
             msgDiv.setAttribute('data-msg-id', newMsg.id || '');
             msgDiv.innerHTML = `
-              <span class="leading-relaxed font-semibold">${newMsg.contenu}</span>
-              <span class="text-[9px] opacity-60 self-end mt-1.5 font-sans">${time}</span>
+              <span>${newMsg.contenu}</span>
+              <span class="opacity-75 align-self-end mt-1 font-monospace" style="font-size: 0.65rem;">${time}</span>
             `;
 
             const placeholder = list.querySelector('.my-auto');
@@ -482,56 +492,56 @@ async function renderTabContent() {
       const user = store.getState().user;
 
       space.innerHTML = `
-        <div class="glass-panel border border-white/10 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
-          <div class="border-b border-white/10 pb-4">
-            <span class="text-[10px] font-black uppercase tracking-widest text-suv-gold">Mon Compte</span>
-            <h3 class="text-xl font-black text-white font-display uppercase tracking-tight mt-0.5">Paramètres du Profil</h3>
+        <div class="toyota-panel rounded-4 p-4 p-md-5 shadow-sm border">
+          <div class="border-bottom pb-3 mb-4">
+            <span class="badge bg-danger text-white text-uppercase" style="font-size: 0.65rem;">Mon Compte</span>
+            <h3 class="h4 fw-black text-dark font-display text-uppercase mt-1 mb-0">Paramètres du Profil</h3>
           </div>
           
-          <form id="profile-edit-form" class="space-y-6">
+          <form id="profile-edit-form">
             
             <!-- Avatar Upload Row -->
-            <div class="flex items-center gap-6 flex-wrap md:flex-nowrap border-b border-white/10 pb-6">
-              <img id="profile-edit-avatar-preview" src="${user.avatar_url || 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'}" class="w-16 h-16 rounded-full object-cover border-2 border-suv-gold/50 shadow-lg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'">
+            <div class="d-flex align-items-center gap-4 flex-wrap border-bottom pb-4 mb-4">
+              <img id="profile-edit-avatar-preview" src="${user.avatar_url || 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'}" class="rounded-circle object-fit-cover border border-danger shadow-sm" style="width: 72px; height: 72px;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'">
               
-              <div class="space-y-2 text-left">
-                <label class="block text-xs font-black uppercase tracking-wider text-white/60">Photo de Profil</label>
-                <div class="flex items-center gap-3">
-                  <input type="file" id="profile-avatar-file-input" accept="image/*" class="hidden">
-                  <button type="button" id="select-avatar-btn" class="btn-premium-dark text-xs font-bold px-4 py-2.5 rounded-xl transition-colors">
+              <div>
+                <label class="form-label small fw-bold text-uppercase text-secondary mb-2" style="font-size: 0.75rem;">Photo de Profil</label>
+                <div class="d-flex align-items-center gap-2">
+                  <input type="file" id="profile-avatar-file-input" accept="image/*" class="d-none">
+                  <button type="button" id="select-avatar-btn" class="btn btn-toyota-dark btn-sm fw-bold px-3 py-2">
                     Changer l'image
                   </button>
-                  <span class="text-[10px] text-white/40 font-medium">JPEG, PNG max 5 Mo</span>
+                  <span class="small text-muted" style="font-size: 0.7rem;">JPEG, PNG max 5 Mo</span>
                 </div>
               </div>
             </div>
 
             <!-- Form Fields -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-              <div class="space-y-1.5">
-                <label class="text-[10px] font-black uppercase tracking-widest text-suv-gold">Prénom</label>
-                <input type="text" id="prof-prenom" value="${user.prenom || ''}" class="w-full suv-input text-xs font-semibold" required>
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Prénom</label>
+                <input type="text" id="prof-prenom" value="${user.prenom || ''}" class="form-control toyota-input" required>
               </div>
               
-              <div class="space-y-1.5">
-                <label class="text-[10px] font-black uppercase tracking-widest text-suv-gold">Nom</label>
-                <input type="text" id="prof-nom" value="${user.nom || ''}" class="w-full suv-input text-xs font-semibold" required>
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Nom</label>
+                <input type="text" id="prof-nom" value="${user.nom || ''}" class="form-control toyota-input" required>
               </div>
 
-              <div class="space-y-1.5">
-                <label class="text-[10px] font-black uppercase tracking-widest text-suv-gold">Téléphone WhatsApp</label>
-                <input type="tel" id="prof-telephone" value="${user.telephone || ''}" placeholder="+229 01 00 00 00 00" class="w-full suv-input text-xs font-semibold" required>
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Téléphone WhatsApp</label>
+                <input type="tel" id="prof-telephone" value="${user.telephone || ''}" placeholder="+229 01 00 00 00 00" class="form-control toyota-input" required>
               </div>
 
-              <div class="space-y-1.5">
-                <label class="text-[10px] font-black uppercase tracking-widest text-white/40">Email (Lecture Seule)</label>
-                <input type="email" value="${user.email || ''}" disabled class="w-full suv-input opacity-50 cursor-not-allowed text-xs font-semibold">
+              <div class="col-12 col-md-6">
+                <label class="form-label small fw-bold text-uppercase text-muted" style="font-size: 0.75rem;">Email (Lecture Seule)</label>
+                <input type="email" value="${user.email || ''}" disabled class="form-control toyota-input bg-light opacity-75">
               </div>
             </div>
 
             <!-- Submit -->
-            <div class="text-right pt-4 border-t border-white/10">
-              <button type="submit" id="save-profile-btn" class="btn-premium-gold px-8 py-3.5 rounded-xl font-black text-xs uppercase tracking-wider transition-all shadow-lg">
+            <div class="text-end pt-4 mt-4 border-top">
+              <button type="submit" id="save-profile-btn" class="btn btn-toyota-red px-4 py-3 fw-black text-uppercase shadow-sm" style="font-size: 0.8rem;">
                 Enregistrer les Modifications
               </button>
             </div>
@@ -610,6 +620,6 @@ async function renderTabContent() {
     }
   } catch (err) {
     console.error('Workspace draw failed:', err);
-    space.innerHTML = `<div class="text-center py-12 text-rose-400">Erreur lors de l'affichage de l'espace.</div>`;
+    space.innerHTML = `<div class="text-center py-5 text-danger">Erreur lors de l'affichage de l'espace.</div>`;
   }
 }

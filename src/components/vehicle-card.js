@@ -20,23 +20,19 @@ export function renderVehicleCard(vehicle, isFavorited = false) {
   // Status Badge HTML
   let statusBadge = '';
   if (statut === 'disponible') {
-    statusBadge = `<span class="bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-sm">Disponible</span>`;
+    statusBadge = `<span class="badge-toyota-red"><i class="bi bi-check-circle-fill me-1"></i>DISPONIBLE</span>`;
   } else if (statut === 'vendu') {
-    statusBadge = `<span class="bg-rose-500/15 text-rose-400 border border-rose-500/30 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-sm">Réservé</span>`;
+    statusBadge = `<span class="badge-toyota-dark"><i class="bi bi-lock-fill me-1"></i>RÉSERVÉ</span>`;
   } else {
-    statusBadge = `<span class="bg-white/10 text-white/50 border border-white/15 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-sm">Archivé</span>`;
+    statusBadge = `<span class="badge-toyota-silver">ARCHIVÉ</span>`;
   }
 
-  const favoriteIconColor = isFavorited ? 'text-rose-500 fill-rose-500 scale-110' : 'text-white/70 hover:text-white group-hover:text-suv-gold';
-
+  const favoriteIconClass = isFavorited ? 'bi-heart-fill text-danger' : 'bi-heart text-secondary';
   const compared = isCompared(id);
-  const compareBtnClass = compared ? 'border-suv-gold bg-suv-gold/20 text-suv-gold' : 'border-white/10 text-white/60 hover:text-white hover:border-white/20';
-  const compareBtnIcon = compared 
-    ? `<svg class="w-4 h-4 text-suv-gold fill-current" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" /><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>`
-    : `<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2" /></svg>`;
+  const compareBtnClass = compared ? 'btn-danger' : 'btn-outline-secondary';
 
   return `
-    <div class="glass-card rounded-3xl overflow-hidden flex flex-col group h-full relative border border-white/10 hover:border-suv-gold/40 transition-all duration-300" 
+    <div class="card toyota-card h-100" 
       data-vehicle-id="${id}"
       data-marque="${marque}"
       data-modele="${modele}"
@@ -49,85 +45,76 @@ export function renderVehicleCard(vehicle, isFavorited = false) {
       data-statut="${statut}">
       
       <!-- Visual Media Wrapper -->
-      <div class="relative aspect-[16/10] overflow-hidden bg-[#11151C] cursor-pointer flex-shrink-0" data-detail-link>
+      <div class="position-relative overflow-hidden cursor-pointer bg-dark" style="height: 220px;" data-detail-link>
         <img 
           src="${mainPhoto}" 
           alt="${marque} ${modele}" 
-          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" 
+          class="w-100 h-100 object-fit-cover" 
           loading="lazy"
-          decoding="async"
         >
         
-        <!-- Ambient Vignette Gradient -->
-        <div class="absolute inset-0 bg-gradient-to-t from-[#0E1218] via-transparent to-black/30 opacity-80 group-hover:opacity-60 transition-opacity"></div>
-        
+        <!-- Gradient Bottom Shadow -->
+        <div class="position-absolute bottom-0 start-0 w-100 p-2 d-flex justify-content-between align-items-end" style="background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);">
+          <span class="badge bg-dark bg-opacity-75 text-white fw-bold px-2 py-1 small">${annee} &middot; Certifié</span>
+        </div>
+
         <!-- Top Left: Status Badge -->
-        <div class="absolute top-4 left-4 z-10 flex items-center gap-2">
+        <div class="position-absolute top-0 start-0 m-3 z-2">
           ${statusBadge}
-          <span class="bg-black/60 backdrop-blur-md border border-white/15 px-2.5 py-1 rounded-full text-[10px] font-black text-suv-gold uppercase tracking-wider">
-            ${annee}
-          </span>
         </div>
  
         <!-- Top Right: Favorite Button -->
-        <div class="absolute top-4 right-4 z-10">
-          <button class="favorite-toggle-btn w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/15 flex items-center justify-center hover:bg-black/80 hover:border-suv-gold/50 transition-all" title="Favoris">
-            <svg class="w-4 h-4 ${favoriteIconColor} transition-transform active:scale-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-            </svg>
+        <div class="position-absolute top-0 end-0 m-3 z-2">
+          <button class="favorite-toggle-btn btn btn-light rounded-circle shadow-sm p-0 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;" title="Favoris">
+            <i class="bi ${favoriteIconClass} fs-6"></i>
           </button>
         </div>
       </div>
  
       <!-- Card Information -->
-      <div class="p-6 flex-grow flex flex-col justify-between space-y-5 text-left">
+      <div class="card-body p-4 d-flex flex-column justify-content-between">
         
-        <div class="cursor-pointer space-y-3" data-detail-link>
-          <!-- Brand and Model Title -->
-          <div class="space-y-0.5">
-            <div class="text-[11px] font-black text-suv-gold uppercase tracking-widest font-display">${marque}</div>
-            <h3 class="text-lg font-black font-display text-white group-hover:text-suv-gold transition-colors tracking-tight leading-snug uppercase">
-              ${modele}
-            </h3>
-          </div>
+        <div class="cursor-pointer mb-3" data-detail-link>
+          <!-- Brand & Model Title -->
+          <div class="text-danger fw-bold text-uppercase small font-display mb-1" style="font-size: 0.72rem; letter-spacing: 0.1em;">${marque}</div>
+          <h3 class="h5 fw-black text-dark text-uppercase font-display mb-3 lh-sm text-truncate" title="${modele}">
+            ${modele}
+          </h3>
  
           <!-- Technical Specs Highlights -->
-          <div class="grid grid-cols-3 gap-2 py-3 border-y border-white/5 text-[11px] font-semibold text-white/80">
-            <div class="flex flex-col">
-              <span class="text-white/40 text-[9px] uppercase tracking-wider font-bold">Kilomètres</span>
-              <span class="font-sans font-bold text-white text-xs">${formattedMileage}</span>
+          <div class="row g-2 py-2 border-top border-bottom text-center mb-3">
+            <div class="col-4">
+              <span class="toyota-spec-label">Kilomètres</span>
+              <span class="fw-bold small text-dark d-block text-truncate">${formattedMileage}</span>
             </div>
-            <div class="flex flex-col border-x border-white/5 px-2">
-              <span class="text-white/40 text-[9px] uppercase tracking-wider font-bold">Énergie</span>
-              <span class="text-white truncate text-xs">${carburant}</span>
+            <div class="col-4 border-start border-end">
+              <span class="toyota-spec-label">Énergie</span>
+              <span class="fw-bold small text-dark d-block text-truncate">${carburant}</span>
             </div>
-            <div class="flex flex-col pl-1">
-              <span class="text-white/40 text-[9px] uppercase tracking-wider font-bold">Boîte</span>
-              <span class="text-white truncate text-xs">${transmission.split(' ')[0] || 'Auto'}</span>
+            <div class="col-4">
+              <span class="toyota-spec-label">Boîte</span>
+              <span class="fw-bold small text-dark d-block text-truncate">${transmission.split(' ')[0] || 'Auto'}</span>
             </div>
           </div>
         </div>
  
         <!-- Price & Action Footer -->
-        <div class="flex items-end justify-between gap-3 pt-1">
-          
-          <div class="flex flex-col">
-            <span class="text-[9px] text-white/40 uppercase tracking-widest font-bold">Prix Showroom</span>
-            <span class="text-lg sm:text-xl font-black font-display text-suv-gold text-glow-gold tracking-tight">${formattedPrice}</span>
-            <span class="text-[10px] text-white/40">dès ${formattedMonthly} F/mois</span>
+        <div class="d-flex justify-content-between align-items-end pt-2 border-top">
+          <div>
+            <span class="toyota-spec-label mb-0">Prix Concessionnaire</span>
+            <div class="fs-5 fw-black text-dark font-display mb-0">${formattedPrice}</div>
+            <span class="text-muted small" style="font-size: 0.72rem;">dès ${formattedMonthly} F/mois</span>
           </div>
  
-          <div class="flex items-center gap-2">
-            <button class="btn-compare-toggle p-2.5 rounded-xl border ${compareBtnClass} bg-white/5 hover:bg-white/10 transition-all" data-vehicle-id="${id}" title="Comparer">
-              ${compareBtnIcon}
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn-compare-toggle btn btn-sm ${compareBtnClass} rounded-3 p-2" data-vehicle-id="${id}" title="Comparer">
+              <i class="bi ${compared ? 'bi-check2-square text-white' : 'bi-plus-slash-minus'} fs-6"></i>
             </button>
-            <a href="/vehicle/${id}" class="btn-premium-gold p-2.5 rounded-xl flex items-center justify-center transition-all shadow-md group-hover:scale-105" data-link title="Voir la fiche">
-              <svg class="w-4 h-4 text-black font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-              </svg>
+            <a href="/vehicle/${id}" class="btn-toyota-red py-2 px-3 rounded-3" data-link title="Voir la fiche">
+              <span>Voir</span>
+              <i class="bi bi-arrow-right"></i>
             </a>
           </div>
- 
         </div>
  
       </div>
@@ -158,23 +145,23 @@ export function initVehicleCards(containerElement) {
       const user = store.getState().user;
 
       if (!user) {
+        alert("Veuillez vous connecter pour ajouter ce SUV à vos favoris.");
         navigate('/login');
         return;
       }
 
-      btn.disabled = true;
       try {
-        const isFavNow = await toggleFavorite(id);
-        const svg = btn.querySelector('svg');
-        if (isFavNow) {
-          svg.setAttribute('class', 'w-4 h-4 text-rose-500 fill-rose-500 scale-110 transition-all');
-        } else {
-          svg.setAttribute('class', 'w-4 h-4 text-white/70 hover:text-white transition-all');
+        const isNowFav = await toggleFavorite(id);
+        const icon = btn.querySelector('i');
+        if (icon) {
+          if (isNowFav) {
+            icon.className = 'bi bi-heart-fill text-danger fs-6';
+          } else {
+            icon.className = 'bi bi-heart text-secondary fs-6';
+          }
         }
       } catch (err) {
-        console.error('Failed to toggle favorite', err);
-      } finally {
-        btn.disabled = false;
+        console.error('Error toggling favorite:', err);
       }
     });
   });
@@ -192,7 +179,7 @@ export function initVehicleCards(containerElement) {
         modele: card.getAttribute('data-modele'),
         annee: card.getAttribute('data-annee'),
         prix: parseFloat(card.getAttribute('data-prix')),
-        kilometrage: parseInt(card.getAttribute('data-kilometrage') || '0'),
+        kilometrage: parseFloat(card.getAttribute('data-kilometrage')),
         carburant: card.getAttribute('data-carburant'),
         transmission: card.getAttribute('data-transmission'),
         photos: [card.getAttribute('data-photo')],

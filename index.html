@@ -1,44 +1,38 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <script>
-      if (localStorage.getItem('suv_theme') === 'light') {
-        document.documentElement.classList.add('light');
-      }
-    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vobokun | Showroom SUV d'exception</title>
+    <title>VOBOKUN | Showroom SUV d'Exception & Corporate</title>
     
-    <!-- Resource preconnects for ultra-fast loading -->
+    <!-- Resource preconnects -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="dns-prefetch" href="https://images.unsplash.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Bootstrap 5.3 & Icons CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    
     <!-- Dynamic SPA Styles -->
     <link rel="stylesheet" href="/src/styles/main.css">
   </head>
-  <body class="font-sans min-h-screen flex flex-col antialiased selection:bg-suv-gold selection:text-black overflow-x-hidden relative bg-[#0B0D11]">
+  <body class="toyota-corporate-body">
     
-    <!-- Fixed luxury ambient backdrop glow spots (Obsidian & Champagne Gold) -->
-    <div class="fixed -top-40 -left-40 w-[550px] h-[550px] rounded-full bg-[#F59E0B]/5 blur-[160px] pointer-events-none z-0"></div>
-    <div class="fixed top-1/3 right-[-10%] w-[600px] h-[600px] rounded-full bg-[#0284C7]/4 blur-[180px] pointer-events-none z-0"></div>
-    <div class="fixed -bottom-40 left-1/3 w-[500px] h-[500px] rounded-full bg-[#F59E0B]/3 blur-[160px] pointer-events-none z-0"></div>
+    <!-- Sticky Corporate Navbar -->
+    <header id="navbar-view" class="sticky-top"></header>
     
-    <!-- Sticky Glassmorphism Header -->
-    <div id="navbar-view" class="relative z-50"></div>
+    <!-- Main Content Shell -->
+    <main id="router-view" class="py-4"></main>
     
-    <!-- Main Content Shell with Transition -->
-    <main id="router-view" class="flex-grow pt-28 pb-16 px-4 md:px-8 max-w-7xl mx-auto w-full transition-all duration-300 ease-out relative z-10"></main>
-    
-    <!-- Global Footer -->
-    <footer id="footer-view" class="relative z-10"></footer>
+    <!-- Global Corporate Footer -->
+    <footer id="footer-view"></footer>
 
     <!-- Global Chat Widget Container -->
-    <div id="global-chat-view" class="relative z-50"></div>
+    <div id="global-chat-view"></div>
 
     <!-- App Entrypoint Script -->
     <script type="module" src="/src/main.js"></script>

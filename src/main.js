@@ -5,115 +5,125 @@ import { initComparisonSystem, updateComparisonBar } from './components/comparis
 import { isMock, db } from './firebase.js';
 import { collection, getDocs } from 'firebase/firestore';
 
-// Global Footer Component HTML
+// Global Toyota Corporate Footer HTML
 const footerHTML = `
-  <div class="global-footer-container border-t border-white/10 bg-[#080A0E] pt-16 pb-12 px-6">
-    <div class="max-w-7xl mx-auto space-y-12">
+  <footer class="toyota-footer py-5 border-top">
+    <div class="container">
       
       <!-- Trust badges ribbon -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pb-12 border-b border-white/5">
-        <div class="flex items-center gap-3.5">
-          <div class="w-10 h-10 rounded-xl bg-suv-gold/10 border border-suv-gold/20 flex items-center justify-center text-suv-gold flex-shrink-0">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-          </div>
-          <div>
-            <div class="text-xs font-black uppercase tracking-wider text-white">Inspection 150 pts</div>
-            <div class="text-[11px] text-suv-gray">Contrôle technique certifié</div>
-          </div>
-        </div>
-        <div class="flex items-center gap-3.5">
-          <div class="w-10 h-10 rounded-xl bg-suv-gold/10 border border-suv-gold/20 flex items-center justify-center text-suv-gold flex-shrink-0">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          </div>
-          <div>
-            <div class="text-xs font-black uppercase tracking-wider text-white">Garantie 12 Mois</div>
-            <div class="text-[11px] text-suv-gray">Pièces et main d'œuvre</div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 pb-4 mb-5 border-bottom border-secondary border-opacity-25">
+        <div class="col">
+          <div class="d-flex align-items-center gap-3">
+            <div class="rounded-3 d-flex align-items-center justify-content-center text-danger flex-shrink-0" style="width: 46px; height: 46px; background: rgba(235, 10, 30, 0.1); border: 1px solid rgba(235, 10, 30, 0.25);">
+              <i class="bi bi-shield-check fs-4"></i>
+            </div>
+            <div>
+              <div class="small fw-black text-uppercase text-white" style="letter-spacing: 0.05em;">Inspection 150 pts</div>
+              <div class="small text-white-50" style="font-size: 0.75rem;">Contrôle certifié rigoureux</div>
+            </div>
           </div>
         </div>
-        <div class="flex items-center gap-3.5">
-          <div class="w-10 h-10 rounded-xl bg-suv-gold/10 border border-suv-gold/20 flex items-center justify-center text-suv-gold flex-shrink-0">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-          </div>
-          <div>
-            <div class="text-xs font-black uppercase tracking-wider text-white">Prix Transparents</div>
-            <div class="text-[11px] text-suv-gray">Négociation directe sans intermédiaire</div>
+        <div class="col">
+          <div class="d-flex align-items-center gap-3">
+            <div class="rounded-3 d-flex align-items-center justify-content-center text-danger flex-shrink-0" style="width: 46px; height: 46px; background: rgba(235, 10, 30, 0.1); border: 1px solid rgba(235, 10, 30, 0.25);">
+              <i class="bi bi-clock-history fs-4"></i>
+            </div>
+            <div>
+              <div class="small fw-black text-uppercase text-white" style="letter-spacing: 0.05em;">Garantie 12 Mois</div>
+              <div class="small text-white-50" style="font-size: 0.75rem;">Pièces et main d'œuvre</div>
+            </div>
           </div>
         </div>
-        <div class="flex items-center gap-3.5">
-          <div class="w-10 h-10 rounded-xl bg-suv-gold/10 border border-suv-gold/20 flex items-center justify-center text-suv-gold flex-shrink-0">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        <div class="col">
+          <div class="d-flex align-items-center gap-3">
+            <div class="rounded-3 d-flex align-items-center justify-content-center text-danger flex-shrink-0" style="width: 46px; height: 46px; background: rgba(235, 10, 30, 0.1); border: 1px solid rgba(235, 10, 30, 0.25);">
+              <i class="bi bi-cash-coin fs-4"></i>
+            </div>
+            <div>
+              <div class="small fw-black text-uppercase text-white" style="letter-spacing: 0.05em;">Prix Transparents</div>
+              <div class="small text-white-50" style="font-size: 0.75rem;">Négociation directe showroom</div>
+            </div>
           </div>
-          <div>
-            <div class="text-xs font-black uppercase tracking-wider text-white">Livraison VIP</div>
-            <div class="text-[11px] text-suv-gray">Cotonou et partout au Bénin</div>
+        </div>
+        <div class="col">
+          <div class="d-flex align-items-center gap-3">
+            <div class="rounded-3 d-flex align-items-center justify-content-center text-danger flex-shrink-0" style="width: 46px; height: 46px; background: rgba(235, 10, 30, 0.1); border: 1px solid rgba(235, 10, 30, 0.25);">
+              <i class="bi bi-truck fs-4"></i>
+            </div>
+            <div>
+              <div class="small fw-black text-uppercase text-white" style="letter-spacing: 0.05em;">Livraison VIP</div>
+              <div class="small text-white-50" style="font-size: 0.75rem;">Cotonou et partout au Bénin</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+      <!-- Links Grid -->
+      <div class="row g-4 mb-5">
         
         <!-- Logo and Description -->
-        <div class="space-y-4">
-          <a href="/" class="flex items-center gap-3 group" data-link>
-            <div class="w-9 h-9 rounded-xl bg-gradient-premium-gold flex items-center justify-center font-black text-black text-lg shadow-md">V</div>
-            <span class="font-black tracking-wider text-xl font-display text-white">VOBO<span class="text-suv-gold">KUN</span></span>
+        <div class="col-12 col-md-4">
+          <a href="/" class="d-flex align-items-center gap-2 text-decoration-none mb-3" data-link>
+            <div class="rounded-3 d-flex align-items-center justify-content-center fw-black text-white" style="width: 38px; height: 38px; background: var(--toyota-red);">V</div>
+            <span class="fw-black text-white fs-4 font-display" style="letter-spacing: 0.08em;">VOBO<span class="text-danger">KUN</span></span>
           </a>
-          <p class="text-xs text-suv-gray max-w-xs leading-relaxed">
-            Le showroom digital de référence pour les SUV de prestige et d'occasion certifiés. Une expérience d'achat sécurisée, transparente et rapide.
+          <p class="small text-white-50 mb-0 lh-lg pe-md-4" style="font-size: 0.8rem;">
+            Le showroom digital de référence pour les SUV de prestige et d'occasion certifiés. Une expérience corporate sécurisée, fluide et réactive aux normes 2026.
           </p>
         </div>
         
-        <!-- Links: Navigation -->
-        <div>
-          <h4 class="text-xs font-extrabold uppercase tracking-widest text-suv-gold font-display mb-4">Showroom</h4>
-          <ul class="space-y-2.5 text-xs text-suv-gray font-medium">
-            <li><a href="/" class="hover:text-suv-gold transition-colors" data-link>Accueil</a></li>
-            <li><a href="/catalogue" class="hover:text-suv-gold transition-colors" data-link>Catalogue Complet</a></li>
-            <li><a href="/login" class="hover:text-suv-gold transition-colors" data-link>Espace Client VIP</a></li>
+        <!-- Showroom Links -->
+        <div class="col-6 col-md-2">
+          <h6 class="fw-black text-uppercase text-danger mb-3 font-display" style="font-size: 0.75rem; letter-spacing: 0.08em;">Showroom</h6>
+          <ul class="list-unstyled small d-grid gap-2 mb-0" style="font-size: 0.8rem;">
+            <li><a href="/" class="text-white-50 text-decoration-none" data-link>Accueil</a></li>
+            <li><a href="/catalogue" class="text-white-50 text-decoration-none" data-link>Catalogue Complet</a></li>
+            <li><a href="/login" class="text-white-50 text-decoration-none" data-link>Espace Client VIP</a></li>
           </ul>
         </div>
         
         <!-- Contact Info -->
-        <div>
-          <h4 class="text-xs font-extrabold uppercase tracking-widest text-suv-gold font-display mb-4">Showroom Privé</h4>
-          <ul class="space-y-2.5 text-xs text-suv-gray font-medium">
-            <li class="flex items-center gap-2.5">
-              <svg class="w-4 h-4 text-suv-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              Haie Vive, Cotonou, Bénin
+        <div class="col-6 col-md-3">
+          <h6 class="fw-black text-uppercase text-danger mb-3 font-display" style="font-size: 0.75rem; letter-spacing: 0.08em;">Showroom Privé</h6>
+          <ul class="list-unstyled small d-grid gap-2 mb-0 text-white-50" style="font-size: 0.8rem;">
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-geo-alt-fill text-danger"></i>
+              <span>Haie Vive, Cotonou, Bénin</span>
             </li>
-            <li class="flex items-center gap-2.5">
-              <svg class="w-4 h-4 text-suv-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-              +229 01 00 00 00 00
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-telephone-fill text-danger"></i>
+              <span>+229 01 00 00 00 00</span>
             </li>
-            <li class="flex items-center gap-2.5">
-              <svg class="w-4 h-4 text-suv-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              contact@vobokun.com
+            <li class="d-flex align-items-center gap-2">
+              <i class="bi bi-envelope-fill text-danger"></i>
+              <span>contact@vobokun.com</span>
             </li>
           </ul>
         </div>
 
-        <!-- Legal Info -->
-        <div>
-          <h4 class="text-xs font-extrabold uppercase tracking-widest text-suv-gold font-display mb-4">Engagements</h4>
-          <ul class="space-y-2.5 text-xs text-suv-gray font-medium">
-            <li><a href="#" class="hover:text-suv-gold transition-colors">Charte Qualité Vobokun</a></li>
-            <li><a href="#" class="hover:text-suv-gold transition-colors">Politique de Confidentialité</a></li>
-            <li><a href="#" class="hover:text-suv-gold transition-colors">Mentions Légales & CGV</a></li>
+        <!-- Engagements -->
+        <div class="col-12 col-md-3">
+          <h6 class="fw-black text-uppercase text-danger mb-3 font-display" style="font-size: 0.75rem; letter-spacing: 0.08em;">Engagements</h6>
+          <ul class="list-unstyled small d-grid gap-2 mb-0" style="font-size: 0.8rem;">
+            <li><a href="#" class="text-white-50 text-decoration-none">Charte Qualité Vobokun</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Politique de Confidentialité</a></li>
+            <li><a href="#" class="text-white-50 text-decoration-none">Mentions Légales & CGV</a></li>
           </ul>
         </div>
         
       </div>
       
-      <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-suv-gray font-medium">
-        <p>&copy; 2026 Vobokun Atelier Automobiles. Tous droits réservés.</p>
-        <p class="flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-          Système opérationnel &middot; Mode Haute Vitesse
-        </p>
+      <!-- Bottom Bar -->
+      <div class="pt-4 border-top border-secondary border-opacity-25 d-flex flex-column flex-sm-row align-items-center justify-content-between gap-3 text-white-50 small" style="font-size: 0.75rem;">
+        <div>&copy; 2026 Vobokun Atelier Automobiles. Tous droits réservés.</div>
+        <div class="d-flex align-items-center gap-2">
+          <span class="rounded-circle bg-success d-inline-block" style="width: 8px; height: 8px;"></span>
+          <span>Système opérationnel &middot; Haute Disponibilité</span>
+        </div>
       </div>
 
     </div>
-  </div>
+  </footer>
 `;
 
 // App startup routine

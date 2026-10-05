@@ -37,19 +37,17 @@ function updateCompareButtonsState() {
     const vId = btn.getAttribute('data-vehicle-id');
     const checked = isCompared(vId);
     if (checked) {
+      btn.className = 'btn btn-outline-danger btn-sm d-inline-flex align-items-center gap-1 btn-compare-toggle active';
       btn.innerHTML = `
-        <svg class="w-4.5 h-4.5 text-suv-gold fill-current" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" /><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+        <i class="bi bi-check2-circle text-danger"></i>
         <span>Comparé</span>
       `;
-      btn.classList.add('border-suv-gold/30', 'text-suv-gold');
-      btn.classList.remove('border-white/10', 'text-white/60');
     } else {
+      btn.className = 'btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1 btn-compare-toggle';
       btn.innerHTML = `
-        <svg class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2" /></svg>
+        <i class="bi bi-arrow-left-right"></i>
         <span>Comparer</span>
       `;
-      btn.classList.remove('border-suv-gold/30', 'text-suv-gold');
-      btn.classList.add('border-white/10', 'text-white/60');
     }
   });
 }
@@ -68,7 +66,10 @@ export function initComparisonSystem() {
   if (!modal) {
     modal = document.createElement('div');
     modal.id = 'comparison-modal-root';
-    modal.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm hidden';
+    modal.className = 'position-fixed top-0 start-0 w-100 h-100 d-none align-items-center justify-content-center p-3';
+    modal.style.background = 'rgba(10, 10, 10, 0.85)';
+    modal.style.backdropFilter = 'blur(8px)';
+    modal.style.zIndex = '1055';
     document.body.appendChild(modal);
   }
 }
@@ -83,24 +84,26 @@ export function updateComparisonBar() {
   }
 
   const itemsHTML = comparedVehicles.map(v => `
-    <div class="flex items-center gap-2 bg-white/5 border border-white/5 pl-2 pr-3 py-1.5 rounded-xl text-xs text-white/95">
-      <img src="${v.photos?.[0] || 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=150&q=80'}" class="w-8 h-8 rounded-lg object-cover">
-      <span class="font-bold">${v.marque} ${v.modele}</span>
-      <button class="remove-compare-btn text-white/40 hover:text-suv-red ml-1 p-0.5" data-vehicle-id="${v.id}">
-        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+    <div class="d-flex align-items-center gap-2 bg-light border px-2 py-1 rounded-3 small">
+      <img src="${v.photos?.[0] || 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=150&q=80'}" class="rounded-2 object-fit-cover" style="width: 32px; height: 32px;">
+      <span class="fw-bold text-dark text-truncate" style="max-width: 110px;">${v.marque} ${v.modele}</span>
+      <button class="btn btn-sm btn-link text-muted p-0 remove-compare-btn text-decoration-none" data-vehicle-id="${v.id}" title="Retirer">
+        <i class="bi bi-x-lg" style="font-size: 0.75rem;"></i>
       </button>
     </div>
   `).join('');
 
   barRoot.innerHTML = `
-    <div class="comparison-floating-bar active flex flex-col md:flex-row items-center gap-4">
-      <div class="flex items-center gap-2 flex-wrap">
-        <span class="text-xs font-bold text-suv-gold uppercase tracking-widest mr-2">Comparateur (${comparedVehicles.length}/3)</span>
-        ${itemsHTML}
+    <div class="toyota-panel border p-3 shadow-lg position-fixed bottom-0 start-50 translate-middle-x mb-3 rounded-4 d-flex flex-column flex-md-row align-items-center justify-content-between gap-3" style="z-index: 1040; max-width: 900px; width: 92%;">
+      <div class="d-flex align-items-center gap-2 flex-wrap">
+        <span class="badge bg-danger text-white text-uppercase tracking-wider px-2 py-1" style="font-size: 0.7rem;">Comparateur (${comparedVehicles.length}/3)</span>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          ${itemsHTML}
+        </div>
       </div>
-      <div class="flex items-center gap-3">
-        <button id="clear-compare-btn" class="text-xxs text-white/50 hover:text-white uppercase font-bold tracking-wider">Vider</button>
-        <button id="open-compare-modal-btn" class="btn-premium-gold py-2 px-5 rounded-xl font-black text-xs uppercase tracking-wider transition-all shadow-md">
+      <div class="d-flex align-items-center gap-2 flex-shrink-0">
+        <button id="clear-compare-btn" class="btn btn-link text-muted text-decoration-none btn-sm fw-bold text-uppercase" style="font-size: 0.75rem;">Vider</button>
+        <button id="open-compare-modal-btn" class="btn btn-toyota-red btn-sm fw-black text-uppercase px-3 py-2 shadow-sm" style="font-size: 0.75rem;">
           Lancer la comparaison
         </button>
       </div>
@@ -140,15 +143,15 @@ function openComparisonModal() {
 
   // Build columns headers
   const headersHTML = comparedVehicles.map(v => `
-    <th class="p-5 text-center w-1/3 border-b border-white/5">
-      <div class="space-y-3">
-        <img src="${v.photos?.[0] || 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=300&q=80'}" class="aspect-[16/10] rounded-xl object-cover border border-white/10 w-full">
+    <th class="p-3 text-center" style="width: 28%;">
+      <div class="d-flex flex-column align-items-center gap-2">
+        <img src="${v.photos?.[0] || 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=300&q=80'}" class="rounded-3 border object-fit-cover w-100" style="aspect-ratio: 16/10;">
         <div>
-          <h4 class="font-extrabold text-white text-base">${v.marque}</h4>
-          <p class="text-xs text-suv-gold">${v.modele} (${v.annee})</p>
+          <h6 class="fw-black text-dark mb-0 font-display text-uppercase">${v.marque}</h6>
+          <span class="small text-danger fw-bold">${v.modele} (${v.annee})</span>
         </div>
-        <button class="bg-white/5 hover:bg-suv-red/10 border border-white/5 hover:border-suv-red text-white hover:text-suv-red text-[10px] font-bold py-1.5 px-3 rounded-lg transition-colors remove-compare-btn-modal" data-vehicle-id="${v.id}">
-          Retirer
+        <button class="btn btn-outline-danger btn-sm py-1 px-2 remove-compare-btn-modal" data-vehicle-id="${v.id}" style="font-size: 0.7rem;">
+          <i class="bi bi-trash3 me-1"></i>Retirer
         </button>
       </div>
     </th>
@@ -156,7 +159,7 @@ function openComparisonModal() {
 
   // Specs helper values
   const rows = [
-    { label: "Prix de vente", key: "prix", format: (v) => new Intl.NumberFormat('fr-FR').format(v) + ' ' + currency, color: "text-suv-gold font-bold font-sans" },
+    { label: "Prix de vente", key: "prix", format: (v) => new Intl.NumberFormat('fr-FR').format(v) + ' ' + currency, color: "text-danger fw-black fs-6" },
     { label: "Motorisation", key: "motorisation", format: (v) => v || 'N/A' },
     { label: "Année de fab.", key: "annee", format: (v) => v || 'N/A' },
     { label: "Puissance", key: "puissance", format: (v) => v || 'N/A' },
@@ -167,7 +170,7 @@ function openComparisonModal() {
     { label: "Capacité Coffre", key: "coffre", format: (v) => v || 'N/A' },
     { label: "Couleurs dispo", key: "couleurs_dispo", format: (v) => v || 'N/A' },
     { label: "Kilométrage", key: "kilometrage", format: (v) => v ? new Intl.NumberFormat('fr-FR').format(v) + ' km' : 'N/A' },
-    { label: "Statut", key: "statut", format: (v) => v === 'disponible' ? 'Disponible' : 'Vendu', color: "text-emerald-400 font-bold" }
+    { label: "Statut", key: "statut", format: (v) => v === 'disponible' ? 'Disponible' : 'Vendu', color: "text-success fw-bold" }
   ];
 
   // Extract numerical values for stats calculations
@@ -194,7 +197,6 @@ function openComparisonModal() {
       const valNum = extractNumber(val);
 
       if (stats && valNum > 0) {
-        // Calculate progress percentage relative to the max value of compared vehicles
         const percent = stats.max > 0 ? (valNum / stats.max) * 100 : 0;
         
         let badgeHTML = '';
@@ -218,73 +220,78 @@ function openComparisonModal() {
 
           if (isWinner && badgeText) {
             badgeHTML = `
-              <div class="inline-flex items-center gap-1 mt-1.5 px-2 py-0.5 rounded bg-suv-gold/10 text-[9px] font-extrabold uppercase tracking-wider text-suv-gold border border-suv-gold/20">
-                <svg class="w-2.5 h-2.5 fill-current text-suv-gold" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                <span>${badgeText}</span>
+              <div>
+                <span class="badge bg-danger text-white mt-1" style="font-size: 0.65rem;">
+                  <i class="bi bi-award-fill me-1"></i>${badgeText}
+                </span>
               </div>
             `;
           }
         }
 
         extraHTML = `
-          <div class="mt-2 w-28 mx-auto bg-black/20 dark:bg-white/10 rounded-full h-1.5 overflow-hidden">
-            <div class="h-full rounded-full animate-pulse-glow" style="background-color: var(--color-suv-gold); width: ${percent}%"></div>
+          <div class="progress mt-2 mx-auto" style="height: 5px; width: 80%;">
+            <div class="progress-bar bg-danger" style="width: ${percent}%;"></div>
           </div>
           ${badgeHTML}
         `;
       }
 
       return `
-        <td class="p-4 text-center border-b border-white/5">
-          <div class="text-sm ${row.color || 'text-white/80'}">${displayVal}</div>
+        <td class="p-3 text-center align-middle">
+          <div class="small ${row.color || 'text-dark fw-semibold'}">${displayVal}</div>
           ${extraHTML}
         </td>
       `;
     }).join('');
 
     return `
-      <tr class="hover:bg-white/[0.01] transition-colors">
-        <td class="p-4 font-bold text-xs uppercase tracking-wider text-suv-gray border-b border-white/5 bg-white/[0.02]">${row.label}</td>
+      <tr>
+        <td class="p-3 fw-bold text-uppercase small text-secondary bg-light text-start" style="font-size: 0.75rem;">${row.label}</td>
         ${colsHTML}
       </tr>
     `;
   }).join('');
 
   modalRoot.innerHTML = `
-    <div class="glass-panel border border-white/10 rounded-2xl w-full max-w-4xl max-h-[85vh] overflow-y-auto shadow-2xl flex flex-col animate-slide-up">
+    <div class="toyota-panel rounded-4 w-100 shadow-2xl p-0 overflow-hidden text-start" style="max-width: 900px; max-height: 88vh; display: flex; flex-direction: column;">
       <!-- Header -->
-      <div class="bg-gradient-premium-gold p-6 flex justify-between items-center text-black sticky top-0 z-10 shadow-md">
+      <div class="p-3 p-sm-4 d-flex justify-content-between align-items-center text-white" style="background: var(--toyota-red);">
         <div>
-          <span class="text-[10px] font-black uppercase tracking-widest text-black/70">Analyse Comparative</span>
-          <h3 class="font-black text-xl font-display uppercase tracking-tight">Comparaison Technique</h3>
+          <span class="badge bg-black text-white text-uppercase tracking-wider mb-1" style="font-size: 0.65rem;">Analyse Comparative</span>
+          <h4 class="fw-black mb-0 font-display text-uppercase">Comparaison Technique</h4>
         </div>
-        <button id="close-compare-modal-btn" class="p-1.5 hover:bg-black/10 rounded-xl transition-colors">
-          <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+        <button id="close-compare-modal-btn" class="btn btn-sm btn-outline-light rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+          <i class="bi bi-x-lg"></i>
         </button>
       </div>
 
       <!-- Comparison Matrix Table -->
-      <div class="p-6 overflow-x-auto">
-        <table class="w-full border-collapse text-left">
-          <thead>
-            <tr>
-              <th class="p-5 border-b border-white/5 bg-white/[0.02] text-xs font-bold uppercase tracking-wider text-suv-gray">Caractéristiques</th>
-              ${headersHTML}
-            </tr>
-          </thead>
-          <tbody>
-            ${rowsHTML}
-          </tbody>
-        </table>
+      <div class="p-3 p-sm-4 overflow-auto flex-grow-1">
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered align-middle text-center mb-0">
+            <thead class="table-light">
+              <tr>
+                <th class="p-3 text-start small fw-bold text-uppercase text-secondary" style="font-size: 0.75rem;">Caractéristiques</th>
+                ${headersHTML}
+              </tr>
+            </thead>
+            <tbody>
+              ${rowsHTML}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   `;
 
-  modalRoot.classList.remove('hidden');
+  modalRoot.classList.remove('d-none');
+  modalRoot.classList.add('d-flex');
   document.body.style.overflow = 'hidden';
 
   const hideComparisonModal = () => {
-    modalRoot.classList.add('hidden');
+    modalRoot.classList.add('d-none');
+    modalRoot.classList.remove('d-flex');
     document.body.style.overflow = '';
   };
 
@@ -305,7 +312,6 @@ function openComparisonModal() {
       const found = comparedVehicles.find(v => v.id === vId);
       if (found) {
         toggleCompare(found);
-        // Refresh modal or close it if no vehicles compared
         if (comparedVehicles.length === 0) {
           hideComparisonModal();
         } else {

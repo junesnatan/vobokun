@@ -11,63 +11,60 @@ let allUniqueBrands = [];
 
 export function render() {
   return `
-    <div class="animate-fade-in space-y-10 text-left">
+    <div class="container py-2 animate-fade-in text-start">
       
       <!-- Catalogue Header Showcase -->
-      <div class="catalogue-header-showcase relative rounded-3xl p-8 sm:p-12 border border-white/10 bg-[#0E1218] overflow-hidden shadow-2xl">
-        <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-suv-gold/10 blur-[80px] pointer-events-none"></div>
-
-        <div class="relative z-10 max-w-2xl space-y-3">
-          <span class="inline-flex items-center gap-2 bg-suv-gold/10 text-suv-gold border border-suv-gold/25 px-3.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest font-display">
-            <span class="w-1.5 h-1.5 rounded-full bg-suv-gold"></span>
-            COLLECTION ATELIER VOBOKUN
+      <div class="card toyota-card p-4 p-md-5 mb-4 border-0 shadow-sm">
+        <div class="d-flex flex-column gap-2" style="max-width: 680px;">
+          <span class="badge bg-danger text-uppercase px-3 py-1.5 fw-bold font-display align-self-start">
+            <i class="bi bi-grid-3x3-gap-fill me-1"></i>COLLECTION OFFICIELLE VOBO<span class="text-white">KUN</span>
           </span>
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight font-display">
-            Le Showroom <span class="text-gradient-gold">Complet.</span>
+          <h1 class="h2 fw-black text-dark font-display text-uppercase mb-1 tracking-tight">
+            Le Showroom <span class="text-danger">Flotte Automobile</span>
           </h1>
-          <p class="text-xs sm:text-sm text-white/70 leading-relaxed font-normal">
-            Tous nos véhicules sont disponibles pour visite et essai à notre showroom de Cotonou. Tarifs vérifiés, historique limpide et garantie 12 mois.
+          <p class="text-muted small mb-0 lh-base">
+            Tous nos véhicules sont disponibles pour visite et essai à notre showroom de Cotonou. Tarifs certifiés concessionnaire, historique limpide et garantie 12 mois.
           </p>
         </div>
 
         <!-- Quick Filter Chips -->
-        <div class="relative z-10 flex flex-wrap gap-2.5 pt-6 mt-6 border-t border-white/10" id="quick-filter-chips">
-          <button class="chip-filter px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-suv-gold bg-suv-gold/15 text-suv-gold" data-type="all">
+        <div class="d-flex flex-wrap gap-2 pt-3 border-top mt-3" id="quick-filter-chips">
+          <button class="chip-filter btn btn-sm btn-danger fw-bold text-uppercase px-3 py-2 rounded-3" data-type="all">
             Tous les SUV
           </button>
-          <button class="chip-filter px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-white/10 bg-white/5 text-white/80 hover:border-suv-gold hover:text-white" data-type="brand" data-val="Toyota">
+          <button class="chip-filter btn btn-sm btn-outline-dark fw-bold text-uppercase px-3 py-2 rounded-3" data-type="brand" data-val="Toyota">
             Toyota
           </button>
-          <button class="chip-filter px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-white/10 bg-white/5 text-white/80 hover:border-suv-gold hover:text-white" data-type="brand" data-val="Land Rover">
+          <button class="chip-filter btn btn-sm btn-outline-dark fw-bold text-uppercase px-3 py-2 rounded-3" data-type="brand" data-val="Land Rover">
             Land Rover
           </button>
-          <button class="chip-filter px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-white/10 bg-white/5 text-white/80 hover:border-suv-gold hover:text-white" data-type="brand" data-val="BMW">
+          <button class="chip-filter btn btn-sm btn-outline-dark fw-bold text-uppercase px-3 py-2 rounded-3" data-type="brand" data-val="BMW">
             BMW
           </button>
-          <button class="chip-filter px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-white/10 bg-white/5 text-white/80 hover:border-suv-gold hover:text-white" data-type="brand" data-val="Porsche">
+          <button class="chip-filter btn btn-sm btn-outline-dark fw-bold text-uppercase px-3 py-2 rounded-3" data-type="brand" data-val="Porsche">
             Porsche
           </button>
-          <button class="chip-filter px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-white/10 bg-white/5 text-white/80 hover:border-suv-gold hover:text-white" data-type="fuel" data-val="Hybride">
+          <button class="chip-filter btn btn-sm btn-outline-dark fw-bold text-uppercase px-3 py-2 rounded-3" data-type="fuel" data-val="Hybride">
             Hybride & Électrique
           </button>
-          <button class="chip-filter px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-white/10 bg-white/5 text-white/80 hover:border-suv-gold hover:text-white" data-type="budget" data-val="40000000">
+          <button class="chip-filter btn btn-sm btn-outline-dark fw-bold text-uppercase px-3 py-2 rounded-3" data-type="budget" data-val="40000000">
             &le; 40M FCFA
           </button>
         </div>
       </div>
 
       <!-- Control Toolbar -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-2">
-        <div class="flex items-center gap-3">
-          <div class="w-2.5 h-2.5 rounded-full bg-emerald-400"></div>
-          <div class="text-xs font-bold uppercase tracking-wider text-white">
-            <span id="vehicles-total-count" class="text-suv-gold font-black text-sm">8</span> SUV disponibles actuellement
-          </div>
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 pb-3 mb-3 border-bottom">
+        <div class="d-flex align-items-center gap-2">
+          <span class="spinner-grow spinner-grow-sm text-danger" role="status"></span>
+          <span class="small fw-bold text-dark text-uppercase">
+            <strong id="vehicles-total-count" class="text-danger fs-6 fw-black">8</strong> SUV DISPONIBLES EN SHOWROOM
+          </span>
         </div>
 
-        <div class="flex items-center gap-3">
-          <label class="text-[10px] font-black uppercase tracking-widest text-suv-gray hidden sm:inline">Trier par :</label>
-          <select id="catalogue-sort-select" class="suv-input py-2 px-3 text-xs font-semibold focus:border-suv-gold">
+        <div class="d-flex align-items-center gap-2">
+          <label class="toyota-spec-label mb-0 d-none d-sm-inline">Trier par :</label>
+          <select id="catalogue-sort-select" class="form-select toyota-input py-1.5 px-3 small" style="width: auto;">
             <option value="dateDesc" ${activeSort === 'dateDesc' ? 'selected' : ''}>Plus récents d'abord</option>
             <option value="prixAsc" ${activeSort === 'prixAsc' ? 'selected' : ''}>Prix : Croissant</option>
             <option value="prixDesc" ${activeSort === 'prixDesc' ? 'selected' : ''}>Prix : Décroissant</option>
@@ -77,24 +74,24 @@ export function render() {
       </div>
 
       <!-- Main Layout Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+      <div class="row g-4 align-items-start">
         
         <!-- Filters Sidebar -->
-        <aside class="lg:col-span-1" id="filters-container">
+        <aside class="col-12 col-lg-3" id="filters-container">
           <!-- Rendered in init() -->
         </aside>
 
         <!-- Product Grid Listing -->
-        <div class="lg:col-span-3 space-y-12">
+        <div class="col-12 col-lg-9">
           
-          <div id="catalogue-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
-            <div class="col-span-full text-center py-16 text-suv-gray font-medium">
+          <div id="catalogue-grid" class="row g-4">
+            <div class="col-12 text-center py-5 text-muted">
               Chargement instantané du showroom...
             </div>
           </div>
 
           <!-- Pagination Controls -->
-          <div id="catalogue-pagination" class="flex justify-center items-center gap-2 pt-6 border-t border-white/10">
+          <div id="catalogue-pagination" class="d-flex justify-content-center align-items-center gap-2 pt-4 border-top mt-5">
             <!-- Rendered in updateCatalogue() -->
           </div>
 
@@ -129,19 +126,23 @@ export async function updateCatalogue() {
 
     if (vehicles.length === 0) {
       grid.innerHTML = `
-        <div class="col-span-full text-center py-24 glass-panel rounded-3xl border border-white/10 space-y-4">
-          <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-suv-gold mx-auto">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <div class="col-12 text-center py-5 card toyota-panel">
+          <div class="rounded-circle bg-danger bg-opacity-10 text-danger p-3 d-inline-flex align-items-center justify-content-center mx-auto mb-3" style="width: 60px; height: 60px;">
+            <i class="bi bi-search fs-3"></i>
           </div>
-          <h3 class="text-lg font-black text-white font-display uppercase tracking-tight">Aucun véhicule ne correspond</h3>
-          <p class="text-xs text-suv-gray max-w-sm mx-auto">Modifiez vos critères de recherche ou réinitialisez les filtres.</p>
+          <h3 class="h5 fw-black text-dark font-display text-uppercase mb-2">Aucun véhicule ne correspond</h3>
+          <p class="text-muted small mb-0">Modifiez vos critères de recherche ou réinitialisez les filtres.</p>
         </div>
       `;
       if (pag) pag.innerHTML = '';
       return;
     }
 
-    grid.innerHTML = vehicles.map(v => renderVehicleCard(v, favIds.includes(v.id))).join('');
+    grid.innerHTML = vehicles.map(v => `
+      <div class="col-12 col-md-6 col-xl-4">
+        ${renderVehicleCard(v, favIds.includes(v.id))}
+      </div>
+    `).join('');
     initVehicleCards(grid);
 
     // Render Pagination
@@ -155,23 +156,23 @@ export async function updateCatalogue() {
       let pagHTML = '';
       
       pagHTML += `
-        <button id="pag-prev" ${currentPage === 1 ? 'disabled class="p-2.5 rounded-xl border border-white/5 text-white/20 cursor-not-allowed"' : 'class="p-2.5 rounded-xl border border-white/10 text-white/80 hover:border-suv-gold hover:text-suv-gold transition-colors"'}>
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        <button id="pag-prev" ${currentPage === 1 ? 'disabled class="btn btn-outline-secondary disabled rounded-3 px-3 py-2"' : 'class="btn btn-outline-dark rounded-3 px-3 py-2"'}>
+          <i class="bi bi-chevron-left"></i>
         </button>
       `;
 
       for (let i = 1; i <= totalPages; i++) {
         const isActive = i === currentPage;
         const btnClass = isActive 
-          ? 'btn-premium-gold font-black w-10 h-10 rounded-xl shadow-lg'
-          : 'border border-white/10 text-white/80 hover:border-suv-gold hover:text-white w-10 h-10 rounded-xl transition-colors font-bold text-xs';
+          ? 'btn btn-danger fw-bold rounded-3 px-3 py-2' 
+          : 'btn btn-outline-dark fw-bold rounded-3 px-3 py-2';
         
         pagHTML += `<button class="pag-num-btn ${btnClass}" data-page="${i}">${i}</button>`;
       }
 
       pagHTML += `
-        <button id="pag-next" ${currentPage === totalPages ? 'disabled class="p-2.5 rounded-xl border border-white/5 text-white/20 cursor-not-allowed"' : 'class="p-2.5 rounded-xl border border-white/10 text-white/80 hover:border-suv-gold hover:text-suv-gold transition-colors"'}>
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <button id="pag-next" ${currentPage === totalPages ? 'disabled class="btn btn-outline-secondary disabled rounded-3 px-3 py-2"' : 'class="btn btn-outline-dark rounded-3 px-3 py-2"'}>
+          <i class="bi bi-chevron-right"></i>
         </button>
       `;
 
@@ -181,7 +182,7 @@ export async function updateCatalogue() {
 
   } catch (err) {
     console.error('Failed to update catalogue listing:', err);
-    grid.innerHTML = `<div class="col-span-full text-center py-12 text-rose-400">Erreur lors de la mise à jour de la liste.</div>`;
+    grid.innerHTML = `<div class="col-12 text-center py-5 text-danger fw-bold">Erreur lors de la mise à jour de la liste.</div>`;
   }
 }
 
@@ -255,9 +256,9 @@ export async function init() {
   document.querySelectorAll('.chip-filter').forEach(chip => {
     chip.addEventListener('click', () => {
       document.querySelectorAll('.chip-filter').forEach(c => {
-        c.className = "chip-filter px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-white/10 bg-white/5 text-white/80 hover:border-suv-gold hover:text-white";
+        c.className = "chip-filter btn btn-sm btn-outline-dark fw-bold text-uppercase px-3 py-2 rounded-3";
       });
-      chip.className = "chip-filter px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border border-suv-gold bg-suv-gold/15 text-suv-gold";
+      chip.className = "chip-filter btn btn-sm btn-danger fw-bold text-uppercase px-3 py-2 rounded-3";
 
       const type = chip.getAttribute('data-type');
       const val = chip.getAttribute('data-val');
